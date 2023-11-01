@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\PermissionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +25,27 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/admin', function () {
-    return view('admin.index');
-})->middleware(['auth', 'role:admin'])->name('admin.index');
+
+
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
+
+    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    Route::get('role', [RoleController::class, 'index'])->name('role');
+    Route::get('create-roles', [RoleController::class, 'create'])->name('create-role');
+    Route::post('create-roles', [RoleController::class, 'store'])->name('store-role');
+    Route::get('edit-roles/{roles}', [RoleController::class, 'edit'])->name('edit-role');
+    Route::put('update-roles/{roles}', [RoleController::class, 'update'])->name('update-role');
+    Route::delete('delete-roles/{role}', [RoleController::class, 'destroy'])->name('delete-role');
+
+
+    Route::get('permission', [PermissionController::class, 'index'])->name('permission');
+    Route::get('create-permissions', [PermissionController::class, 'create'])->name('create-permission');
+    Route::post('create-permissions', [PermissionController::class, 'store'])->name('store-permission');
+    Route::get('edit-permissions/{permissions}', [PermissionController::class, 'edit'])->name('edit-permission');
+    Route::put('update-permissions/{permissions}', [PermissionController::class, 'update'])->name('update-permission');
+    Route::delete('delete-permissions/{permission}', [PermissionController::class, 'destroy'])->name('delete-permission');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
