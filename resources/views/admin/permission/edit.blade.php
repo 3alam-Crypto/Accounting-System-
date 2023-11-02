@@ -19,7 +19,7 @@
 
                 <div class="mb-3">
                     <label>Permission Name</label>
-                    <input type="text" name="name" class="form-control" value="{{ $permissions->name }}">
+                    <input type="text" name="name" class="form-control small-input" value="{{ $permissions->name }}">
                 </div>
                 @error('name')
                 <span class="text-sm" style="color: red;">{{ $message }}</span>
