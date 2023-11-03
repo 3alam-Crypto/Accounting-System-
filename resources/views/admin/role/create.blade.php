@@ -8,9 +8,6 @@
             <h1 class="">Add Role</h1>
         </div>
         <div class="card-body">
-
-            
-
             <form action="{{ route('store-role') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,18 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::get('edit-permissions/{permissions}', [PermissionController::class, 'edit'])->name('edit-permission');
     Route::put('update-permissions/{permissions}', [PermissionController::class, 'update'])->name('update-permission');
     Route::delete('delete-permissions/{permission}', [PermissionController::class, 'destroy'])->name('delete-permission');
+
+
+    Route::get('user', [UserController::class, 'index'])->name('user');
+    Route::get('create-user', [UserController::class, 'create'])->name('create-user');
+    Route::post('create-user', [UserController::class, 'store'])->name('store-user');
+    Route::get('edit-user/{user}', [UserController::class, 'edit'])->name('edit-user');
+    Route::put('update-user/{user}', [UserController::class, 'update'])->name('update-user');
+    Route::delete('delete-user/{user}', [UserController::class, 'destroy'])->name('delete-user');
+    Route::post('user/{user}/roles', [UserController::class, 'giveRole'])->name('add-role-user');
+    Route::delete('user/{user}/roles/{role}', [UserController::class, 'revokeRole'])->name('delete-role-user');
+    Route::post('user/{user}/permissions', [UserController::class, 'givePermission'])->name('add-user-permission');
+    Route::delete('user/{user}/permissions/{permission}', [UserController::class, 'revokePermission'])->name('delete-user-permission');
 });
 
 Route::middleware('auth')->group(function () {
