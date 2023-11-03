@@ -50,6 +50,20 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
+        
+        $usersWithRole = $role->users;
+        $permissions = $role->permissions;
+
+        foreach ($usersWithRole as $user)
+        {
+            $user->removeRole($role);
+        }
+        
+        foreach ($permissions as $permission)
+        {
+            $role->revokePermissionTo($permission);
+        }
+
         $role->delete();
         return redirect()->route('role')->with('success', 'Role deleted successfully');
     }

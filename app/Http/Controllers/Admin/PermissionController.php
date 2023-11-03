@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+
 
 class PermissionController extends Controller
 {
@@ -46,6 +49,18 @@ class PermissionController extends Controller
 
     public function destroy(Permission $permission)
     {
+        
+        $usersWithPermission = User::permission($permission)->get();
+        $rolesWithPermission = Role::permission($permission)->get();
+        
+        foreach ($usersWithPermission as $user) {
+        
+            $user->revokePermissionTo($permission);
+        }
+        
+        foreach ($rolesWithPermission as $role) {
+            $role->revokePermissionTo($permission);
+        }
         $permission->delete();
         return redirect()->route('permission')->with('success', 'Permission deleted successfully');
     }
