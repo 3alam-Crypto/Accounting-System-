@@ -58,7 +58,9 @@ class UserController extends Controller
         $request->validate([
             'name' => ['sometimes', 'required', 'string', 'max:255'],
             'email' => ['sometimes', 'required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
-            'password' => ['sometimes', 'nullable', 'string', 'confirmed', Rules\Password::defaults()],
+            //'password' => ['sometimes', 'nullable', 'string', 'confirmed', Rules\Password::defaults()],
+            
+            
         ]);
         if ($request->filled('name')) {
             $user->name = $request->name;
@@ -69,8 +71,13 @@ class UserController extends Controller
         }
         
         if ($request->filled('password')) {
+            $rules['password'] = ['required', 'string', 'confirmed', Rules\Password::defaults()];
+        }
+
+        if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
+
         $user->save();
         
         return redirect()->route('user')->with('success', 'User updated successfully');
@@ -115,7 +122,7 @@ class UserController extends Controller
         
     }
 
-    public function givePermission(Request $request, User $user)
+    /*public function givePermission(Request $request, User $user)
     {
 
         if($user->hasPermissionTo($request->permission)){
@@ -134,5 +141,5 @@ class UserController extends Controller
         }
         return back()->with('success', 'Permission not exists');
         
-    }
+    }*/
 }

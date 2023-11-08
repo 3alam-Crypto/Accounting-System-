@@ -35,6 +35,10 @@
                     <input type="text" name="email" class="form-control small-input" value="{{ $user->email}}">
                 </div>  
 
+                <div class="mb-3">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control small-input">
+                </div> 
 
                 <div class="row">
                     <div class="col-md-6">
@@ -84,7 +88,7 @@
             </div>
         </div>
 
-        <div class="card-body">
+        <!--<div class="card-body">
             <h2 class="text-2xl font-semibold">Permissions User</h2>
             <div class="button mt-4 p-2">
                 @if($user->permissions)
@@ -122,7 +126,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div>-->
     </div>
 </div>
 @endsection
