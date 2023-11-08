@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\SaleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,7 +61,16 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::delete('user/{user}/roles/{role}', [UserController::class, 'revokeRole'])->name('delete-role-user');
     Route::post('user/{user}/permissions', [UserController::class, 'givePermission'])->name('add-user-permission');
     Route::delete('user/{user}/permissions/{permission}', [UserController::class, 'revokePermission'])->name('delete-user-permission');
+
+
+    Route::get('sale', [SaleController::class, 'index'])->name('sale');
+    Route::get('create-sale', [SaleController::class, 'create'])->name('create-sale');
+    Route::post('create-sale', [SaleController::class, 'store'])->name('store-sale');
+    Route::get('edit-sale/{sale}', [SaleController::class, 'edit'])->name('edit-sale');
+    Route::put('update-sale/{sale}', [SaleController::class, 'update'])->name('update-sale');
+    Route::get('view-sale/{sale}', [SaleController::class, 'view'])->name('view-sale');
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
