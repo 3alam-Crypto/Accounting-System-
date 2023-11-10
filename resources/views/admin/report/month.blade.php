@@ -100,3 +100,16 @@
 </div>
 
 @endsection
+
+@section('javascript')
+<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+<script>
+    new DataTable('#kt_table_users',{
+
+
+    }).on("draw", function () {
+    KTMenu.createInstances();
+    });
+</script>
+
+@endsection
