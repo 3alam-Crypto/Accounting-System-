@@ -24,156 +24,197 @@
                 <div class="row">
                     <div class="col-md-8">
                         <!-- Input fields section -->
-                        <div class="mb-3">
-                            <label for="name">Vendor INVOICE NUMBER</label>
-                            <input type="text" name="vendor_invoice_number" class="form-control" id="vendor_invoice_number">
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="vendor_invoice_number">Vendor INVOICE NUMBER</label>
+                                <input type="text" name="vendor_invoice_number" class="form-control" id="vendor_invoice_number">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="vendor_confirmation">Vendor Confirmation</label>
+                                <input type="text" name="vendor_confirmation" class="form-control" id="vendor_confirmation">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="name">Vendor Confirmation</label>
-                            <input type="text" name="vendor_confirmation" class="form-control" id="vendor_confirmation">
-                        </div>
-                        <div class="mb-3">
-                            <label for="name">Market Place PO</label>
-                            <input type="text" name="market_place_po" class="form-control" id="market_place_po">
-                        </div>
-
-                        <label for="platform" class="block text-sm font-medium text-gray-700">Platform</label>
-                        <div class="mb-3">
-                            <select name="platform_id" id="platform" autocomplete="platform-name" class="small-select">
-                                @foreach ($platforms as $platform)
-                                <option value="{{ $platform->id }}">{{ $platform->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <label for="shipping_date">Shipping Date</label>
-                        <div class="mb-3">
-                            <input class="small-select" type="date" name="shipping_date" class="form-control" id="shipping_date">
-                        </div>
-
-                        <label for="shipping_date">Our Order ID</label>
-                        <div class="mb-3">
-                            <input type="text" name="our_order_id" class="form-control" id="our_order_id">
-                        </div>
-
-                        <label for="shipping_date">Order Date</label>
-                        <div class="mb-3">
-                            <input class="small-select" type="date" name="order_date" class="form-control" id="order_date">
-                        </div>
-
-                        <label for="shipping_date">Product Model</label>
-                        <div class="mb-3">
-                            <input type="text" name="product_model" class="form-control" id="product_model">
-                        </div>
-
-                        <label for="shipping_date">Product Name</label>
-                        <div class="mb-3">
-                            <input type="text" name="product_name" class="form-control" id="product_name">
-                        </div>
-
-                        <label for="brand" class="block text-sm font-medium text-gray-700">Brand</label>
-                        <div class="mb-3">
-                            <select name="brand_id" id="brand" autocomplete="brand-name" class="small-select">
-                                @foreach ($brands as $brand)
-                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <label for="shipping_date">Customer Name</label>
-                        <div class="mb-3">
-                            <input type="text" name="customer_name" class="form-control" id="customer_name">
-                        </div>
-
-                        <label for="shipping_date">Customer Address</label>
-                        <div class="mb-3">
-                            <input type="text" name="customer_address" class="form-control" id="customer_address">
-                        </div>
-
-                        <label for="shipping_date">City</label>
-                        <div class="mb-3">
-                            <input type="text" name="city" class="form-control" id="city">
-                        </div>
-
-                        <label for="shipping_date">Zip Code</label>
-                        <div class="mb-3">
-                            <input type="text" name="zip_code" class="form-control" id="zip_code">
-                        </div>
-
-                        <label for="shipping_date">State</label>
-                        <div class="mb-3">
-                            <input type="text" name="state" class="form-control" id="state">
-                        </div>
-
-                        <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
-                        <div class="mb-3">
-                            <select name="country_id" id="country" autocomplete="country-name" class="small-select">
-                                @foreach ($countries as $country)
-                                <option value="{{ $country->id }}">{{ $country->country_name }}</option>
-                                @endforeach
-                            </select>
+                        
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="name">Market Place PO</label>
+                                <input type="text" name="market_place_po" class="form-control" id="market_place_po">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="platform" class="block text-sm font-medium text-gray-700">Platform</label>
+                                <div class="mb-3">
+                                    <select name="platform_id" id="platform" autocomplete="platform-name" class="form-select">
+                                        @foreach ($platforms as $platform)
+                                        <option value="{{ $platform->id }}">{{ $platform->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                         
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">Shipping Date</label>
+                                <div class="mb-3">
+                                    <input class="form-control" type="date" name="shipping_date" class="form-control" id="shipping_date">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="shipping_date">Our Order ID</label>
+                                <input type="text" name="our_order_id" class="form-control" id="our_order_id">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">Order Date</label>
+                                <div class="mb-3">
+                                    <input class="form-control" type="date" name="order_date" class="form-control" id="order_date">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="shipping_date">Product Model</label>
+                                <input type="text" name="product_model" class="form-control" id="product_model">
+                            </div>
+                        </div>
+
+                    
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">Product Name</label>
+                                <input type="text" name="product_name" class="form-control" id="product_name">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="brand" class="block text-sm font-medium text-gray-700">Brand</label>
+                                <div class="mb-3">
+                                    <select name="brand_id" id="brand" autocomplete="brand-name" class="form-select">
+                                        @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">Customer Name</label>
+                                <input type="text" name="customer_name" class="form-control" id="customer_name">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="shipping_date">Customer Address</label>
+                                <input type="text" name="customer_address" class="form-control" id="customer_address">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">City</label>
+                                <input type="text" name="city" class="form-control" id="city">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="shipping_date">Zip Code</label>
+                                <input type="text" name="zip_code" class="form-control" id="zip_code">
+                            </div>  
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">State</label>
+                                <input type="text" name="state" class="form-control" id="state">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                                <div class="mb-3">
+                                    <select name="country_id" id="country" autocomplete="country-name" class="form-select">
+                                        @foreach ($countries as $country)
+                                        <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">Unit Price</label>
+                                <input type="text" name="unit_price" class="form-control" id="unit_price" oninput="calculateTotalNetReceived(); calculateDiscount();">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="shipping_date">Special Shipping cost</label>
+                                <input type="text" name="special_shipping_cost" class="form-control" id="special_shipping_cost" oninput="calculateTotalNetReceived()">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">Platform Tax</label>
+                                <input type="text" name="platform_tax" class="form-control" id="special_shipping_cost">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="shipping_date">Discount Percent</label>
+                                <input type="text" name="discount_percent" class="form-control" id="discount_percent" oninput="calculateDiscount()">
+                            </div>
+                        </div>
+
                         
-                        <label for="shipping_date">Unit Price</label>
-                        <div class="mb-3">
-                            <input type="text" name="unit_price" class="form-control" id="unit_price" oninput="calculateTotalNetReceived(); calculateDiscount();">
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">Quantity</label>
+                                <input type="text" name="quantity" class="form-control" id="quantity" oninput="calculateTotalNetReceived(); calculateDiscount();">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="shipping_date">Platform Fee</label>
+                                <input type="text" name="platform_fee" class="form-control" id="platform_fee" oninput="calculateGrossProfit()">
+                            </div>
                         </div>
 
-                        <label for="shipping_date">Special Shipping cost</label>
-                        <div class="mb-3">
-                            <input type="text" name="special_shipping_cost" class="form-control" id="special_shipping_cost" oninput="calculateTotalNetReceived()">
-                        </div>
-
-                        <label for="shipping_date">Platform Tax</label>
-                        <div class="mb-3">
-                            <input type="text" name="platform_tax" class="form-control" id="special_shipping_cost">
-                        </div>
-
-                        <label for="shipping_date">Discount Percent</label>
-                        <div class="mb-3">
-                            <input type="text" name="discount_percent" class="form-control" id="discount_percent" oninput="calculateDiscount()">
-                        </div>
-
-                        <label for="shipping_date">Quantity</label>
-                        <div class="mb-3">
-                            <input type="text" name="quantity" class="form-control" id="quantity" oninput="calculateTotalNetReceived(); calculateDiscount();">
-                        </div>
-
-                        <label for="shipping_date">Platform Fee</label>
-                        <div class="mb-3">
-                            <input type="text" name="platform_fee" class="form-control" id="platform_fee" oninput="calculateGrossProfit()">
-                        </div>
-
-                        <label for="shipping_date">Shipping Cost</label>
-                        <div class="mb-3">
-                            <input type="text" name="shipping_cost" class="form-control" id="shipping_cost" oninput="calculateGrossProfit()">
-                        </div>
-
-                        <label for="shipping_date">Additional Shipping</label>
-                        <div class="mb-3">
-                            <input type="text" name="additional_shipping" class="form-control" id="additional_shipping" oninput="calculateGrossProfit()">
-                        </div>
-
-                        <label for="shipping_date">Manufacturer Tax</label>
-                        <div class="mb-3">
-                            <input type="text" name="manufacturer_tax" class="form-control" id="manufacturer_tax" oninput="calculateGrossProfit()">
-                        </div>
-
-                        <label for="shipping_date">Other Cost</label>
-                        <div class="mb-3">
-                            <input type="text" name="other_cost" class="form-control" id="other_cost" oninput="calculateGrossProfit()">
-                        </div>
-
-                        <label for="shipping_date">Product Cost</label>
-                        <div class="mb-3">
-                            <input type="text" name="product_cost" class="form-control" id="product_cost" oninput="calculateGrossProfit()">
-                        </div>
 
                         
-                        <!-- Add more input fields as needed -->
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">Shipping Cost</label>
+                                <input type="text" name="shipping_cost" class="form-control" id="shipping_cost" oninput="calculateGrossProfit()">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="shipping_date">Additional Shipping</label>
+                                <input type="text" name="additional_shipping" class="form-control" id="additional_shipping" oninput="calculateGrossProfit()">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">Manufacturer Tax</label>
+                                <input type="text" name="manufacturer_tax" class="form-control" id="manufacturer_tax" oninput="calculateGrossProfit()">
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="shipping_date">Other Cost</label>
+                                <input type="text" name="other_cost" class="form-control" id="other_cost" oninput="calculateGrossProfit()">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="shipping_date">Product Cost</label>
+                                <input type="text" name="product_cost" class="form-control" id="product_cost" oninput="calculateGrossProfit()">
+                            </div>
+                        </div>
                     </div>
+
+                    
                     <div class="col-md-4">
                         <label for="name">Total Net Received</label>
                         <input type="text" name="total_net_received" class="form-control" id="total_net_received" disabled>

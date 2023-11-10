@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::get('edit-sale/{sale}', [SaleController::class, 'edit'])->name('edit-sale');
     Route::put('update-sale/{sale}', [SaleController::class, 'update'])->name('update-sale');
     Route::get('view-sale/{sale}', [SaleController::class, 'view'])->name('view-sale');
+
+
+    Route::get('monthly-report', [ReportController::class, 'viewMonthly'])->name('monthly-report');
+    Route::get('export-report', [ReportController::class, 'exportReport'])->name('export-report');
+
 });
 
 

@@ -29,3 +29,32 @@
 <script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
+
+<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#salesTable').DataTable({
+            "pagingType": "simple_numbers",
+            "lengthMenu": [10, 25, 50, 100],
+            "language": {
+                "paginate": {
+                    "first": '<i class="first"></i>',
+                    "last": '<i class="last"></i>',
+                    "next": '<i class="next"></i>',
+                    "previous": '<i class="previous"></i>'
+                }
+            },
+            // Add other DataTables options as needed
+        });
+    });
+</script>
+<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+new DataTable('#kt_table_users',{
+
+
+}).on("draw", function () {
+ KTMenu.createInstances();
+});
+
+
