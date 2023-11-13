@@ -30,7 +30,7 @@
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 
-<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>  
 
 <script>
     $(document).ready(function() {
@@ -49,12 +49,5 @@
         });
     });
 </script>
-<script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-new DataTable('#kt_table_users',{
-
-
-}).on("draw", function () {
- KTMenu.createInstances();
-});
 
 

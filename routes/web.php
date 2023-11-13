@@ -73,6 +73,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
 
 
     Route::get('monthly-report', [ReportController::class, 'viewMonthly'])->name('monthly-report');
+    Route::get('yearly-report', [ReportController::class, 'viewYearly'])->name('yearly-report');
     Route::get('export-report', [ReportController::class, 'exportReport'])->name('export-report');
 
 });
