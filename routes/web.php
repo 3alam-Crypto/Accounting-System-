@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\ExpensesTypeController;
+use App\Http\Controllers\Admin\ExpensesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,6 +78,25 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::get('yearly-report', [ReportController::class, 'viewYearly'])->name('yearly-report');
     Route::get('yearly-Brand-report', [ReportController::class, 'viewBrandYearly'])->name('yearly-Brand-report');
     Route::get('export-report', [ReportController::class, 'exportReport'])->name('export-report');
+
+
+    Route::get('expensesType', [ExpensesTypeController::class, 'index'])->name('expensesType');
+    Route::get('create-expenses-Type', [ExpensesTypeController::class, 'create'])->name('create-expenses-type');
+    Route::post('create-expenses-type', [ExpensesTypeController::class, 'store'])->name('store-expenses-type');
+    Route::get('edit-expenses-type/{expensesType}', [ExpensesTypeController::class, 'edit'])->name('edit-expenses-type');
+    Route::put('update-expenses-type/{expensesType}', [ExpensesTypeController::class, 'update'])->name('update-expenses-type');
+    Route::delete('delete-expenses-type/{expensesType}', [ExpensesTypeController::class, 'destroy'])->name('delete-expenses-type');
+    Route::get('expensesType/{expensesType}', [ExpensesTypeController::class, 'view'])->name('view-expenses-type');
+
+
+    Route::get('expenses', [ExpensesController::class, 'index'])->name('expenses');
+    Route::get('create-expenses', [ExpensesController::class, 'create'])->name('create-expenses');
+    Route::post('create-expenses', [ExpensesController::class, 'store'])->name('store-expenses');
+    Route::get('edit-expenses/{expenses}', [ExpensesController::class, 'edit'])->name('edit-expenses');
+    Route::delete('delete-expenses/{expenses}', [ExpensesController::class, 'destroy'])->name('delete-expenses');
+    Route::put('update-expenses/{expenses}', [ExpensesController::class, 'update'])->name('update-expenses');
+    Route::post('update-expense-status', [ExpensesController::class, 'updateStatus'])->name('update-expense-status');
+    
 
 });
 
