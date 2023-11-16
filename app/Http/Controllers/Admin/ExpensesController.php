@@ -31,43 +31,58 @@ class ExpensesController extends Controller
             'due_date' => 'required|date',
             'charges' => 'required|numeric',
             'due_charges' => 'required|numeric',
-            'period' => 'required|string|in:yearly,monthly,weekly',
+            'period' => 'required|string|in:yearly,monthly,weekly,on time',
             'priority' => 'required|string|in:High,Medium,Low',
         ]);
-
-        $installmentCount = $request->input('installment_count');
-        $dueDate = new \DateTime($request->input('due_date'));
-
-        for ($i = 0; $i < $installmentCount; $i++) {
+        
+        if ($request->input('period') === 'on time') {
             $newExpense = [
                 'expenses_type_id' => $request->input('expenses_type_id'),
                 'installment_amount' => $request->input('installment_amount'),
-                'installment_count' => $installmentCount,
+                'installment_count' => 1, // Set to 1 for 'One Time'
                 'amount' => $request->input('amount'),
                 'charges' => $request->input('charges'),
                 'due_charges' => $request->input('due_charges'),
                 'period' => $request->input('period'),
                 'priority' => $request->input('priority'),
+                'due_date' => $request->input('due_date'),
             ];
-
-            if ($i === 0) {
-                $newExpense['due_date'] = $dueDate->format('Y-m-d');
-            } else {
-                if ($request->input('period') === 'yearly') {
-                    $dueDate->add(new \DateInterval('P1Y'));
-                } elseif ($request->input('period') === 'monthly') {
-                    $dueDate->add(new \DateInterval('P1M'));
-                } elseif ($request->input('period') === 'weekly') {
-                    $dueDate->add(new \DateInterval('P7D'));
-                }
-                $newExpense['due_date'] = $dueDate->format('Y-m-d');
-            }
-
+            
             Expenses::create($newExpense);
+        } else {
+            $installmentCount = $request->input('installment_count');
+            $dueDate = new \DateTime($request->input('due_date'));
+            
+            for ($i = 0; $i < $installmentCount; $i++) {
+                $newExpense = [
+                    'expenses_type_id' => $request->input('expenses_type_id'),
+                    'installment_amount' => $request->input('installment_amount'),
+                    'amount' => $request->input('amount'),
+                    'charges' => $request->input('charges'),
+                    'due_charges' => $request->input('due_charges'),
+                    'period' => $request->input('period'),
+                    'priority' => $request->input('priority'),
+                ];
+                
+                if ($i === 0) {
+                    $newExpense['due_date'] = $dueDate->format('Y-m-d');
+                } else {
+                    
+                    if ($request->input('period') === 'yearly') {
+                        $dueDate->add(new \DateInterval('P1Y'));
+                    } elseif ($request->input('period') === 'monthly') {
+                        $dueDate->add(new \DateInterval('P1M'));
+                    } elseif ($request->input('period') === 'weekly') {
+                        $dueDate->add(new \DateInterval('P7D'));
+                    }
+                    $newExpense['due_date'] = $dueDate->format('Y-m-d');
+                }
+                Expenses::create($newExpense);
+            }
         }
-
         return redirect()->route('expenses')->with('success', 'Expenses added successfully.');
     }
+
 
     public function edit(Expenses $expenses)
     {

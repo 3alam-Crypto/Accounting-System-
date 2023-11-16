@@ -52,18 +52,6 @@
 
                             <div class="mb-3 row">
                                 <div class="col-md-6">
-                                    <label for="period">Period</label>
-                                    <select name="period" id="period" class="form-select">
-                                        <option value="yearly" {{ $expenses->period === 'yearly' ? 'selected' : '' }}>Yearly</option>
-                                        <option value="monthly" {{ $expenses->period === 'monthly' ? 'selected' : '' }}>Monthly</option>
-                                        <option value="weekly" {{ $expenses->period === 'weekly' ? 'selected' : '' }}>Weekly</option>
-                                        <option value="on time" {{ $expenses->period === 'on time' ? 'selected' : '' }}>On Time</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="mb-3 row">
-                                <div class="col-md-6">
                                     <label for="priority">Priority</label>
                                     <select name="priority" id="priority" class="form-select">
                                         <option value="High" {{ $expenses->priority === 'High' ? 'selected' : '' }}>High</option>

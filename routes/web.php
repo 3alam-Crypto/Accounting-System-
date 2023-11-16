@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\SalesFileTypeController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ExpensesTypeController;
 use App\Http\Controllers\Admin\ExpensesController;
@@ -72,6 +73,17 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::get('edit-sale/{sale}', [SaleController::class, 'edit'])->name('edit-sale');
     Route::put('update-sale/{sale}', [SaleController::class, 'update'])->name('update-sale');
     Route::get('view-sale/{sale}', [SaleController::class, 'view'])->name('view-sale');
+    Route::get('createFile-sale/{sale}', [SaleController::class, 'createFile'])->name('createFile-sale'); // Define this route
+    Route::post('storeFile-sale/{sale}', [SaleController::class, 'storeFile'])->name('storeFile-sale');
+
+
+    Route::get('saleFileType', [SalesFileTypeController::class, 'index'])->name('saleFileType');
+    Route::get('create-saleFileType', [SalesFileTypeController::class, 'create'])->name('create-saleFileType');
+    Route::post('create-saleFileType', [SalesFileTypeController::class, 'store'])->name('store-saleFileType');
+    Route::get('edit-saleFileType/{salesFileType}', [SalesFileTypeController::class, 'edit'])->name('edit-saleFileType');
+    Route::put('update-saleFileType/{salesFileType}', [SalesFileTypeController::class, 'update'])->name('update-saleFileType');
+    Route::delete('delete-saleFileType/{salesFileType}', [SalesFileTypeController::class, 'destroy'])->name('delete-saleFileType');
+    
 
 
     Route::get('monthly-report', [ReportController::class, 'viewMonthly'])->name('monthly-report');

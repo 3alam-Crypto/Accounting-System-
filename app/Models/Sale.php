@@ -130,4 +130,9 @@ class Sale extends Model
     {
         return $this->belongsTo(Platform::class);
     }
+
+    public function salesFiles()
+    {
+        return $this->hasMany(SalesFile::class);
+    }
 }

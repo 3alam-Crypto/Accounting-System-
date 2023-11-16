@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
 <div class="container">
     <div class="container">
         <div class="container-fluid px-4">
@@ -9,9 +8,9 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Sales</h3>
+                            <h3 class="card-title">Sales File Type</h3>
                             <!--begin::Primary button-->
-                            <a href="{{ route('create-sale') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Sale</a>
+                            <a href="{{ route('create-saleFileType') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add File Type</a>
                             <!--end::Primary button-->
                         </div>
 
@@ -24,28 +23,21 @@
                         <table id="myDataTable" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Shipping Date</th>
-                                    <th>Our Order </th>
-                                    <th>Order Date</th>
-                                    <th>Customer Name</th>
-                                    <th>Product Name</th>
-                                    <th>Product Model</th>
+                                    <th>Name</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($sales as $sale)
+                                @foreach($salesFileTypes as $salesFileType)
                                 <tr>
-                                    <td>{{ $sale->shipping_date }}</td>
-                                    <td>{{ $sale->our_order_id }}</td>
-                                    <td>{{ $sale->order_date }}</td>
-                                    <td>{{ $sale->customer_name }}</td>
-                                    <td>{{ $sale->product_name }}</td>
-                                    <td>{{ $sale->product_model }}</td>
+                                    <td>{{ $salesFileType->name }}</td>
                                     <td style="display: flex; align-items: center;">
-                                        <a href="{{ route('edit-sale', $sale->id)}}" class="btn btn-success">Edit</a>
-                                        <a href="{{ route('view-sale', $sale->id)}}" class="btn btn-success space">View</a>
-                                        <a href="{{ route('createFile-sale', $sale->id) }}" class="btn btn-success space">File</a>
-
+                                        <a href="{{ route('edit-saleFileType', $salesFileType->id) }}" class="btn btn-success">Edit</a>
+                                        <form method="POST" action="{{ route('delete-saleFileType', $salesFileType->id) }}" onsubmit="return confirm('Are you sure?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -57,5 +49,4 @@
         </div>
     </div>
 </div>
-
 @endsection

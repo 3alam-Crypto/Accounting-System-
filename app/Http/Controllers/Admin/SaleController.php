@@ -8,6 +8,8 @@ use App\Models\Sale;
 use App\Models\Platform;
 use App\Models\Brand;
 use App\Models\Country;
+use App\Models\SalesFile;
+use App\Models\SalesFileType;
 
 class SaleController extends Controller
 {
@@ -129,5 +131,42 @@ class SaleController extends Controller
 
         return view('admin.sale.view', compact('sale', 'platforms', 'brands', 'countries'));
     }
+
+    public function createFile()
+    {
+        $sale = Sale::first();
+        $salesFileTypes = SalesFileType::all();
+        
+        return view('admin.sale.createFile', compact('sale', 'salesFileTypes'));
+    }
+
+    public function storeFile(Request $request, $saleId)
+    {
+        $request->validate([
+            'salesFileType' => 'required|exists:sales_file_types,id',
+            'fileUpload' => 'required|max:2048',
+        ]);
+        
+        $saleFile = new SalesFile();
+        $saleFile->salesFileType_id = $request->input('salesFileType');
+        $saleFile->sale_id = $saleId;
+        
+        if ($request->hasFile('fileUpload') && $request->file('fileUpload')->isValid()) {
+            $file = $request->file('fileUpload');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            
+            $file->storeAs('sales_files', $fileName);
+            
+            
+            $saleFile->uploadFiles = $fileName;
+            $saleFile->file_location = storage_path('app/public/sales_files/') . $fileName;
+            $saleFile->save();
+            
+            return redirect()->route('sale', ['sale' => $saleId])->with('success', 'File uploaded successfully.');
+        }
+        
+        return redirect()->route('sale', ['sale' => $saleId])->with('error', 'File upload failed.');
+    }
+
     
 }

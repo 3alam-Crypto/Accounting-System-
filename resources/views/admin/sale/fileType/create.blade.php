@@ -5,14 +5,14 @@
     
     <div class="card mt-4">
         <div class="card-header">
-            <h1 class="">Add Expenses Type</h1>
+            <h1 class="">Add File Type</h1>
         </div>
         <div class="card-body">
-            <form action="{{ route('store-expenses-type') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('store-saleFileType') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
-                    <label>Expenses Type Name</label>
+                    <label>File Type Name</label>
                     <input type="text" name="name" class="form-control">
                 </div>
                 @error('name')
@@ -21,7 +21,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Save Expenses Type</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </form>
