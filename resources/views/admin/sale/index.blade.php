@@ -44,7 +44,8 @@
                                     <td style="display: flex; align-items: center;">
                                         <a href="{{ route('edit-sale', $sale->id)}}" class="btn btn-success">Edit</a>
                                         <a href="{{ route('view-sale', $sale->id)}}" class="btn btn-success space">View</a>
-                                        <a href="{{ route('createFile-sale', $sale->id) }}" class="btn btn-success space">File</a>
+                                        <a href="{{ route('createFile-sale', $sale->id) }}" class="btn btn-success space">Add File</a>
+                                        <a href="{{ route('viewFile-sale', $sale->id) }}" class="btn btn-success space">View File</a>
 
                                     </td>
                                 </tr>

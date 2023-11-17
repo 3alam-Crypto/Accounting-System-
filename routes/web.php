@@ -73,8 +73,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::get('edit-sale/{sale}', [SaleController::class, 'edit'])->name('edit-sale');
     Route::put('update-sale/{sale}', [SaleController::class, 'update'])->name('update-sale');
     Route::get('view-sale/{sale}', [SaleController::class, 'view'])->name('view-sale');
-    Route::get('createFile-sale/{sale}', [SaleController::class, 'createFile'])->name('createFile-sale'); // Define this route
+    Route::get('createFile-sale/{sale}', [SaleController::class, 'createFile'])->name('createFile-sale');
     Route::post('storeFile-sale/{sale}', [SaleController::class, 'storeFile'])->name('storeFile-sale');
+    Route::get('viewFile-sale/{sale}', [SaleController::class, 'viewFile'])->name('viewFile-sale');
 
 
     Route::get('saleFileType', [SalesFileTypeController::class, 'index'])->name('saleFileType');

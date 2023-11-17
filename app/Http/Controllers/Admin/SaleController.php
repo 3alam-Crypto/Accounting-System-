@@ -168,5 +168,11 @@ class SaleController extends Controller
         return redirect()->route('sale', ['sale' => $saleId])->with('error', 'File upload failed.');
     }
 
+    public function viewFile(Sale $sale)
+    {
+        $salesFiles = SalesFile::with('salesFileType')->where('sale_id', $sale->id)->get();
+        return view('admin.sale.viewFile', compact('salesFiles'));
+    }
+
     
 }

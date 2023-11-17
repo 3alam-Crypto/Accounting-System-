@@ -16,6 +16,7 @@ class SalesFile extends Model
 
     public function salesFileType()
     {
-        return $this->belongsTo(SalesFileType::class);
+        return $this->belongsTo(SalesFileType::class, 'salesFileType_id');
+        
     }
 }
