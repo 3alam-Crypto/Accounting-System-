@@ -154,12 +154,12 @@ class SaleController extends Controller
         if ($request->hasFile('fileUpload') && $request->file('fileUpload')->isValid()) {
             $file = $request->file('fileUpload');
             $fileName = time() . '_' . $file->getClientOriginalName();
-            
-            $file->storeAs('sales_files', $fileName);
-            
+            //This uploading the files to Public Folder to bee accessable and give the link to the file not the file path 
+            // $file->storeAs('sales_files', $fileName);
+            $file->move(public_path('sales_files'), $fileName);            
             
             $saleFile->uploadFiles = $fileName;
-            $saleFile->file_location = storage_path('app/public/sales_files/') . $fileName;
+            $saleFile->file_location = asset('sales_files/'.$fileName) ;
             $saleFile->save();
             
             return redirect()->route('sale', ['sale' => $saleId])->with('success', 'File uploaded successfully.');
