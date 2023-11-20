@@ -76,6 +76,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::get('createFile-sale/{sale}', [SaleController::class, 'createFile'])->name('createFile-sale');
     Route::post('storeFile-sale/{sale}', [SaleController::class, 'storeFile'])->name('storeFile-sale');
     Route::get('viewFile-sale/{sale}', [SaleController::class, 'viewFile'])->name('viewFile-sale');
+    Route::get('awaitingShipping-sale', [SaleController::class, 'awaitingShipping'])->name('awaitingShipping-sale');
 
 
     Route::get('saleFileType', [SalesFileTypeController::class, 'index'])->name('saleFileType');

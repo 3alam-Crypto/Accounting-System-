@@ -211,7 +211,25 @@
                                 <label for="shipping_date">Product Cost</label>
                                 <input type="text" name="product_cost" class="form-control" id="product_cost" oninput="calculateGrossProfit()">
                             </div>
+
+                            <div class="col-md-6">
+                                <label for="due_date_shipping">Due Date Shipping</label>
+                                <input type="date" name="due_date_shipping" class="form-control" id="due_date_shipping">
+                            </div>
                         </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="tracking_number_1">Tracking Number 1</label>
+                                <input type="text" name="tracking_number_1" class="form-control" id="tracking_number_1">
+                            </div>
+                        
+                            <div class="col-md-6">
+                                <label for="tracking_number_2">Tracking Number 2</label>
+                                <input type="text" name="tracking_number_2" class="form-control" id="tracking_number_2">
+                            </div>
+                        </div>
+            
                     </div>
 
                     

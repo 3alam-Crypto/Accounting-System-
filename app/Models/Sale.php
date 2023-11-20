@@ -39,6 +39,9 @@ class Sale extends Model
         'gross_profit',
         'gross_profit_percentage',
         'discount_value',
+        'due_date_shipping',
+        'tracking_number_1',
+        'tracking_number_2',
         'platform_id',
         'brand_id',
         'country_id',
@@ -69,6 +72,9 @@ class Sale extends Model
         'gross_profit' => 0,
         'gross_profit_percentage' => 0,
         'discount_value' =>0,
+        'due_date_shipping' => null,
+        'tracking_number_1' => '',
+        'tracking_number_2' => '',
     ];
 
     protected static function boot()

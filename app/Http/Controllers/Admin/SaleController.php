@@ -63,6 +63,9 @@ class SaleController extends Controller
             'platform_id' => 'nullable|exists:platforms,id',
             'brand_id' => 'nullable|exists:brands,id',
             'country_id' => 'nullable|exists:countries,id',
+            'due_date_shipping' => 'nullable|date',
+            'tracking_number_1' => 'nullable|string',
+            'tracking_number_2' => 'nullable|string',
         ]);
 
         
@@ -116,6 +119,9 @@ class SaleController extends Controller
             'platform_id' => 'nullable|exists:platforms,id',
             'brand_id' => 'nullable|exists:brands,id',
             'country_id' => 'nullable|exists:countries,id',
+            'due_date_shipping' => 'nullable|date',
+            'tracking_number_1' => 'nullable|string',
+            'tracking_number_2' => 'nullable|string',
         ]);
         
         $sale->update($validatedData);
@@ -174,5 +180,12 @@ class SaleController extends Controller
         return view('admin.sale.viewFile', compact('salesFiles'));
     }
 
-    
+    public function awaitingShipping()
+    {
+        $awaitingShippingSales = Sale::whereNull('tracking_number_1')
+        ->orWhereNull('tracking_number_2')
+        ->orWhereNull('due_date_shipping')
+        ->get();
+        return view('admin.sale.awaitingShipping.index', compact('awaitingShippingSales'));
+    }
 }

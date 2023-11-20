@@ -42,6 +42,9 @@ return new class extends Migration
             $table->decimal('product_cost', 10, 2)->default(0);
             $table->decimal('gross_profit', 10, 2)->default(0);
             $table->decimal('gross_profit_percentage', 5, 2)->default(0);
+            $table->date('due_date_shipping')->nullable();
+            $table->string('tracking_number_1')->nullable();
+            $table->string('tracking_number_2')->nullable();
             $table->timestamps();
         });
     }
