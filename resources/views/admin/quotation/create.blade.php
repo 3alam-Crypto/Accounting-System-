@@ -7,52 +7,67 @@
             <h2>Create Purchase Order</h2>
         </div>
         <div class="card-body">
-            <form action="{{ route('store-purchaseOrder') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('store-quotation') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 
-                <!-- Brand Selection -->
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label class="form-label">Brand Name</label>
-                        <select id="brandSelector" class="form-select" name="brand_id" oninput="addBrand()">
-                            <option selected disabled>Select Brand</option>
-                            @foreach($brands as $brand)
-                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
                 <!-- Product Information -->
                 <div id="products">
                     <div class="row mb-3">
-                        <input type="hidden" name="brand_id[]" id="hidden_brand_id">
+                        <div class="col-md-6">
+                            <label class="form-label">Brand Name</label>
+                            <select class="form-select" name="brand_id[]"">
+                                <option selected disabled>Select Brand</option>
+                                @foreach($brands as $brand)
+                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="col-md-6">
                             <label class="form-label">Product Name</label>
                             <input type="text" class="form-control" name="product_name[]">
                         </div>
+                    </div>
+                    
+                    
+                    <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="form-label">Quantity</label>
-                            <input type="number" class="form-control" name="quantity[]" oninput="calculateTotalQuantity()">
+                            <input type="number" class="form-control" name="quantity[]"">
                         </div>
-                    </div>
-                    <div class="row mb-3">
                         <div class="col-md-6">
                             <label class="form-label">Product Price</label>
                             <input type="number" step="0.01" class="form-control" name="product_price[]" oninput="calculateTotalPrice()">
                         </div>
                     </div>
-                </div>
-                <button type="button" class="btn btn-primary" onclick="addProduct()">Add Product</button><br><br>
-
-                <!-- Customer Information -->
-                <div class="card mt-4">
-                    <div class="card-header">
-                        <h2>Customer Information</h2>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Discount</label>
+                            <input type="number" class="form-control" name="discount[]" oninput="calculateTotalDiscount()">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="form-label">Shipping Cost</label>
+                            <input type="number" class="form-control" name="shipping_cost[]"">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Shipping Type</label>
+                            <input type="text" class="form-control" name="shipping_type[]">
+                            <input type="hidden" name="shipping_type[]" id="hidden_shipping_type">
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addProduct()">Add Product</button><br><br>
+            
+            
+            <!-- Customer Information -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h2>Customer Information</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
                                 <label class="form-label">Customer Name</label>
                                 <input type="text" class="form-control" name="customer_name">
                             </div>
@@ -156,28 +171,40 @@
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">
+                            <label class="form-label">Quotation Type</label>
+                            <input type="text" class="form-control" name="quotation_type">
+                        </div>
+                        <div class="row mb-3">
                             <label class="form-label">Note</label>
                             <textarea class="form-control" name="note"></textarea>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="form-label">valid</label>
+                            <input type="text" class="form-control" name="valid">
                         </div>
                         <div class="row mb-3">
                             <label class="form-label">Payment</label>
                             <input type="text" class="form-control" name="payment">
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">Shipping</label>
-                            <input type="text" class="form-control" name="shipping">
-                        </div>
-                        <div class="row mb-3">
-                            <label class="form-label">Total Quantity</label>
-                            <input type="number" class="form-control" name="total_quantity" disabled>
-                            <input type="hidden" name="total_quantity" id="hidden_total_quantity">
-
-                            
-                        </div>
-                        <div class="row mb-3">
                             <label class="form-label">Total Price</label>
                             <input type="number" step="0.01" class="form-control" name="total_price" disabled>
                             <input type="hidden" name="total_price" id="hidden_total_price">
+                        </div>
+                        <div class="row mb-3">
+                            <label class="form-label">Total Tax</label>
+                            <input type="number" step="0.01" class="form-control" name="total_tax" disabled>
+                            <input type="hidden" name="total_tax" id="hidden_total_tax">
+                        </div>
+                        <div class="row mb-3">
+                            <label class="form-label">Shipping Cost</label>
+                            <input type="number" step="0.01" class="form-control" name="shipping_cost" disabled>
+                            <input type="hidden" name="shipping_cost" id="hidden_shipping_cost">
+                        </div>
+                        <div class="row mb-3">
+                            <label class="form-label">Total discount</label>
+                            <input type="number" step="0.01" class="form-control" name="total_discount" disabled>
+                            <input type="hidden" name="total_discount" id="hidden_total_discount">
                         </div>
                     </div>
                 </div>
@@ -192,64 +219,59 @@
 </div>
 
 <script>
-    // JavaScript function to add product details fields
-    function addBrand() {
-    const brandSelector = document.getElementById('brandSelector');
-    const selectedBrandId = brandSelector.value;
-    const hiddenBrandIdInput = document.getElementById('hidden_brand_id');
 
-    if (hiddenBrandIdInput) {
-        hiddenBrandIdInput.value = selectedBrandId;
-    }
-}
 
+let productCount = 1;
 function addProduct() {
     const productsDiv = document.getElementById('products');
-    const brandId = document.getElementById('hidden_brand_id').value;
+    productCount++;
+
+    const firstShippingTypeInput = document.querySelector('input[name="shipping_type[]"]');
+    const shippingTypeValue = firstShippingTypeInput.value || '';
+
 
     const productFields = `
+    <h2>Product ${productCount}</h2>
         <div class="row mb-3">
-            <input type="hidden" name="brand_id[]" value="${brandId}">
+            <div class="col-md-6">
+                <label class="form-label">Brand Name</label>
+                <select class="form-select" name="brand_id[]"">
+                    <option selected disabled>Select Brand</option>
+                    @foreach($brands as $brand)
+                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="col-md-6">
                 <label class="form-label">Product Name</label>
                 <input type="text" class="form-control" name="product_name[]">
             </div>
-            <div class="col-md-6">
-                <label class="form-label">Quantity</label>
-                <input type="number" class="form-control" name="quantity[]" oninput="calculateTotalQuantity()">
-            </div>
         </div>
         <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Quantity</label>
+                <input type="number" class="form-control" name="quantity[]">
+            </div>
             <div class="col-md-6">
                 <label class="form-label">Product Price</label>
                 <input type="number" step="0.01" class="form-control" name="product_price[]" oninput="calculateTotalPrice()">
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label class="form-label">Discount</label>
+                <input type="number" class="form-control" name="discount[]" oninput="calculateTotalDiscount()"> 
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Shipping Cost</label>
+                <input type="number" class="form-control" name="shipping_cost[]">
+            </div>
+            <input type="hidden" class="form-control" name="shipping_type_hidden[]" value="${shippingTypeValue}">
+        </div>
     `;
     productsDiv.insertAdjacentHTML('beforeend', productFields);
 }
 
-
-
-    function calculateTotalQuantity() {
-    const quantityInputs = document.querySelectorAll('input[name="quantity[]"]');
-    let totalQuantity = 0;
-
-    quantityInputs.forEach(input => {
-        if (input.value !== '') {
-            totalQuantity += parseInt(input.value);
-        }
-    });
-
-    // Update the total quantity input field
-    const totalQuantityInput = document.querySelector('input[name="total_quantity"]');
-    const hiddenTotalQuantityInput = document.getElementById('hidden_total_quantity');
-
-    if (totalQuantityInput && hiddenTotalQuantityInput) {
-        totalQuantityInput.value = totalQuantity;
-        hiddenTotalQuantityInput.value = totalQuantity;
-    }
-}
 
 function calculateTotalPrice() {
     const quantityInputs = document.querySelectorAll('input[name="quantity[]"]');
@@ -265,7 +287,6 @@ function calculateTotalPrice() {
         }
     });
 
-    // Update the total price input field
     const totalPriceInput = document.querySelector('input[name="total_price"]');
     const hiddenTotalPriceInput = document.getElementById('hidden_total_price');
 
@@ -276,6 +297,25 @@ function calculateTotalPrice() {
 }
 
 
-    
+
+function calculateTotalDiscount() {
+    const discountInputs = document.querySelectorAll('input[name="discount[]"]');
+    let totalDiscount = 0;
+
+    discountInputs.forEach(input => {
+        if (input.value !== '') {
+            totalDiscount += parseInt(input.value);
+        }
+    });
+
+    const totalDiscountInput = document.querySelector('input[name="total_discount"]');
+    const hiddenTotalDiscountInput = document.getElementById('hidden_total_discount');
+
+    if (totalDiscountInput && hiddenTotalDiscountInput) {
+        totalDiscountInput.value = totalDiscount;
+        hiddenTotalDiscountInput.value = totalDiscount;
+    }
+}
+
 </script>
 @endsection

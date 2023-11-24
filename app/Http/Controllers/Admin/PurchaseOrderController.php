@@ -62,7 +62,7 @@ class PurchaseOrderController extends Controller
         
         $purchaseOrder = PurchaseOrder::create($validatedData);
         
-        $brandId = $request->input('brand_id')[0];  // Assuming it's the first brand in the array
+        $brandId = $request->input('brand_id')[0];
         
         $lastOrder = PurchaseOrderProduct::whereHas('purchaseOrder', function ($query) use ($brandId) {
             $query->where('brand_id', $brandId);
@@ -88,8 +88,8 @@ class PurchaseOrderController extends Controller
             $purchaseOrder->purchaseOrderProducts()->save($purchaseOrderProduct);
         }
         
-        // Redirect with success message
-        return redirect()->route('create-purchaseOrder')->with('success', 'Purchase Order created successfully');
+        
+        return redirect()->route('purchaseOrder')->with('success', 'Purchase Order created successfully');
 
     }
 

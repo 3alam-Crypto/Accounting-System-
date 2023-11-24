@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ExpensesTypeController;
 use App\Http\Controllers\Admin\ExpensesController;
 use App\Http\Controllers\Admin\PurchaseOrderController;
+use App\Http\Controllers\Admin\QuotationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -115,6 +116,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::get('purchaseOrder', [PurchaseOrderController::class, 'index'])->name('purchaseOrder');
     Route::get('create-purchaseOrder', [PurchaseOrderController::class, 'create'])->name('create-purchaseOrder');
     Route::post('create-purchaseOrder', [PurchaseOrderController::class, 'store'])->name('store-purchaseOrder');
+
+    Route::get('quotation', [QuotationController::class, 'index'])->name('quotation');
+    Route::get('create-quotation', [QuotationController::class, 'create'])->name('create-quotation');
+    Route::post('create-quotation', [QuotationController::class, 'store'])->name('store-quotation');
     
 
 
