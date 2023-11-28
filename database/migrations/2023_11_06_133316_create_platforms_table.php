@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('platforms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('immediately')->default(0);
+            $table->integer('pay_out_1')->nullable();
+            $table->integer('pay_out_2')->nullable();
             $table->timestamps();
         });
 

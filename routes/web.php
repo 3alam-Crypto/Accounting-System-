@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ExpensesTypeController;
 use App\Http\Controllers\Admin\ExpensesController;
 use App\Http\Controllers\Admin\PurchaseOrderController;
 use App\Http\Controllers\Admin\QuotationController;
+use App\Http\Controllers\Admin\PlatformController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -122,7 +123,12 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::post('create-quotation', [QuotationController::class, 'store'])->name('store-quotation');
     
 
-
+    Route::get('platform', [PlatformController::class, 'index'])->name('platform');
+    Route::get('create-platform', [PlatformController::class, 'create'])->name('create-platform');
+    Route::post('create-platform', [PlatformController::class, 'store'])->name('store-platform');
+    Route::get('edit-platform/{platform}', [PlatformController::class, 'edit'])->name('edit-platform');
+    Route::put('update-platform/{platform}', [PlatformController::class, 'update'])->name('update-platform');
+    Route::delete('delete-platform/{platform}', [PlatformController::class, 'destroy'])->name('delete-platform');
     
 
 });
