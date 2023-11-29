@@ -24,6 +24,8 @@ class ExpensesTypeController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
+            'bounce' => 'nullable|string',
+            'punishment' => 'nullable|string' 
         ]);
 
         ExpensesType::create($request->all());
@@ -40,6 +42,8 @@ class ExpensesTypeController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
+            'bounce' => 'nullable|string',
+            'punishment' => 'nullable|string'
         ]);
 
         $expensesType->update($request->all());

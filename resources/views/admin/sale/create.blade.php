@@ -229,6 +229,16 @@
                                 <input type="text" name="tracking_number_2" class="form-control" id="tracking_number_2">
                             </div>
                         </div>
+
+                        <div class="mb-3">
+                            <div class="col-md-6">
+                                <select name="status_id" id="status_id" autocomplete="status-name" class="form-select">
+                                    @foreach ($statuses as $status)
+                                    <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
             
                     </div>
 

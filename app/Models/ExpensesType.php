@@ -11,7 +11,7 @@ class ExpensesType extends Model
 
     protected $table = 'expenses_types';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'bounce', 'punishment'];
 
     public function expenses()
     {

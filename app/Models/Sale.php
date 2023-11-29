@@ -45,6 +45,7 @@ class Sale extends Model
         'platform_id',
         'brand_id',
         'country_id',
+        'status_id'
     ];
 
     protected $attributes = [
@@ -140,5 +141,10 @@ class Sale extends Model
     public function salesFiles()
     {
         return $this->hasMany(SalesFile::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

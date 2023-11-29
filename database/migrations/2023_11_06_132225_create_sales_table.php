@@ -45,6 +45,8 @@ return new class extends Migration
             $table->date('due_date_shipping')->nullable();
             $table->string('tracking_number_1')->nullable();
             $table->string('tracking_number_2')->nullable();
+            $table->unsignedBigInteger('status_id')->nullable();
+            $table->foreign('status_id')->references('id')->on('statuses');
             $table->timestamps();
         });
     }

@@ -10,6 +10,7 @@ use App\Models\Brand;
 use App\Models\Country;
 use App\Models\SalesFile;
 use App\Models\SalesFileType;
+use App\Models\Status;
 
 class SaleController extends Controller
 {
@@ -25,8 +26,9 @@ class SaleController extends Controller
         $platforms = Platform::all();
         $brands = Brand::all();
         $countries = Country::all();
+        $statuses = Status::all();
         
-        return view('admin.sale.create', compact('platforms', 'brands', 'countries'));
+        return view('admin.sale.create', compact('platforms', 'brands', 'countries', 'statuses'));
     }
 
     public function store(Request $request)
@@ -66,6 +68,7 @@ class SaleController extends Controller
             'due_date_shipping' => 'nullable|date',
             'tracking_number_1' => 'nullable|string',
             'tracking_number_2' => 'nullable|string',
+            'status_id' => 'nullable|exists:statuses,id',
         ]);
 
         
@@ -81,8 +84,9 @@ class SaleController extends Controller
         $platforms = Platform::all();
         $brands = Brand::all();
         $countries = Country::all();
+        $statuses = Status::all();
 
-        return view('admin.sale.edit', compact('sale', 'platforms', 'brands', 'countries'));
+        return view('admin.sale.edit', compact('sale', 'platforms', 'brands', 'countries', 'statuses'));
     }
     
     public function update(Request $request, Sale $sale) {
@@ -122,6 +126,7 @@ class SaleController extends Controller
             'due_date_shipping' => 'nullable|date',
             'tracking_number_1' => 'nullable|string',
             'tracking_number_2' => 'nullable|string',
+            'status_id' => 'nullable|exists:statuses,id',
         ]);
         
         $sale->update($validatedData);

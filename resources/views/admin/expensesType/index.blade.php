@@ -9,9 +9,7 @@
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
                             <h3 class="card-title">Expenses Type</h3>
-                            <!--begin::Primary button-->
                             <a href="{{ route('create-expenses-type') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Expenses Type</a>
-                            <!--end::Primary button-->
                         </div>
 
                         @if(session('success'))
@@ -24,13 +22,17 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Bounce</th>
+                                    <th>Punishment</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($expensesType  as $expenses_type)
+                                @foreach($expensesType as $expenses_type)
                                 <tr>
                                     <td>{{ $expenses_type->name }}</td>
+                                    <td>{{ $expenses_type->bounce }}</td>
+                                    <td>{{ $expenses_type->punishment }}</td>
                                     <td style="display: flex; align-items: center;">
                                         <a href="{{ route('edit-expenses-type', $expenses_type->id) }}" class="btn btn-success">Edit</a>
                                         <form method="POST" action="{{ route('delete-expenses-type', $expenses_type->id) }}" onsubmit="return confirm('Are you sure?');">

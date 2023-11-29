@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('expenses_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('bounce')->nullable();
-            $table->text('punishment')->nullable();
-            $table->timestamps();
+        Schema::table('expenses_types', function (Blueprint $table) {
+            $table->text('bounce')->nullable()->after('name');
+            $table->text('punishment')->nullable()->after('bounce');
         });
     }
 
@@ -25,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('expenses_types');
+        Schema::table('expenses_types', function (Blueprint $table) {
+            $table->dropColumn(['bounce', 'punishment']);
+        });
     }
 };

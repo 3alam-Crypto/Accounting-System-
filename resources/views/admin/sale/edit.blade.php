@@ -230,6 +230,19 @@
                             </div>
                         </div>
 
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                                <div class="mb-3">
+                                    <select name="status_id" id="status" autocomplete="status-name" class="form-select">
+                                        @foreach ($statuses as $status)
+                                            <option value="{{ $status->id }}" {{ $status->id === $sale->status_id ? 'selected' : '' }}>{{ $status->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
 
