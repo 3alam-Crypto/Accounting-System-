@@ -561,14 +561,14 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                     <!--begin:Menu item-->
                     <div class="menu-item">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="https://preview.keenthemes.com/html/metronic/docs/base/utilities" target="_blank">
+                        <a class="menu-link" href="{{ route('paymentPlan') }}" target="_blank">
                             <span class="menu-icon">
                                 <i class="ki-duotone ki-rocket fs-2">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Components</span>
+                            <span class="menu-title">generate Payment Plan</span>
                         </a>
                         <!--end:Menu link-->
                     </div>

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ExpensesController;
 use App\Http\Controllers\Admin\PurchaseOrderController;
 use App\Http\Controllers\Admin\QuotationController;
 use App\Http\Controllers\Admin\PlatformController;
+use App\Http\Controllers\Admin\PaymentPlanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -130,6 +131,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::put('update-platform/{platform}', [PlatformController::class, 'update'])->name('update-platform');
     Route::delete('delete-platform/{platform}', [PlatformController::class, 'destroy'])->name('delete-platform');
     
+    Route::get('/generate-payment-plan', [PaymentPlanController::class, 'paymentPlan'])->name('paymentPlan');
+    Route::post('/generate-payment-plan', [PaymentPlanController::class, 'generatePaymentPlan'])->name('generatePaymentPlan');
+
 
 });
 
