@@ -259,7 +259,22 @@ class SaleController extends Controller
                 }
             }
             
-            Sale::create($saleData);
+            //Sale::create($saleData);
+            
+            $sale = new Sale($saleData);
+            
+            $totalNetReceived = $this->calculateTotalNetReceived($sale);
+            $grossProfit = $this->calculateGrossProfit($sale);
+            $grossProfitPercentage = $this->calculateGrossProfitPercentage($sale);
+            $discountValue = $this->calculateDiscountValue($sale);
+            
+            
+            $sale->total_net_received = $totalNetReceived;
+            $sale->gross_profit = $grossProfit;
+            $sale->gross_profit_percentage = $grossProfitPercentage;
+            $sale->discount_value = $discountValue;
+            
+            $sale->save();
         }
         
         return redirect()->back()->with('success', 'CSV file imported successfully.');
@@ -276,6 +291,48 @@ class SaleController extends Controller
         return $formattedDate ? $formattedDate->format('Y-m-d') : null;
     }
     
+    private function calculateTotalNetReceived($sale)
+    {
+        $quantity = $sale->quantity ?? 1;
+        $unitPrice = $sale->unit_price ?? 0;
+        $specialShippingCost = $sale->special_shipping_cost ?? 0;
+        
+        return $quantity * $unitPrice + $specialShippingCost;
+    }
+    
+    private function calculateGrossProfit($sale)
+    {
+        $totalNetReceived = $this->calculateTotalNetReceived($sale) ?? 0;
+        $productCost = $sale->product_cost ?? 0;
+        $otherCost = $sale->other_cost ?? 0;
+        $manufacturerTax = $sale->manufacturer_tax ?? 0;
+        $additionalShipping = $sale->additional_shipping ?? 0;
+        $shippingCost = $sale->shipping_cost ?? 0;
+        $platformFee = $sale->platform_fee ?? 0;
+        
+        return $totalNetReceived - ($productCost + $otherCost + $manufacturerTax + $additionalShipping + $shippingCost + $platformFee);
+    }
+    
+    private function calculateGrossProfitPercentage($sale)
+    {
+        $grossProfit = $this->calculateGrossProfit($sale);
+        $totalNetReceived = $this->calculateTotalNetReceived($sale);
+        
+        if ($totalNetReceived !== 0) {
+            return ($grossProfit / $totalNetReceived) * 100;
+        }
+        return 0;
+    }
+    
+    private function calculateDiscountValue($sale)
+    {
+        $quantity = $sale->quantity ?? 1;
+        $unitPrice = $sale->unit_price ?? 0;
+        $discountPercent = $sale->discount_percent ?? 0;
+        
+        return ($unitPrice * $quantity * $discountPercent) / 100;
+    }
+
     private function getCountryId($countryName)
     {
         switch ($countryName) {
@@ -299,3 +356,4 @@ class SaleController extends Controller
     }
 
 }
+

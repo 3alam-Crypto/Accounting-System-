@@ -29,12 +29,12 @@ class ReportController extends Controller
             foreach ($platforms as $platform) {
                 $totalSales = Sale::where('brand_id', $brand->id)
                     ->where('platform_id', $platform->id)
-                    ->whereMonth('shipping_date', $month)
+                    ->whereMonth('order_date', $month)
                     ->sum('total_net_received');
 
                 $grossProfit = Sale::where('brand_id', $brand->id)
                     ->where('platform_id', $platform->id)
-                    ->whereMonth('shipping_date', $month)
+                    ->whereMonth('order_date', $month)
                     ->sum('gross_profit');
 
                 $totals[$brand->id][$platform->id] = $totalSales;
@@ -80,7 +80,7 @@ class ReportController extends Controller
             $totals[$month] = [];
 
             foreach ($platforms as $platform) {
-                $totalSales = Sale::whereMonth('shipping_date', $month)
+                $totalSales = Sale::whereMonth('order_date', $month)
                     ->where('platform_id', $platform->id)
                     ->sum('total_net_received');
 
@@ -135,7 +135,7 @@ class ReportController extends Controller
             
             foreach ($brands as $brand) {
                 $totalSales = Sale::where('brand_id', $brand->id)
-                ->whereMonth('shipping_date', $month)
+                ->whereMonth('order_date', $month)
                 ->sum('total_net_received');
                 
                 $totals[$month][$brand->id] = $totalSales;
