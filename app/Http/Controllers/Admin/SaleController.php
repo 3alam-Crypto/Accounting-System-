@@ -11,6 +11,7 @@ use App\Models\Country;
 use App\Models\SalesFile;
 use App\Models\SalesFileType;
 use App\Models\Status;
+use DateTime;
 
 class SaleController extends Controller
 {
@@ -193,4 +194,108 @@ class SaleController extends Controller
         ->get();
         return view('admin.sale.awaitingShipping.index', compact('awaitingShippingSales'));
     }
+
+    public function showImportForm()
+    {
+        return view('admin.sale.import');
+    }
+
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        $fileContents = file($file->getPathname());
+        $fileContents = array_slice($fileContents, 1);
+        
+        foreach ($fileContents as $line) {
+            $data = str_getcsv($line);
+            
+            
+            $saleData = [
+                'vendor_invoice_number' => $data[0],
+                'vendor_confirmation' => $data[1],
+                'market_place_po' => $data[2],
+                'platform_id' => is_numeric($data[3]) ? (int)$data[3] : 0,
+                'shipping_date' => $this->formatDate($data[4]),
+                'our_order_id' => $data[5],
+                'order_date' => $this->formatDate($data[6]),
+                'product_model' => $data[7],
+                'product_name' => $data[8],
+                'customer_name' => $data[9],
+                'customer_address' => $data[10],
+                'city' => $data[11],
+                'zip_code' => $data[12],
+                'state' => $data[13],
+                'country_id' => $this->getCountryId($data[14]),
+                'unit_price' => is_numeric($data[15]) ? $data[15] : 0,
+                'special_shipping_cost' => is_numeric($data[16]) ? $data[16] : 0,
+                'discount_percent' => is_numeric($data[19]) ? $data[19] : 0,
+                'quantity' => is_numeric($data[20]) ? (int)$data[20] : 0,
+                'shipping_cost' => is_numeric($data[27]) ? $data[27] : 0,
+                'additional_shipping' => is_numeric($data[28]) ? $data[28] : 0,
+                'other_cost' => is_numeric($data[30]) ? $data[30] : 0,
+                'product_cost' => is_numeric($data[31]) ? $data[31] : 0,
+                'brand_id' => is_numeric($data[32]) ? (int)$data[32] : 0,
+                'platform_fee' => is_numeric($data[33]) ? $data[33] : 0,
+                'platform_tax' => is_numeric($data[34]) ? $data[34] : 0,
+            ];
+            
+            $countryId = $this->getCountryId($data[14]);
+            $saleData['country_id'] = $countryId !== null ? $countryId : 0;
+            
+            foreach ($saleData as $key => $value) {
+                if (empty($value)) {
+                    if ($key === 'shipping_date' || $key === 'order_date') {
+
+                        $saleData[$key] = null;
+                    
+                    } elseif (is_numeric($value)) {
+                        
+                        $saleData[$key] = 0;
+                    
+                    } else {
+                        
+                        $saleData[$key] = 'Unknown';
+                    }
+                }
+            }
+            
+            Sale::create($saleData);
+        }
+        
+        return redirect()->back()->with('success', 'CSV file imported successfully.');
+    }
+
+    
+    private function formatDate($date)
+    {
+        if ($date === 'null' || empty($date)) {
+            return null;
+        }
+    
+        $formattedDate = DateTime::createFromFormat('m/d/Y', $date);
+        return $formattedDate ? $formattedDate->format('Y-m-d') : null;
+    }
+    
+    private function getCountryId($countryName)
+    {
+        switch ($countryName) {
+            case 'USA':
+                return 230;
+            case 'Saudi Arabia':
+                return 189;
+            case 'Mexico':
+                 return 141;
+            case 'Canada':
+                return 38;
+            case 'Botswana':
+                return 28;
+            case 'Turkey':
+                return 222;
+            case 'Nicaragua':
+                return 158;
+            default:
+                return null;
+        }
+    }
+
 }

@@ -81,6 +81,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::post('storeFile-sale/{sale}', [SaleController::class, 'storeFile'])->name('storeFile-sale');
     Route::get('viewFile-sale/{sale}', [SaleController::class, 'viewFile'])->name('viewFile-sale');
     Route::get('awaitingShipping-sale', [SaleController::class, 'awaitingShipping'])->name('awaitingShipping-sale');
+    Route::get('import-sale', [SaleController::class, 'showImportForm'])->name('import-form');
+    Route::post('import-sale', [SaleController::class, 'import'])->name('import');
 
 
     Route::get('saleFileType', [SalesFileTypeController::class, 'index'])->name('saleFileType');
