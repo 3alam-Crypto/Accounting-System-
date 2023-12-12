@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('statuses', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('statuses', function (Blueprint $table) {
+            $table->string('name')->nullable()->change();
         });
-    
-        // Insert initial statuses
+
+        // Insert new statuses
         DB::table('statuses')->insert([
-            ['name' => 'Done'],
-            ['name' => 'Cancel'],
             ['name' => 'Pending'],
             ['name' => 'Paid'],
             ['name' => 'Return'],
@@ -36,6 +32,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('statuses');
+        Schema::table('statuses', function (Blueprint $table) {
+            //
+        });
     }
 };

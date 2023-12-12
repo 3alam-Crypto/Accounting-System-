@@ -11,8 +11,13 @@ class ExpensesController extends Controller
 {
     public function index()
     {
-        $expenses = Expenses::with('expensesType')->get();
-        return view('admin.expenses.index', compact('expenses'));
+        $firstExpenses = Expenses::whereIn('id', function ($query) {
+            $query->selectRaw('MIN(id)')
+                ->from('expenses')
+                ->groupBy('group_id');
+        })->get();
+    
+        return view('admin.expenses.index', compact('firstExpenses'));
     }
 
     public function create()
@@ -35,6 +40,9 @@ class ExpensesController extends Controller
             'priority' => 'required|string|in:High,Medium,Low',
         ]);
         
+        $maxGroupId = Expenses::max('group_id');
+        $newGroupId = $maxGroupId + 1;
+        
         if ($request->input('period') === 'on time') {
             $newExpense = [
                 'expenses_type_id' => $request->input('expenses_type_id'),
@@ -46,6 +54,7 @@ class ExpensesController extends Controller
                 'period' => $request->input('period'),
                 'priority' => $request->input('priority'),
                 'due_date' => $request->input('due_date'),
+                'group_id' => $newGroupId,
             ];
             
             Expenses::create($newExpense);
@@ -57,11 +66,13 @@ class ExpensesController extends Controller
                 $newExpense = [
                     'expenses_type_id' => $request->input('expenses_type_id'),
                     'installment_amount' => $request->input('installment_amount'),
+                    'installment_count' => $installmentCount,
                     'amount' => $request->input('amount'),
                     'charges' => $request->input('charges'),
                     'due_charges' => $request->input('due_charges'),
                     'period' => $request->input('period'),
                     'priority' => $request->input('priority'),
+                    'group_id' => $newGroupId,
                 ];
                 
                 if ($i === 0) {
@@ -132,4 +143,12 @@ class ExpensesController extends Controller
 
         return redirect()->route('expenses')->with('success', 'Expenses deleted successfully.');
     }
+
+    public function view($groupId)
+    {
+        $groupExpenses = Expenses::where('group_id', $groupId)->get();
+        
+        return view('admin.expenses.view', compact('groupExpenses'));
+    }
+
 }

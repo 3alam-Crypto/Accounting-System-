@@ -8,9 +8,9 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Loans</h3>
+                            <h3 class="card-title">Expenses</h3>
                             <!--begin::Primary button-->
-                            <a href="{{ route('create-expenses') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Loans</a>
+                            <a href="{{ route('create-expenses') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Expenses</a>
                             <!--end::Primary button-->
                         </div>
 
@@ -20,7 +20,7 @@
                             </div>
                         @endif
 
-                        <table id="kt_table_users" class="table table-bordered">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Expense Type</th>
@@ -37,7 +37,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($firstExpenses as $expense)
+                                @foreach($groupExpenses as $expense)
                                 <tr>
                                     <td>{{ $expense->expensesType->name }}</td>
                                     <td>{{ $expense->installment_amount }}</td>
@@ -58,7 +58,6 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
                                         </form>
-                                        <a href="{{ route('view-expenses', ['group_id' => $expense->group_id]) }}" class="btn btn-success" style="margin-left: 10px;">View</a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -110,18 +109,4 @@ document.querySelectorAll('.status-checkbox').forEach((checkbox) => {
 
 </script>
 
-@endsection
-@section('javascript')
-    <!-- DataTables CSS -->
-    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
-
-    <!-- DataTables JS -->
-    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-
-    <script>
-        // Initialize the DataTable
-        $(document).ready(function() {
-            $('#kt_table_users').DataTable();
-        });
-    </script>
 @endsection

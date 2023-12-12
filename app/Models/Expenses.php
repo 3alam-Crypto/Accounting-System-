@@ -23,6 +23,7 @@ class Expenses extends Model
         'due_charges',
         'period',
         'priority',
+        'group_id',
     ];
 
     public function expensesType()

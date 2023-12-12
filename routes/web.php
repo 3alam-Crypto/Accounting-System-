@@ -116,6 +116,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::delete('delete-expenses/{expenses}', [ExpensesController::class, 'destroy'])->name('delete-expenses');
     Route::put('update-expenses/{expenses}', [ExpensesController::class, 'update'])->name('update-expenses');
     Route::post('update-expense-status', [ExpensesController::class, 'updateStatus'])->name('update-expense-status');
+    Route::get('view-expenses/{group_id}', [ExpensesController::class, 'view'])->name('view-expenses');
+
 
     Route::get('purchaseOrder', [PurchaseOrderController::class, 'index'])->name('purchaseOrder');
     Route::get('create-purchaseOrder', [PurchaseOrderController::class, 'create'])->name('create-purchaseOrder');

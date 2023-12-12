@@ -21,7 +21,7 @@
                             </div>
                         @endif
 
-                        <table id="myDataTable" class="table table-bordered">
+                        <table id="kt_table_users" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -56,4 +56,19 @@
     </div>
 </div>
 
+@endsection
+
+@section('javascript')
+    <!-- DataTables CSS -->
+    <link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- DataTables JS -->
+    <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+
+    <script>
+        // Initialize the DataTable
+        $(document).ready(function() {
+            $('#kt_table_users').DataTable();
+        });
+    </script>
 @endsection

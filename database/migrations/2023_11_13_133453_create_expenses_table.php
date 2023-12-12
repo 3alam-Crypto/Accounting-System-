@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
+            $table->integer('group_id')->default(0);
             $table->foreignId('expenses_type_id')->constrained();
             $table->decimal('installment_amount');
             $table->integer('installment_count');

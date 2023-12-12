@@ -55,21 +55,21 @@
                         
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_date">Shipping Date</label>
+                                <label>Shipping Date</label>
                                 <div class="mb-3">
                                     <input class="form-control" type="date" name="shipping_date" class="form-control" id="shipping_date">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-                                <label for="shipping_date">Our Order ID</label>
+                                <label>Vendor Order ID</label>
                                 <input type="text" name="our_order_id" class="form-control" id="our_order_id">
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_date">Order Date</label>
+                                <label>Order Date</label>
                                 <div class="mb-3">
                                     <input class="form-control" type="date" name="order_date" class="form-control" id="order_date">
                                 </div>
@@ -231,6 +231,7 @@
                         </div>
 
                         <div class="mb-3">
+                            <label>Status</label>
                             <div class="col-md-6">
                                 <select name="status_id" id="status_id" autocomplete="status-name" class="form-select">
                                     @foreach ($statuses as $status)

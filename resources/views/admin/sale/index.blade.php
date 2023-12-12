@@ -21,7 +21,7 @@
                             </div>
                         @endif
 
-                        <table id="myDataTable" class="table table-bordered">
+                        <table id="kt_table_users" class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>Shipping Date</th>
@@ -30,6 +30,7 @@
                                     <th>Customer Name</th>
                                     <th>Product Name</th>
                                     <th>Product Model</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,5 +59,18 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('javascript')
+    <script src="{{asset('assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    <script>
+        new DataTable('#kt_table_users',{
+
+
+        }).on("draw", function () {
+        KTMenu.createInstances();
+        });
+    </script>
 
 @endsection
