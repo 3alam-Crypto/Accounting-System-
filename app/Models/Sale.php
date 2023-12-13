@@ -45,7 +45,23 @@ class Sale extends Model
         'platform_id',
         'brand_id',
         'country_id',
-        'status_id'
+        'status_id',
+
+        'tax_exempt',
+        'ramo_trading_order_id',
+        'first_name',
+        'last_name',
+        'company_name',
+        'billing_first_name',
+        'billing_last_name',
+        'billing_company_name',
+        'billing_address',
+        'billing_city',
+        'billing_zip_code',
+        'billing_state',
+        'billing_country_id',
+        'note',
+        'tracking_number',
     ];
 
     protected $attributes = [
@@ -74,8 +90,7 @@ class Sale extends Model
         'gross_profit_percentage' => 0,
         'discount_value' =>0,
         'due_date_shipping' => null,
-        'tracking_number_1' => '',
-        'tracking_number_2' => '',
+
     ];
 
     protected static function boot()

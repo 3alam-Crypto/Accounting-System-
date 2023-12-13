@@ -24,21 +24,22 @@
 
                 <div class="row">
                     <div class="col-md-8">
+                        <!-- Input fields section -->
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="vendor_invoice_number">Vendor INVOICE NUMBER</label>
-                                <input type="text" name="vendor_invoice_number" class="form-control" id="vendor_invoice_number" value="{{ $sale->vendor_invoice_number }}">
+                                <input type="text" name="vendor_invoice_number" class="form-control" value="{{ $sale->vendor_invoice_number }}" id="vendor_invoice_number">
                             </div>
                             <div class="col-md-6">
                                 <label for="vendor_confirmation">Vendor Confirmation</label>
-                                <input type="text" name="vendor_confirmation" class="form-control" id="vendor_confirmation" value="{{ $sale->vendor_confirmation }}">
+                                <input type="text" name="vendor_confirmation" class="form-control" value="{{ $sale->vendor_confirmation }}" id="vendor_confirmation">
                             </div>
                         </div>
                         
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="name">Market Place PO</label>
-                                <input type="text" name="market_place_po" class="form-control" id="market_place_po" value="{{ $sale->market_place_po }}">
+                                <input type="text" name="market_place_po" class="form-control" value="{{ $sale->market_place_po }}" id="market_place_po">
                             </div>
                             <div class="col-md-6">
                                 <label for="platform" class="block text-sm font-medium text-gray-700">Platform</label>
@@ -55,21 +56,21 @@
                         
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_date">Shipping Date</label>
+                                <label>Shipping Date</label>
                                 <div class="mb-3">
                                     <input class="form-control" type="date" name="shipping_date" class="form-control" id="shipping_date" value="{{ $sale->shipping_date }}">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-                                <label for="shipping_date">Our Order ID</label>
+                                <label>Vendor Order ID</label>
                                 <input type="text" name="our_order_id" class="form-control" id="our_order_id" value="{{ $sale->our_order_id }}">
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_date">Order Date</label>
+                                <label>Order Date</label>
                                 <div class="mb-3">
                                     <input class="form-control" type="date" name="order_date" class="form-control" id="order_date" value="{{ $sale->order_date }}">
                                 </div>
@@ -100,48 +101,6 @@
                             </div>
                         </div>
 
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-                                <label for="shipping_date">Customer Name</label>
-                                <input type="text" name="customer_name" class="form-control" id="customer_name" value="{{ $sale->customer_name }}">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="shipping_date">Customer Address</label>
-                                <input type="text" name="customer_address" class="form-control" id="customer_address" value="{{ $sale->customer_address }}">
-                            </div>
-                        </div>
-
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-                                <label for="shipping_date">City</label>
-                                <input type="text" name="city" class="form-control" id="city" value="{{ $sale->city }}">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="shipping_date">Zip Code</label>
-                                <input type="text" name="zip_code" class="form-control" id="zip_code" value="{{ $sale->zip_code }}">
-                            </div>  
-                        </div>
-
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-                                <label for="shipping_date">State</label>
-                                <input type="text" name="state" class="form-control" id="state" value="{{ $sale->state }}">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
-                                <div class="mb-3">
-                                    <select name="country_id" id="country" autocomplete="country-name" class="form-select">
-                                        @foreach ($countries as $country)
-                                        <option value="{{ $country->id }}" {{ $country->id  === $sale->country->id  ? 'selected' : '' }}>{{ $country->country_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
                        
                         <div class="mb-3 row">
                             <div class="col-md-6">
@@ -158,7 +117,7 @@
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="shipping_date">Platform Tax</label>
-                                <input type="text" name="platform_tax" class="form-control" id="special_shipping_cost" value="{{ $sale->platform_tax }}">
+                                <input type="text" name="platform_tax" class="form-control" value="{{ $sale->platform_tax }}" id="special_shipping_cost">
                             </div>
 
                             <div class="col-md-6">
@@ -220,55 +179,176 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="tracking_number_1">Tracking Number 1</label>
-                                <input type="text" name="tracking_number_1" class="form-control" id="tracking_number_1" value="{{ $sale->tracking_number_1 }}">
+                                <label>Status</label>
+                                <select name="status_id" id="status" autocomplete="status-name" class="form-select">
+                                    @foreach ($statuses as $status)
+                                        <option value="{{ $status->id }}" {{ $status->id === $sale->status_id ? 'selected' : '' }}>{{ $status->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                        
+
                             <div class="col-md-6">
-                                <label for="tracking_number_2">Tracking Number 2</label>
-                                <input type="text" name="tracking_number_2" class="form-control" id="tracking_number_2" value="{{ $sale->tracking_number_2 }}">
+                                <label for="due_date_shipping">Ramo Trading Order Id</label>
+                                <input type="text" name="ramo_trading_order_id" class="form-control" id="ramo_trading_order_id" value="{{ $sale->ramo_trading_order_id }}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Note</label>
+                            <textarea name="note" class="form-control">{{ $sale->note }}</textarea>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <input type="checkbox" name="tax_exempt" id="tax_exempt" class="status-checkbox" onclick="toggleTaxExempt()" value="1" {{ $sale->tax_exempt ? 'checked' : '' }}>
+                                <label for="tax_exempt">Is Customer Tax Exempt</label>
+                                <input type="hidden" name="hidden_tax_exempt" value="0">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    
+                    <div class="col-md-4">
+                        <label for="name">Total Net Received</label>
+                        <input type="text" name="total_net_received" class="form-control" id="total_net_received" value="{{ $sale->total_net_received }}" disabled>
+                        <input type="hidden" name="total_net_received" id="hidden_total_net_received" value="{{ $sale->total_net_received }}">
+
+                        <label for="name">Gross Profit</label>
+                        <input type="text" name="gross_profit" class="form-control" id="gross_profit" value="{{ $sale->gross_profit }}" disabled>
+                        <input type="hidden" name="gross_profit" id="hidden_gross_profit" value="{{ $sale->gross_profit }}">
+
+                        <label for="name">Gross Profit Percentage</label>
+                        <input type="text" name="gross_profit_percentage" class="form-control" id="gross_profit_percentage" value="{{ $sale->gross_profit_percentage }}" disabled>
+                        <input type="hidden" name="gross_profit_percentage" id="hidden_gross_profit_percentage" value="{{ $sale->gross_profit_percentage }}">
+
+                        <label for="name">Discount Value</label>
+                        <input type="text" name="discount_value" class="form-control" id="discount_value" value="{{ $sale->discount_value }}" disabled>
+                        <input type="hidden" name="discount_value" id="hidden_discount_value" value="{{ $sale->discount_value }}">
+                    </div>
+
+                    <!-- Shipping Information -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2>Shipping Information</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" name="first_name" value="{{ $sale->first_name }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" name="last_name" value="{{ $sale->last_name }}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Customer Address</label>
+                                <input type="text" name="customer_address" class="form-control" id="customer_address" value="{{ $sale->customer_address }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Customer City</label>
+                                <input type="text" class="form-control" name="city" value="{{ $sale->city }}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Zip Code</label>
+                                <input type="text" name="zip_code" class="form-control" id="zip_code" value="{{ $sale->zip_code }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">State</label>
+                                <input type="text" name="state" class="form-control" id="state" value="{{ $sale->state }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="country" class="form-label">Country</label>
+                                <select name="country_id" id="country" autocomplete="country-name" class="form-select">
+                                    @foreach ($countries as $country)
+                                    <option value="{{ $country->id }}" {{ $country->id  === $sale->country->id  ? 'selected' : '' }}>{{ $country->country_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" class="form-control" name="company_name" value="{{ $sale->company_name }}">
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                                <div class="mb-3">
-                                    <select name="status_id" id="status" autocomplete="status-name" class="form-select">
-                                        @foreach ($statuses as $status)
-                                            <option value="{{ $status->id }}" {{ $status->id === $sale->status_id ? 'selected' : '' }}>{{ $status->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <input class="form-check-input" type="checkbox" name="Same_aaddress" id="Same_aaddress">
+                                <label class="form-check-label" for="Same_aaddress">
+                                    Same As Billing Address
+                                </label>
                             </div>
                         </div>
 
                     </div>
-
-
-                    <div class="col-md-4">
-                        <label for="name">Total Net Received</label>
-                        <input type="hidden" name="total_net_received" id="hidden_total_net_received" value="{{ $sale->total_net_received }}">
-                        <input type="text" name="total_net_received" class="form-control" id="total_net_received" value="{{ $sale->total_net_received }}" disabled>
-                        
-
-                        <label for="name">Gross Profit</label>
-                        <input type="hidden" name="gross_profit" id="hidden_gross_profit" value="{{ $sale->gross_profit }}">
-                        <input type="text" name="gross_profit" class="form-control" id="gross_profit" value="{{ $sale->gross_profit }}" disabled>
-                        
-
-                        <label for="name">Gross Profit Percentage</label>
-                        <input type="hidden" name="gross_profit_percentage" id="hidden_gross_profit_percentage" value="{{ $sale->gross_profit_percentage }}">
-                        <input type="text" name="gross_profit_percentage" class="form-control" id="gross_profit_percentage" value="{{ $sale->gross_profit_percentage }}" disabled>
-                        
-
-                        <label for="name">Discount Value</label>
-                        <input type="hidden" name="discount_value" id="hidden_discount_value" value="{{ $sale->discount_value }}">
-                        <input type="text" name="discount_value" class="form-control" id="discount_value" value="{{ $sale->discount_value }}" disabled>
-                        
-                    </div>
-
                 </div>
+
+                <!-- Billing Information -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2>Billing Information</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" name="billing_first_name" value="{{ $sale->billing_first_name }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" name="billing_last_name" value="{{ $sale->billing_last_name }}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Address</label>
+                                <input type="text" name="billing_address" class="form-control" id="billing_address" value="{{ $sale->billing_address }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" name="billing_city" value="{{ $sale->billing_city }}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Zip Code</label>
+                                <input type="text" name="billing_zip_code" class="form-control" id="billing_zip_code" value="{{ $sale->billing_zip_code }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">State</label>
+                                <input type="text" name="billing_state" class="form-control" id="billing_state" value="{{ $sale->billing_state }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="country" class="form-label">Country</label>
+                                <select name="billing_country_id" id="billing_country_id" autocomplete="country-name" class="form-select">
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->id }}" {{ $country->id === $sale->billing_country_id ? 'selected' : '' }}>
+                                            {{ $country->country_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" class="form-control" name="billing_company_name" value="{{ $sale->billing_company_name }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
                 <div class="row">
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-primary">Save Sale</button>
@@ -286,7 +366,6 @@
         const specialShippingCost = parseFloat(document.getElementById('special_shipping_cost').value) || 0;
 
         const totalNetReceived = quantity * unitPrice + specialShippingCost;
-       
         document.getElementById('total_net_received').value = isNaN(totalNetReceived) ? '' : totalNetReceived.toFixed(2);
 
         
@@ -323,6 +402,64 @@
 
         document.getElementById('hidden_discount_value').value = isNaN(discountAmount) ? '' : discountAmount.toFixed(2);
     }
+
+    function toggleTaxExempt() {
+    const checkbox = document.getElementById('tax_exempt');
+    const hiddenInput = document.querySelector('input[name="hidden_tax_exempt"]');
+    
+    if (checkbox.checked) {
+        hiddenInput.value = "1";
+    } else {
+        hiddenInput.value = "0";
+    }
+}
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const sameAddressCheckbox = document.getElementById('Same_aaddress');
+        const shippingFields = {
+            'billing_first_name': 'first_name',
+            'billing_last_name': 'last_name',
+            'billing_address': 'customer_address',
+            'billing_city': 'city',
+            'billing_zip_code': 'zip_code',
+            'billing_state': 'state',
+            'billing_country_id': 'country_id',
+            'billing_company_name': 'company_name'
+        };
+
+        sameAddressCheckbox.addEventListener('change', function() {
+            const shippingInfo = {};
+            // Get shipping information
+            Object.keys(shippingFields).forEach(key => {
+                const shippingField = document.querySelector(`[name="${shippingFields[key]}"]`);
+                if (shippingField) {
+                    shippingInfo[key] = shippingField.value;
+                }
+            });
+
+            const billingFields = Object.keys(shippingFields);
+
+            if (sameAddressCheckbox.checked) {
+                // Copy shipping information to billing information fields
+                billingFields.forEach(key => {
+                    const billingField = document.querySelector(`[name="${key}"]`);
+                    if (billingField) {
+                        billingField.value = shippingInfo[key];
+                    }
+                });
+            } else {
+                // Clear billing information fields if unchecked
+                billingFields.forEach(key => {
+                    const billingField = document.querySelector(`[name="${key}"]`);
+                    if (billingField) {
+                        billingField.value = '';
+                    }
+                });
+            }
+        });
+    });
+
 </script>
 
 

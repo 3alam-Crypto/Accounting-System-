@@ -13,6 +13,7 @@
                         <!--begin::Label-->
                         <div class="fw-bold fs-3 text-gray-800 mb-8">Our Order Id: {{ $sale->our_order_id }}</div>
                         <!--end::Label-->
+                        <div class="fw-bold fs-3 text-gray-800 mb-8">Platform: {{ $sale->platform->name }}</div>
                         <!--begin::Row-->
                         <div class="row g-5 mb-11">
                             <!--end::Col-->
@@ -44,19 +45,34 @@
                             <!--end::Col-->
                             <div class="col-sm-6">
                                 <!--end::Label-->
-                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Issue For:</div>
+                                <div style="font-size: 24px; font-weight: bold;">Shipping Information:</div>
                                 <!--end::Label-->
                                 <!--end::Text-->
-                                <div class="fw-bold fs-6 text-gray-800">{{ $sale->customer_name }}</div>
+                                <div style="font-size: 20px; font-weight: bold; color: red;">{{ $sale->first_name }} {{ $sale->last_name }}</div>
                                 <!--end::Text-->
                                 <!--end::Description-->
-                                <div class="fw-semibold fs-7 text-gray-600">{{ $sale->country->id === $sale->country_id ? $sale->country->country_name : '' }}
+                                <div style="font-size: 20px; font-weight: bold; color: red;">{{ $sale->country->id === $sale->country_id ? $sale->country->country_name : '' }}
                                     
                                     <br />{{ $sale->state }} , {{ $sale->city }} , {{ $sale->zip_code }}</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--end::Col-->
                                 <!--end::Row-->
+
+                                <div class="col-sm-6">
+                                    <!-- Billing Information -->
+                                    <div style="font-size: 24px; font-weight: bold;">Billing Information:</div>
+                                    <div style="font-size: 20px; font-weight: bold; color: red;">
+                                        {{ $sale->billing_first_name }} {{ $sale->billing_last_name }}
+                                    </div>
+                                    <div style="font-size: 18px; font-weight: bold; color: red;">
+                                        {{ $sale->country->id === $sale->billing_country_id ? $sale->country->country_name : '' }}
+                                        <br />{{ $sale->billing_state }} , {{ $sale->billing_city }} , {{ $sale->billing_zip_code }}
+                                    </div>
+                                </div>
+                                
+                                
+                                <!--end::Col-->
                                 <!--begin::Content-->
                                 <div class="flex-grow-1">
                                     <!--begin::Table-->

@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('product_model')->default('');
             $table->string('product_name')->default('');
             $table->integer('quantity')->default(0);
-            $table->string('customer_name')->default('');
             $table->string('customer_address')->default('');
             $table->string('city')->default('');
             $table->string('zip_code')->default('');
@@ -43,10 +42,24 @@ return new class extends Migration
             $table->decimal('gross_profit', 10, 2)->default(0);
             $table->decimal('gross_profit_percentage', 5, 2)->default(0);
             $table->date('due_date_shipping')->nullable();
-            $table->string('tracking_number_1')->nullable();
-            $table->string('tracking_number_2')->nullable();
             $table->unsignedBigInteger('status_id')->nullable();
             $table->foreign('status_id')->references('id')->on('statuses');
+
+            $table->boolean('tax_exempt')->default(0);
+            $table->string('ramo_trading_order_id')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('billing_first_name')->nullable();
+            $table->string('billing_last_name')->nullable();
+            $table->string('billing_company_name')->nullable();
+            $table->string('billing_address')->nullable();
+            $table->string('billing_city')->nullable();
+            $table->string('billing_zip_code')->nullable();
+            $table->string('billing_state')->nullable();
+            $table->unsignedBigInteger('billing_country_id')->nullable();
+            $table->string('note')->nullable();
+            $table->string('tracking_number')->nullable();
             $table->timestamps();
         });
     }

@@ -23,13 +23,13 @@ class SaleController extends Controller
 
     public function create()
     {
-        
+        $sale = new Sale();
         $platforms = Platform::all();
         $brands = Brand::all();
         $countries = Country::all();
         $statuses = Status::all();
         
-        return view('admin.sale.create', compact('platforms', 'brands', 'countries', 'statuses'));
+        return view('admin.sale.create', compact('platforms', 'brands', 'countries', 'statuses', 'sale'));
     }
 
     public function store(Request $request)
@@ -44,7 +44,6 @@ class SaleController extends Controller
             'product_model' => 'nullable|string',
             'product_name' => 'required|string',
             'quantity' => 'nullable|integer',
-            'customer_name' => 'required|string',
             'customer_address' => 'required|string',
             'city' => 'nullable|string',
             'zip_code' => 'nullable|string',
@@ -67,11 +66,46 @@ class SaleController extends Controller
             'brand_id' => 'nullable|exists:brands,id',
             'country_id' => 'nullable|exists:countries,id',
             'due_date_shipping' => 'nullable|date',
-            'tracking_number_1' => 'nullable|string',
-            'tracking_number_2' => 'nullable|string',
             'status_id' => 'nullable|exists:statuses,id',
+
+            'tax_exempt' => 'nullable|in:0,1',
+            'ramo_trading_order_id' => 'nullable|string',
+            'first_name' => 'nullable|string',
+            'last_name' => 'nullable|string',
+            'company_name' => 'nullable|string',
+            'billing_first_name' => 'nullable|string',
+            'billing_last_name' => 'nullable|string',
+            'billing_company_name' => 'nullable|string',
+            'billing_address' => 'nullable|string',
+            'billing_city' => 'nullable|string',
+            'billing_zip_code' => 'nullable|string',
+            'billing_state' => 'nullable|string',
+            'billing_country_id' => 'nullable|exists:countries,id',
+            'note' => 'nullable|string',
+            'tracking_number' => 'nullable|string',
         ]);
 
+        // Check the presence of tax_exempt
+        $taxExempt = $request->has('tax_exempt') ? 1 : 0;
+        
+        $validatedData['tax_exempt'] = $taxExempt;
+        
+        if ($request->has('Same_aaddress')) {
+            $billingFields = [
+                'billing_first_name' => 'first_name',
+                'billing_last_name' => 'last_name',
+                'billing_address' => 'customer_address',
+                'billing_city' => 'city',
+                'billing_zip_code' => 'zip_code',
+                'billing_state' => 'state',
+                'billing_country_id' => 'country_id',
+                'billing_company_name' => 'company_name',
+            ];
+    
+            foreach ($billingFields as $billingField => $shippingField) {
+                $validatedData[$billingField] = $validatedData[$shippingField];
+            }
+        }
         
         $sale = Sale::create($validatedData);
 
@@ -91,7 +125,6 @@ class SaleController extends Controller
     }
     
     public function update(Request $request, Sale $sale) {
-
         $validatedData = $request->validate([
             'vendor_invoice_number' => 'nullable|string',
             'vendor_confirmation' => 'nullable|string',
@@ -102,7 +135,7 @@ class SaleController extends Controller
             'product_model' => 'nullable|string',
             'product_name' => 'required|string',
             'quantity' => 'nullable|integer',
-            'customer_name' => 'required|string',
+            
             'customer_address' => 'required|string',
             'city' => 'nullable|string',
             'zip_code' => 'nullable|string',
@@ -125,15 +158,51 @@ class SaleController extends Controller
             'brand_id' => 'nullable|exists:brands,id',
             'country_id' => 'nullable|exists:countries,id',
             'due_date_shipping' => 'nullable|date',
-            'tracking_number_1' => 'nullable|string',
-            'tracking_number_2' => 'nullable|string',
+            'tracking_number' => 'nullable|string',
             'status_id' => 'nullable|exists:statuses,id',
+            'tax_exempt' => 'nullable|boolean',
+            'ramo_trading_order_id' => 'nullable|string',
+            'first_name' => 'nullable|string',
+            'last_name' => 'nullable|string',
+            'company_name' => 'nullable|string',
+            'billing_first_name' => 'nullable|string',
+            'billing_last_name' => 'nullable|string',
+            'billing_company_name' => 'nullable|string',
+            'billing_address' => 'nullable|string',
+            'billing_city' => 'nullable|string',
+            'billing_zip_code' => 'nullable|string',
+            'billing_state' => 'nullable|string',
+            'billing_country_id' => 'nullable|exists:countries,id',
+            'note' => 'nullable|string',
+            'tracking_number' => 'nullable|string',
         ]);
+    
+        // Check the presence of tax_exempt
+        $taxExempt = $request->has('tax_exempt') ? 1 : 0;
+        $validatedData['tax_exempt'] = $taxExempt;
         
+        if ($request->has('Same_aaddress')) {
+            $billingFields = [
+                'billing_first_name' => 'first_name',
+                'billing_last_name' => 'last_name',
+                'billing_address' => 'customer_address',
+                'billing_city' => 'city',
+                'billing_zip_code' => 'zip_code',
+                'billing_state' => 'state',
+                'billing_country_id' => 'country_id',
+                'billing_company_name' => 'company_name',
+            ];
+    
+            foreach ($billingFields as $billingField => $shippingField) {
+                $validatedData[$billingField] = $validatedData[$shippingField];
+            }
+        }
+    
         $sale->update($validatedData);
-
-        return redirect()->route('sale')->with('success', 'Sale Update successfully');   
+    
+        return redirect()->route('sale')->with('success', 'Sale Update successfully');
     }
+    
 
     public function view(Sale $sale)
     {

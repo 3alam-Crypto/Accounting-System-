@@ -100,48 +100,6 @@
                             </div>
                         </div>
 
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-                                <label for="shipping_date">Customer Name</label>
-                                <input type="text" name="customer_name" class="form-control" id="customer_name">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="shipping_date">Customer Address</label>
-                                <input type="text" name="customer_address" class="form-control" id="customer_address">
-                            </div>
-                        </div>
-
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-                                <label for="shipping_date">City</label>
-                                <input type="text" name="city" class="form-control" id="city">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="shipping_date">Zip Code</label>
-                                <input type="text" name="zip_code" class="form-control" id="zip_code">
-                            </div>  
-                        </div>
-
-                        <div class="mb-3 row">
-                            <div class="col-md-6">
-                                <label for="shipping_date">State</label>
-                                <input type="text" name="state" class="form-control" id="state">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
-                                <div class="mb-3">
-                                    <select name="country_id" id="country" autocomplete="country-name" class="form-select">
-                                        @foreach ($countries as $country)
-                                        <option value="{{ $country->id }}">{{ $country->country_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
                        
                         <div class="mb-3 row">
                             <div class="col-md-6">
@@ -220,27 +178,33 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="tracking_number_1">Tracking Number 1</label>
-                                <input type="text" name="tracking_number_1" class="form-control" id="tracking_number_1">
-                            </div>
-                        
-                            <div class="col-md-6">
-                                <label for="tracking_number_2">Tracking Number 2</label>
-                                <input type="text" name="tracking_number_2" class="form-control" id="tracking_number_2">
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label>Status</label>
-                            <div class="col-md-6">
+                                <label>Status</label>
                                 <select name="status_id" id="status_id" autocomplete="status-name" class="form-select">
                                     @foreach ($statuses as $status)
                                     <option value="{{ $status->id }}">{{ $status->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="col-md-6">
+                                <label for="due_date_shipping">Ramo Trading Order Id</label>
+                                <input type="text" name="ramo_trading_order_id" class="form-control" id="ramo_trading_order_id">
+                            </div>
                         </div>
-            
+
+                        <div class="mb-3">
+                            <label>Note</label>
+                            <textarea name="note" class="form-control"></textarea>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <input type="checkbox" name="tax_exempt" id="tax_exempt" class="status-checkbox" onclick="toggleTaxExempt()" {{ $sale->tax_exempt ? 'checked' : '' }}>
+                                <label for="tax_exempt">Is Customer Tax Exempt</label>
+                                <input type="hidden" name="hidden_tax_exempt" value="{{ $sale->tax_exempt }}">
+                            </div>
+                        </div>
+
                     </div>
 
                     
@@ -262,7 +226,125 @@
                         <input type="hidden" name="discount_value" id="hidden_discount_value">
                     </div>
 
+                    <!-- Shipping Information -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2>Shipping Information</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" name="first_name">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" name="last_name">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Customer Address</label>
+                                <input type="text" name="customer_address" class="form-control" id="customer_address">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Customer City</label>
+                                <input type="text" class="form-control" name="city">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Zip Code</label>
+                                <input type="text" name="zip_code" class="form-control" id="zip_code">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">State</label>
+                                <input type="text" name="state" class="form-control" id="state">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="country" class="form-label">Country</label>
+                                <select name="country_id" id="country" autocomplete="country-name" class="form-select">
+                                    @foreach ($countries as $country)
+                                    <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" class="form-control" name="company_name">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <input class="form-check-input" type="checkbox" name="Same_aaddress" id="Same_aaddress">
+                                <label class="form-check-label" for="Same_aaddress">
+                                    Same As Billing Address
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+
+                <!-- Billing Information -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2>Billing Information</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-control" name="billing_first_name">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-control" name="billing_last_name">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Address</label>
+                                <input type="text" name="billing_address" class="form-control" id="billing_address">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" name="billing_city">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Zip Code</label>
+                                <input type="text" name="billing_zip_code" class="form-control" id="billing_zip_code">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">State</label>
+                                <input type="text" name="billing_state" class="form-control" id="billing_state">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="country" class="form-label">Country</label>
+                                <select name="billing_country_id" id="billing_country_id" autocomplete="country-name" class="form-select">
+                                    @foreach ($countries as $country)
+                                    <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" class="form-control" name="billing_company_name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
                 <div class="row">
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-primary">Save Sale</button>
@@ -316,6 +398,62 @@
 
         document.getElementById('hidden_discount_value').value = isNaN(discountAmount) ? '' : discountAmount.toFixed(2);
     }
+
+    function toggleTaxExempt() {
+            const checkbox = document.getElementById('tax_exempt');
+            if (checkbox.checked) {
+                checkbox.value = 1;
+            } else {
+                checkbox.value = 0;
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const sameAddressCheckbox = document.getElementById('Same_aaddress');
+        const shippingFields = {
+            'billing_first_name': 'first_name',
+            'billing_last_name': 'last_name',
+            'billing_address': 'customer_address',
+            'billing_city': 'city',
+            'billing_zip_code': 'zip_code',
+            'billing_state': 'state',
+            'billing_country_id': 'country_id',
+            'billing_company_name': 'company_name'
+        };
+
+        sameAddressCheckbox.addEventListener('change', function() {
+            const shippingInfo = {};
+            // Get shipping information
+            Object.keys(shippingFields).forEach(key => {
+                const shippingField = document.querySelector(`[name="${shippingFields[key]}"]`);
+                if (shippingField) {
+                    shippingInfo[key] = shippingField.value;
+                }
+            });
+
+            const billingFields = Object.keys(shippingFields);
+
+            if (sameAddressCheckbox.checked) {
+                // Copy shipping information to billing information fields
+                billingFields.forEach(key => {
+                    const billingField = document.querySelector(`[name="${key}"]`);
+                    if (billingField) {
+                        billingField.value = shippingInfo[key];
+                    }
+                });
+            } else {
+                // Clear billing information fields if unchecked
+                billingFields.forEach(key => {
+                    const billingField = document.querySelector(`[name="${key}"]`);
+                    if (billingField) {
+                        billingField.value = '';
+                    }
+                });
+            }
+        });
+    });
+
 </script>
 
 
