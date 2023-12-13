@@ -27,6 +27,7 @@
                                     <th>Immediately</th>
                                     <th>Pay Out 1</th>
                                     <th>Pay Out 2</th>
+                                    <th>Ship Date</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -38,6 +39,7 @@
                                     <td>{{ $platform->immediately ? 'Yes' : 'No' }}</td>
                                     <td>{{ $platform->pay_out_1 ?? 'null' }}</td>
                                     <td>{{ $platform->pay_out_2 ?? 'null' }}</td>
+                                    <td>{{ $platform->ship_date ?? 'null' }}</td>
                                     <td style="display: flex; align-items: center;">
                                         <a href="{{ route('edit-platform', ['platform' => $platform->id]) }}" class="btn btn-success space">Edit</a>
 

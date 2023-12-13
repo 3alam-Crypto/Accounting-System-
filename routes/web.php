@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\PurchaseOrderController;
 use App\Http\Controllers\Admin\QuotationController;
 use App\Http\Controllers\Admin\PlatformController;
 use App\Http\Controllers\Admin\PaymentPlanController;
+use App\Http\Controllers\Admin\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -137,6 +138,13 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     
     Route::get('/generate-payment-plan', [PaymentPlanController::class, 'paymentPlan'])->name('paymentPlan');
     Route::post('/generate-payment-plan', [PaymentPlanController::class, 'generatePaymentPlan'])->name('generatePaymentPlan');
+
+    Route::get('employee', [EmployeeController::class, 'index'])->name('employee');
+    Route::get('create-employee', [EmployeeController::class, 'create'])->name('create-employee');
+    Route::post('create-employee', [EmployeeController::class, 'store'])->name('store-employee');
+    Route::get('edit-employee/{employee}', [EmployeeController::class, 'edit'])->name('edit-employee');
+    Route::put('update-employee/{employee}', [EmployeeController::class, 'update'])->name('update-employee');
+    Route::delete('delete-employee/{employee}', [EmployeeController::class, 'destroy'])->name('delete-employee');
 
 
 });

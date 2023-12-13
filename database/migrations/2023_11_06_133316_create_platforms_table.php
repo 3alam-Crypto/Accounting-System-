@@ -17,6 +17,7 @@ return new class extends Migration
             $table->boolean('immediately')->default(0);
             $table->integer('pay_out_1')->nullable();
             $table->integer('pay_out_2')->nullable();
+            $table->integer('ship_date')->nullable();
             $table->timestamps();
         });
 

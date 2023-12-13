@@ -26,6 +26,7 @@ class PlatformController extends Controller
             'name' => 'required',
             'pay_out_1' => 'nullable|numeric',
             'pay_out_2' => 'nullable|numeric',
+            'ship_date' => 'nullable|integer',
         ]);
 
         $data['immediately'] = $request->has('immediately');
@@ -51,6 +52,8 @@ class PlatformController extends Controller
             'name' => 'required',
             'pay_out_1' => 'nullable|numeric',
             'pay_out_2' => 'nullable|numeric',
+            'ship_date' => 'nullable|integer',
+            
         ]);
         $data['immediately'] = $request->has('immediately');
         

@@ -49,6 +49,13 @@
                              </div>
                         </div>
 
+                        <div class="mb-3">
+                            <div class="col-md-6">
+                                <label>Ship Date</label>
+                                <input type="text" name="ship_date" class="form-control">
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-6">
                                 <button type="submit" class="btn btn-primary">Save Platform</button>
