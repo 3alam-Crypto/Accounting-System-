@@ -85,7 +85,22 @@ class SaleController extends Controller
             'tracking_number' => 'nullable|string',
         ]);
 
-        // Check the presence of tax_exempt
+        // Get the main tracking number
+        $trackingNumber = $validatedData['tracking_number'];
+        
+        // Get additional tracking numbers and store them as an array
+        $additionalTrackingNumbers = $request->input('additional_tracking_number', []);
+        
+        // Combine main and additional tracking numbers into one array
+        $allTrackingNumbers = array_merge([$trackingNumber], $additionalTrackingNumbers);
+        
+        // Convert the combined array to JSON
+        $trackingNumbersJSON = json_encode($allTrackingNumbers);
+        
+        // Replace the 'tracking_number' field with the JSON representation
+        $validatedData['tracking_number'] = $trackingNumbersJSON;
+
+        
         $taxExempt = $request->has('tax_exempt') ? 1 : 0;
         
         $validatedData['tax_exempt'] = $taxExempt;
@@ -120,8 +135,11 @@ class SaleController extends Controller
         $brands = Brand::all();
         $countries = Country::all();
         $statuses = Status::all();
+        // Decode tracking numbers for the view
+        $decodedTrackingNumbers = json_decode($sale->tracking_number);
+        $primaryTrackingNumber = !empty($decodedTrackingNumbers) ? $decodedTrackingNumbers[0] : '';
 
-        return view('admin.sale.edit', compact('sale', 'platforms', 'brands', 'countries', 'statuses'));
+        return view('admin.sale.edit', compact('sale', 'platforms', 'brands', 'countries', 'statuses', 'primaryTrackingNumber', 'decodedTrackingNumbers'));
     }
     
     public function update(Request $request, Sale $sale) {
@@ -176,7 +194,7 @@ class SaleController extends Controller
             'note' => 'nullable|string',
             'tracking_number' => 'nullable|string',
         ]);
-    
+
         // Check the presence of tax_exempt
         $taxExempt = $request->has('tax_exempt') ? 1 : 0;
         $validatedData['tax_exempt'] = $taxExempt;
@@ -197,6 +215,20 @@ class SaleController extends Controller
                 $validatedData[$billingField] = $validatedData[$shippingField];
             }
         }
+
+        // Extract and merge tracking numbers
+        $trackingNumber = $validatedData['tracking_number'];
+        $additionalTrackingNumbers = $request->input('additional_tracking_number', []);
+        $allTrackingNumbers = array_merge([$trackingNumber], $additionalTrackingNumbers);
+        $trackingNumbersJSON = json_encode($allTrackingNumbers);
+        
+        // Update the sale's tracking numbers
+        $sale->update([
+            'tracking_number' => $trackingNumbersJSON,
+        ]);
+        
+        // Update other sale attributes except tracking_number
+        unset($validatedData['tracking_number']);
     
         $sale->update($validatedData);
     

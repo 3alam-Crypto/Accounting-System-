@@ -11,6 +11,9 @@
                     <!--begin::Wrapper-->
                     <div class="m-0">
                         <!--begin::Label-->
+                        <div style="font-size: 20px; font-weight: bold; color: red;">{{ $sale->note }}</div>
+                        <!--end::Label-->
+                        <!--begin::Label-->
                         <div class="fw-bold fs-3 text-gray-800 mb-8">Our Order Id: {{ $sale->our_order_id }}</div>
                         <!--end::Label-->
                         <div class="fw-bold fs-3 text-gray-800 mb-8">Platform: {{ $sale->platform->name }}</div>
@@ -45,13 +48,13 @@
                             <!--end::Col-->
                             <div class="col-sm-6">
                                 <!--end::Label-->
-                                <div style="font-size: 24px; font-weight: bold;">Shipping Information:</div>
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Shipping Information:</div>
                                 <!--end::Label-->
                                 <!--end::Text-->
-                                <div style="font-size: 20px; font-weight: bold; color: red;">{{ $sale->first_name }} {{ $sale->last_name }}</div>
+                                <div class="fw-bold fs-6 text-gray-800">{{ $sale->first_name }} {{ $sale->last_name }}</div>
                                 <!--end::Text-->
                                 <!--end::Description-->
-                                <div style="font-size: 20px; font-weight: bold; color: red;">{{ $sale->country->id === $sale->country_id ? $sale->country->country_name : '' }}
+                                <div class="fw-bold fs-6 text-gray-800">{{ $sale->country->id === $sale->country_id ? $sale->country->country_name : '' }}
                                     
                                     <br />{{ $sale->state }} , {{ $sale->city }} , {{ $sale->zip_code }}</div>
                                 </div>
@@ -61,11 +64,11 @@
 
                                 <div class="col-sm-6">
                                     <!-- Billing Information -->
-                                    <div style="font-size: 24px; font-weight: bold;">Billing Information:</div>
-                                    <div style="font-size: 20px; font-weight: bold; color: red;">
+                                    <div class="fw-semibold fs-7 text-gray-600 mb-1">Billing Information:</div>
+                                    <div class="fw-bold fs-6 text-gray-800">
                                         {{ $sale->billing_first_name }} {{ $sale->billing_last_name }}
                                     </div>
-                                    <div style="font-size: 18px; font-weight: bold; color: red;">
+                                    <div class="fw-bold fs-6 text-gray-800">
                                         {{ $sale->country->id === $sale->billing_country_id ? $sale->country->country_name : '' }}
                                         <br />{{ $sale->billing_state }} , {{ $sale->billing_city }} , {{ $sale->billing_zip_code }}
                                     </div>

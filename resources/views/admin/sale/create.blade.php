@@ -205,6 +205,20 @@
                             </div>
                         </div>
 
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="tracking_number">Tracking Number</label>
+                                <input type="text" name="tracking_number" class="form-control" id="tracking_number">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Additional Tracking Numbers</label>
+                                <div id="additionalTrackingNumbers">
+                                   
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="addTrackingNumberField()">+</button>
+                            </div>
+                        </div>
+                        
                     </div>
 
                     
@@ -453,6 +467,38 @@
             }
         });
     });
+
+    function addTrackingNumberField() {
+    const additionalTrackingNumbers = document.getElementById('additionalTrackingNumbers');
+
+    // Create new input field and a delete button
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.name = 'additional_tracking_number[]'; 
+    newInput.className = 'form-control mb-2';
+
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'btn btn-danger ms-2 delete-button';
+    deleteButton.innerText = '-';
+    deleteButton.onclick = function() {
+        additionalTrackingNumbers.removeChild(container);
+
+        // Display the '+' button when deleting an input field
+        addButton.style.display = 'inline-block';
+    };
+
+    const container = document.createElement('div');
+    container.className = 'input-group mb-2';
+    container.appendChild(newInput);
+    container.appendChild(deleteButton);
+
+    // Retrieve the '+' button
+    const addButton = document.querySelector('.btn-primary');
+
+    // Append the new input and delete button to the container
+    additionalTrackingNumbers.appendChild(container);
+}
 
 </script>
 

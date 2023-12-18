@@ -207,6 +207,29 @@
                             </div>
                         </div>
 
+                        <div class="mb-3 row">
+                            <div class="col-md-6">
+                                <label for="tracking_number">Tracking Number</label>
+                                <input type="text" name="tracking_number" class="form-control" id="tracking_number" value="{{ $primaryTrackingNumber ?? '' }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Additional Tracking Numbers</label>
+                                <div id="additionalTrackingNumbers">
+                                    @if(isset($decodedTrackingNumbers))
+                                        @foreach($decodedTrackingNumbers as $key => $tracking)
+                                            @if($key > 0)
+                                                <div class="input-group mb-2">
+                                                    <input type="text" name="additional_tracking_number[]" class="form-control mb-2" value="{{ $tracking }}">
+                                                    <button type="button" class="btn btn-danger ms-2 delete-button" onclick="deleteTrackingNumber(this)">-</button>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="addTrackingNumberField()">+</button>
+                            </div>
+                        </div>
+
                     </div>
 
                     
@@ -459,6 +482,32 @@
             }
         });
     });
+
+    function addTrackingNumberField() {
+    const additionalTrackingNumbers = document.getElementById('additionalTrackingNumbers');
+
+    // Create new input field and a delete button
+    const newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.name = 'additional_tracking_number[]';
+    newInput.className = 'form-control mb-2';
+
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'btn btn-danger ms-2 delete-button';
+    deleteButton.innerText = '-';
+    deleteButton.onclick = function() {
+        additionalTrackingNumbers.removeChild(container);
+    };
+
+    const container = document.createElement('div');
+    container.className = 'input-group mb-2';
+    container.appendChild(newInput);
+    container.appendChild(deleteButton);
+
+    // Append the new input and delete button to the container
+    additionalTrackingNumbers.appendChild(container);
+}
 
 </script>
 
