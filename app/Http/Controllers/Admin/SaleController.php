@@ -326,7 +326,7 @@ class SaleController extends Controller
                 'city' => $data[11],
                 'zip_code' => $data[12],
                 'state' => $data[13],
-                'country_id' => $this->getCountryId($data[14]),
+                'country_id' => is_numeric($data[14]) ? (int)$data[14] : 0,
                 'unit_price' => is_numeric($data[15]) ? $data[15] : 0,
                 'special_shipping_cost' => is_numeric($data[16]) ? $data[16] : 0,
                 'discount_percent' => is_numeric($data[19]) ? $data[19] : 0,
@@ -340,8 +340,7 @@ class SaleController extends Controller
                 'platform_tax' => is_numeric($data[34]) ? $data[34] : 0,
             ];
             
-            $countryId = $this->getCountryId($data[14]);
-            $saleData['country_id'] = $countryId !== null ? $countryId : 0;
+
             
             foreach ($saleData as $key => $value) {
                 if (empty($value)) {

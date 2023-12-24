@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\QuotationController;
 use App\Http\Controllers\Admin\PlatformController;
 use App\Http\Controllers\Admin\PaymentPlanController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\ShippingReminderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -146,6 +147,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::put('update-employee/{employee}', [EmployeeController::class, 'update'])->name('update-employee');
     Route::delete('delete-employee/{employee}', [EmployeeController::class, 'destroy'])->name('delete-employee');
 
+
+    //Route::get('/send-reminder-email', [ShippingReminderController::class, 'sendReminderEmail']);
+    Route::get('/send-reminder-email', [ShippingReminderController::class, 'sendReminderEmail']);
 
 });
 

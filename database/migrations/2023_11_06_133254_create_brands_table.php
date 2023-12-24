@@ -15,21 +15,22 @@ return new class extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('code')->nullable()->after('name');
             $table->timestamps();
         });
 
         $brands = [
-            'OHAUS',
-            'A&D',
-            'Sartorius STR',
-            'ADAM AE',
-            'CAS CS',
-            'Detecto DT',
-            'CARDINAL CN',
-            'RICE LAKE RL',
-            'PENSYLVANIA PN',
-            'VELAB',
-            'TORREY TR',
+            'OHAUS' => 'OH',
+            'A&D' => 'AD',
+            'Sartorius STR' => 'STR',
+            'ADAM AE' => 'AE',
+            'CAS CS' => 'CS',
+            'Detecto DT' => 'DT',
+            'CARDINAL CN' => 'CN',
+            'RICE LAKE RL' => 'RL',
+            'PENSYLVANIA PN' => 'BN',
+            'VELAB' => 'VE',
+            'TORREY TR' => 'TR',
         ];
 
         foreach ($brands as $brand) {
