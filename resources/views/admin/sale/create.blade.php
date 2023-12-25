@@ -403,7 +403,7 @@
 
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <button type="submit" class="btn btn-primary form-control mt-4">Create Sale</button>
                 </div>
             </div>
