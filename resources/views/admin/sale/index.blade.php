@@ -96,7 +96,7 @@
 <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <script>
     new DataTable('#kt_table_users', {
-
+        "search":true
 
     }).on("draw", function () {
         KTMenu.createInstances();
