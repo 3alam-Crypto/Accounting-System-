@@ -434,7 +434,7 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                                     <span class="path3"></span>
                                 </i>
                             </span>
-                            <span class="menu-title">Loans Type</span>
+                            <span class="menu-title">Expenses Type</span>
                             <span class="menu-arrow"></span>
                         </span>
                         <!--end:Menu link-->
