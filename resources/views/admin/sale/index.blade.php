@@ -43,7 +43,7 @@
                                         <td>{{ $sale->customer_name }}</td>
                                         <td>{{ $sale->product_name }}</td>
                                         <td>{{ $sale->product_model }}</td>
-                                        <td class="text-end">
+                                        <td class="text-center">
                                             <a href="#"
                                                 class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm"
                                                 data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
