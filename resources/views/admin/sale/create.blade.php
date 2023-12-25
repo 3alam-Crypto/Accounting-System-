@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-md-8">
 
-                <div class="card card-px-0 shadow-sm mt-4">
+                <div class="card  shadow-sm mt-4">
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="col-md-6">
@@ -96,7 +96,7 @@
                 </div>
 
 
-                <div class="card card-px-0 shadow-sm mt-4">
+                <div class="card  shadow-sm mt-4">
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="col-md-6">
@@ -204,7 +204,7 @@
                     </div>
                 </div>
 
-                <div class="card card-px-0 shadow-sm mt-4">
+                <div class="card  shadow-sm mt-4">
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="col-md-6">
@@ -255,7 +255,7 @@
                     </div>
                 </div>
                 <!-- Shipping Information -->
-                <div class="card card-px-0 shadow-sm mt-4">
+                <div class="card  shadow-sm mt-4">
                     <div class="card-header">
                         <h2 class="card-title">Shipping Information</h2>
                     </div>
@@ -319,7 +319,7 @@
                 </div>
 
                 <!-- Billing Information -->
-                <div class="card card-px-0 shadow-sm mt-4">
+                <div class="card  shadow-sm mt-4">
                     <div class="card-header">
                         <h2 class="card-title">Billing Information</h2>
                     </div>
@@ -376,7 +376,7 @@
 
 
             <div class="col-md-4">
-                <div class="card card-px-0 shadow-sm mt-4">
+                <div class="card  shadow-sm mt-4">
                     <div class="card-body">
                         <label for="name">Total Net Received</label>
                         <input type="text" name="total_net_received" class="form-control" id="total_net_received"
