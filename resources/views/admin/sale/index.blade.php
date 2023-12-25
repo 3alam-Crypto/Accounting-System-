@@ -22,16 +22,16 @@
                             </div>
                         @endif
 
-                        <table id="kt_table_users" class="table table-bordered">
+                        <table id="kt_table_users" class="table align-middle table-row-dashed fs-6 gy-5">
                             <thead>
                                 <tr>
-                                    <th>Shipping Date</th>
-                                    <th>Our Order </th>
-                                    <th>Order Date</th>
-                                    <th>Customer Name</th>
-                                    <th>Product Name</th>
-                                    <th>Product Model</th>
-                                    <th>Action</th>
+                                    <th class="min-w-125px">Shipping Date</th>
+                                    <th class="min-w-125px">Our Order </th>
+                                    <th class="min-w-125px">Order Date</th>
+                                    <th class="min-w-125px">Customer Name</th>
+                                    <th class="min-w-125px">Product Name</th>
+                                    <th class="min-w-125px">Product Model</th>
+                                    <th class="min-w-125px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,12 +43,6 @@
                                         <td>{{ $sale->customer_name }}</td>
                                         <td>{{ $sale->product_name }}</td>
                                         <td>{{ $sale->product_model }}</td>
-                                        <td style="display: flex; align-items: center;">
-
-
-
-
-                                        </td>
                                         <td class="text-end">
                                             <a href="#"
                                                 class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm"
