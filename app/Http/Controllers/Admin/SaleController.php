@@ -309,6 +309,27 @@ class SaleController extends Controller
         
         foreach ($fileContents as $line) {
             $data = str_getcsv($line);
+
+            $name = $data[9];
+            
+            // Split the name based on spaces
+            $nameParts = explode(' ', $name);
+        
+            $firstName = '';
+            $lastName = '';
+            
+            if (count($nameParts) === 1) {
+                // If there's no space in the name, put it in the first name
+                $firstName = $nameParts[0];
+            } elseif (count($nameParts) === 2) {
+                // If there is one space, put the first part in the first name and the second in the last name
+                $firstName = $nameParts[0];
+                $lastName = $nameParts[1];
+            } else {
+                // If there are two or more spaces, split accordingly
+                $firstName = $nameParts[0] . ' ' . $nameParts[1];
+                $lastName = implode(' ', array_slice($nameParts, 2));
+            }
             
             
             $saleData = [
@@ -321,12 +342,20 @@ class SaleController extends Controller
                 'order_date' => $this->formatDate($data[6]),
                 'product_model' => $data[7],
                 'product_name' => $data[8],
-                'customer_name' => $data[9],
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'billing_first_name' => $firstName,
+                'billing_last_name' => $lastName,
                 'customer_address' => $data[10],
+                'billing_address' => $data[10],
                 'city' => $data[11],
+                'billing_city' => $data[11],
                 'zip_code' => $data[12],
+                'billing_zip_code' => $data[12],
                 'state' => $data[13],
+                'billing_state' => $data[13],
                 'country_id' => is_numeric($data[14]) ? (int)$data[14] : 0,
+                'billing_country_id' => is_numeric($data[14]) ? (int)$data[14] : 0,
                 'unit_price' => is_numeric($data[15]) ? $data[15] : 0,
                 'special_shipping_cost' => is_numeric($data[16]) ? $data[16] : 0,
                 'discount_percent' => is_numeric($data[19]) ? $data[19] : 0,
@@ -338,9 +367,11 @@ class SaleController extends Controller
                 'brand_id' => is_numeric($data[32]) ? (int)$data[32] : 0,
                 'platform_fee' => is_numeric($data[33]) ? $data[33] : 0,
                 'platform_tax' => is_numeric($data[34]) ? $data[34] : 0,
+                'manufacturer_tax' => is_numeric($data[29]) ? $data[29] : 0,
             ];
             
 
+            
             
             foreach ($saleData as $key => $value) {
                 if (empty($value)) {
