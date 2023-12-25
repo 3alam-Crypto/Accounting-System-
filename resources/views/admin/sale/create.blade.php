@@ -3,38 +3,47 @@
 @section('content')
 
 <div class="container-fluid px-4">
-    
-    <div class="card mt-4">
-        <div class="card-header">
-            <h1 class="">Add Sale</h1>
-        </div>
-        <div class="card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
+    @if($errors->any())
+        <div class="card card-warrning mt-4">
+            <div class="card-header">
+                <h1 class="">Warrning</h1>
+            </div>
+            <div class="card-body">
+
+                <div class="alert alert-warrning">
                     <ul>
-                        @foreach ($errors->all() as $error)
+                        @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
-            @endif
-            <form action="{{ route('store-sale') }}" method="POST" enctype="multipart/form-data">
-                @csrf
 
-                <div class="row">
-                    <div class="col-md-8">
-                        <!-- Input fields section -->
+
+            </div>
+        </div>
+    @endif
+
+    <form action="{{ route('store-sale') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+
+        <div class="row">
+            <div class="col-md-8">
+
+                <div class="card">
+                    <div class="card-body">
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="vendor_invoice_number">Vendor INVOICE NUMBER</label>
-                                <input type="text" name="vendor_invoice_number" class="form-control" id="vendor_invoice_number">
+                                <input type="text" name="vendor_invoice_number" class="form-control"
+                                    id="vendor_invoice_number">
                             </div>
                             <div class="col-md-6">
                                 <label for="vendor_confirmation">Vendor Confirmation</label>
-                                <input type="text" name="vendor_confirmation" class="form-control" id="vendor_confirmation">
+                                <input type="text" name="vendor_confirmation" class="form-control"
+                                    id="vendor_confirmation">
                             </div>
                         </div>
-                        
+
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="name">Market Place PO</label>
@@ -43,21 +52,23 @@
                             <div class="col-md-6">
                                 <label for="platform" class="block text-sm font-medium text-gray-700">Platform</label>
                                 <div class="mb-3">
-                                    <select name="platform_id" id="platform" autocomplete="platform-name" class="form-select">
-                                        @foreach ($platforms as $platform)
-                                        <option value="{{ $platform->id }}">{{ $platform->name }}</option>
+                                    <select name="platform_id" id="platform" autocomplete="platform-name"
+                                        class="form-select">
+                                        @foreach($platforms as $platform)
+                                            <option value="{{ $platform->id }}">{{ $platform->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                        
+
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label>Shipping Date</label>
                                 <div class="mb-3">
-                                    <input class="form-control" type="date" name="shipping_date" class="form-control" id="shipping_date">
+                                    <input class="form-control" type="date" name="shipping_date" class="form-control"
+                                        id="shipping_date">
                                 </div>
                             </div>
 
@@ -71,7 +82,8 @@
                             <div class="col-md-6">
                                 <label>Order Date</label>
                                 <div class="mb-3">
-                                    <input class="form-control" type="date" name="order_date" class="form-control" id="order_date">
+                                    <input class="form-control" type="date" name="order_date" class="form-control"
+                                        id="order_date">
                                 </div>
                             </div>
 
@@ -80,8 +92,12 @@
                                 <input type="text" name="product_model" class="form-control" id="product_model">
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                    
+
+                <div class="card">
+                    <div class="card-body">
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="shipping_date">Product Name</label>
@@ -92,24 +108,26 @@
                                 <label for="brand" class="block text-sm font-medium text-gray-700">Brand</label>
                                 <div class="mb-3">
                                     <select name="brand_id" id="brand" autocomplete="brand-name" class="form-select">
-                                        @foreach ($brands as $brand)
-                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                        @foreach($brands as $brand)
+                                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                       
+
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="shipping_date">Unit Price</label>
-                                <input type="text" name="unit_price" class="form-control" id="unit_price" oninput="calculateTotalNetReceived(); calculateDiscount();">
+                                <input type="text" name="unit_price" class="form-control" id="unit_price"
+                                    oninput="calculateTotalNetReceived(); calculateDiscount();">
                             </div>
 
                             <div class="col-md-6">
                                 <label for="shipping_date">Special Shipping cost</label>
-                                <input type="text" name="special_shipping_cost" class="form-control" id="special_shipping_cost" oninput="calculateTotalNetReceived()">
+                                <input type="text" name="special_shipping_cost" class="form-control"
+                                    id="special_shipping_cost" oninput="calculateTotalNetReceived()">
                             </div>
                         </div>
 
@@ -121,53 +139,61 @@
 
                             <div class="col-md-6">
                                 <label for="shipping_date">Discount Percent</label>
-                                <input type="text" name="discount_percent" class="form-control" id="discount_percent" oninput="calculateDiscount()">
+                                <input type="text" name="discount_percent" class="form-control" id="discount_percent"
+                                    oninput="calculateDiscount()">
                             </div>
                         </div>
 
-                        
+
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="shipping_date">Quantity</label>
-                                <input type="text" name="quantity" class="form-control" id="quantity" oninput="calculateTotalNetReceived(); calculateDiscount();">
+                                <input type="text" name="quantity" class="form-control" id="quantity"
+                                    oninput="calculateTotalNetReceived(); calculateDiscount();">
                             </div>
 
                             <div class="col-md-6">
                                 <label for="shipping_date">Platform Fee</label>
-                                <input type="text" name="platform_fee" class="form-control" id="platform_fee" oninput="calculateGrossProfit()">
+                                <input type="text" name="platform_fee" class="form-control" id="platform_fee"
+                                    oninput="calculateGrossProfit()">
                             </div>
                         </div>
 
 
-                        
+
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="shipping_date">Shipping Cost</label>
-                                <input type="text" name="shipping_cost" class="form-control" id="shipping_cost" oninput="calculateGrossProfit()">
+                                <input type="text" name="shipping_cost" class="form-control" id="shipping_cost"
+                                    oninput="calculateGrossProfit()">
                             </div>
 
                             <div class="col-md-6">
                                 <label for="shipping_date">Additional Shipping</label>
-                                <input type="text" name="additional_shipping" class="form-control" id="additional_shipping" oninput="calculateGrossProfit()">
+                                <input type="text" name="additional_shipping" class="form-control"
+                                    id="additional_shipping" oninput="calculateGrossProfit()">
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="shipping_date">Manufacturer Tax</label>
-                                <input type="text" name="manufacturer_tax" class="form-control" id="manufacturer_tax" oninput="calculateGrossProfit()">
+                                <input type="text" name="manufacturer_tax" class="form-control" id="manufacturer_tax"
+                                    oninput="calculateGrossProfit()">
                             </div>
 
                             <div class="col-md-6">
                                 <label for="shipping_date">Other Cost</label>
-                                <input type="text" name="other_cost" class="form-control" id="other_cost" oninput="calculateGrossProfit()">
+                                <input type="text" name="other_cost" class="form-control" id="other_cost"
+                                    oninput="calculateGrossProfit()">
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="shipping_date">Product Cost</label>
-                                <input type="text" name="product_cost" class="form-control" id="product_cost" oninput="calculateGrossProfit()">
+                                <input type="text" name="product_cost" class="form-control" id="product_cost"
+                                    oninput="calculateGrossProfit()">
                             </div>
 
                             <div class="col-md-6">
@@ -175,20 +201,25 @@
                                 <input type="date" name="due_date_shipping" class="form-control" id="due_date_shipping">
                             </div>
                         </div>
+                    </div>
+                </div>
 
+                <div class="card">
+                    <div class="card-body">
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label>Status</label>
                                 <select name="status_id" id="status_id" autocomplete="status-name" class="form-select">
-                                    @foreach ($statuses as $status)
-                                    <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                    @foreach($statuses as $status)
+                                        <option value="{{ $status->id }}">{{ $status->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="due_date_shipping">Ramo Trading Order Id</label>
-                                <input type="text" name="ramo_trading_order_id" class="form-control" id="ramo_trading_order_id">
+                                <input type="text" name="ramo_trading_order_id" class="form-control"
+                                    id="ramo_trading_order_id">
                             </div>
                         </div>
 
@@ -199,7 +230,9 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <input type="checkbox" name="tax_exempt" id="tax_exempt" class="status-checkbox" onclick="toggleTaxExempt()" {{ $sale->tax_exempt ? 'checked' : '' }}>
+                                <input type="checkbox" name="tax_exempt" id="tax_exempt" class="status-checkbox"
+                                    onclick="toggleTaxExempt()"
+                                    {{ $sale->tax_exempt ? 'checked' : '' }}>
                                 <label for="tax_exempt">Is Customer Tax Exempt</label>
                                 <input type="hidden" name="hidden_tax_exempt" value="{{ $sale->tax_exempt }}">
                             </div>
@@ -213,37 +246,18 @@
                             <div class="col-md-6">
                                 <label>Additional Tracking Numbers</label>
                                 <div id="additionalTrackingNumbers">
-                                   
+
                                 </div>
-                                <button type="button" class="btn btn-primary" onclick="addTrackingNumberField()">+</button>
+                                <button type="button" class="btn btn-primary"
+                                    onclick="addTrackingNumberField()">+</button>
                             </div>
                         </div>
-                        
                     </div>
-
-                    
-                    <div class="col-md-4">
-                        <label for="name">Total Net Received</label>
-                        <input type="text" name="total_net_received" class="form-control" id="total_net_received" disabled>
-                        <input type="hidden" name="total_net_received" id="hidden_total_net_received">
-
-                        <label for="name">Gross Profit</label>
-                        <input type="text" name="gross_profit" class="form-control" id="gross_profit" disabled>
-                        <input type="hidden" name="gross_profit" id="hidden_gross_profit">
-
-                        <label for="name">Gross Profit Percentage</label>
-                        <input type="text" name="gross_profit_percentage" class="form-control" id="gross_profit_percentage" disabled>
-                        <input type="hidden" name="gross_profit_percentage" id="hidden_gross_profit_percentage">
-
-                        <label for="name">Discount Value</label>
-                        <input type="text" name="discount_value" class="form-control" id="discount_value" disabled>
-                        <input type="hidden" name="discount_value" id="hidden_discount_value">
-                    </div>
-
-                    <!-- Shipping Information -->
+                </div>
+                <!-- Shipping Information -->
                 <div class="card mt-4">
                     <div class="card-header">
-                        <h2>Shipping Information</h2>
+                        <h2 class="card-title">Shipping Information</h2>
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">
@@ -281,8 +295,8 @@
                             <div class="col-md-6">
                                 <label for="country" class="form-label">Country</label>
                                 <select name="country_id" id="country" autocomplete="country-name" class="form-select">
-                                    @foreach ($countries as $country)
-                                    <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                    @foreach($countries as $country)
+                                        <option value="{{ $country->id }}">{{ $country->country_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -307,7 +321,7 @@
                 <!-- Billing Information -->
                 <div class="card mt-4">
                     <div class="card-header">
-                        <h2>Billing Information</h2>
+                        <h2 class="card-title">Billing Information</h2>
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">
@@ -344,9 +358,10 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="country" class="form-label">Country</label>
-                                <select name="billing_country_id" id="billing_country_id" autocomplete="country-name" class="form-select">
-                                    @foreach ($countries as $country)
-                                    <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                <select name="billing_country_id" id="billing_country_id" autocomplete="country-name"
+                                    class="form-select">
+                                    @foreach($countries as $country)
+                                        <option value="{{ $country->id }}">{{ $country->country_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -357,16 +372,43 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Save Sale</button>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <label for="name">Total Net Received</label>
+                        <input type="text" name="total_net_received" class="form-control" id="total_net_received"
+                            disabled>
+                        <input type="hidden" name="total_net_received" id="hidden_total_net_received">
+
+                        <label for="name">Gross Profit</label>
+                        <input type="text" name="gross_profit" class="form-control" id="gross_profit" disabled>
+                        <input type="hidden" name="gross_profit" id="hidden_gross_profit">
+
+                        <label for="name">Gross Profit Percentage</label>
+                        <input type="text" name="gross_profit_percentage" class="form-control"
+                            id="gross_profit_percentage" disabled>
+                        <input type="hidden" name="gross_profit_percentage" id="hidden_gross_profit_percentage">
+
+                        <label for="name">Discount Value</label>
+                        <input type="text" name="discount_value" class="form-control" id="discount_value" disabled>
+                        <input type="hidden" name="discount_value" id="hidden_discount_value">
                     </div>
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary">Save Sale</button>
+                </div>
+            </div>
+    </form>
+
 </div>
 
 <script>
@@ -376,10 +418,12 @@
         const specialShippingCost = parseFloat(document.getElementById('special_shipping_cost').value) || 0;
 
         const totalNetReceived = quantity * unitPrice + specialShippingCost;
-        document.getElementById('total_net_received').value = isNaN(totalNetReceived) ? '' : totalNetReceived.toFixed(2);
+        document.getElementById('total_net_received').value = isNaN(totalNetReceived) ? '' : totalNetReceived.toFixed(
+            2);
 
-        
-        document.getElementById('hidden_total_net_received').value = isNaN(totalNetReceived) ? '' : totalNetReceived.toFixed(2);
+
+        document.getElementById('hidden_total_net_received').value = isNaN(totalNetReceived) ? '' : totalNetReceived
+            .toFixed(2);
     }
 
     function calculateGrossProfit() {
@@ -391,15 +435,18 @@
         const shippingCost = parseFloat(document.getElementById('shipping_cost').value) || 0;
         const platformFee = parseFloat(document.getElementById('platform_fee').value) || 0;
 
-        const grossProfit = totalNetReceived - (productCost + otherCost + manufacturerTax + additionalShipping + shippingCost + platformFee);
+        const grossProfit = totalNetReceived - (productCost + otherCost + manufacturerTax + additionalShipping +
+            shippingCost + platformFee);
         document.getElementById('gross_profit').value = isNaN(grossProfit) ? '' : grossProfit.toFixed(2);
 
         const grossProfitPercentage = (grossProfit / totalNetReceived) * 100;
-        document.getElementById('gross_profit_percentage').value = isNaN(grossProfitPercentage) ? '' : grossProfitPercentage.toFixed(2) + '%';
+        document.getElementById('gross_profit_percentage').value = isNaN(grossProfitPercentage) ? '' :
+            grossProfitPercentage.toFixed(2) + '%';
 
-        
+
         document.getElementById('hidden_gross_profit').value = isNaN(grossProfit) ? '' : grossProfit.toFixed(2);
-        document.getElementById('hidden_gross_profit_percentage').value = isNaN(grossProfitPercentage) ? '' : grossProfitPercentage.toFixed(2);
+        document.getElementById('hidden_gross_profit_percentage').value = isNaN(grossProfitPercentage) ? '' :
+            grossProfitPercentage.toFixed(2);
     }
 
     function calculateDiscount() {
@@ -414,16 +461,16 @@
     }
 
     function toggleTaxExempt() {
-            const checkbox = document.getElementById('tax_exempt');
-            if (checkbox.checked) {
-                checkbox.value = 1;
-            } else {
-                checkbox.value = 0;
-            }
+        const checkbox = document.getElementById('tax_exempt');
+        if (checkbox.checked) {
+            checkbox.value = 1;
+        } else {
+            checkbox.value = 0;
         }
+    }
 
 
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const sameAddressCheckbox = document.getElementById('Same_aaddress');
         const shippingFields = {
             'billing_first_name': 'first_name',
@@ -436,7 +483,7 @@
             'billing_company_name': 'company_name'
         };
 
-        sameAddressCheckbox.addEventListener('change', function() {
+        sameAddressCheckbox.addEventListener('change', function () {
             const shippingInfo = {};
             // Get shipping information
             Object.keys(shippingFields).forEach(key => {
@@ -469,39 +516,37 @@
     });
 
     function addTrackingNumberField() {
-    const additionalTrackingNumbers = document.getElementById('additionalTrackingNumbers');
+        const additionalTrackingNumbers = document.getElementById('additionalTrackingNumbers');
 
-    // Create new input field and a delete button
-    const newInput = document.createElement('input');
-    newInput.type = 'text';
-    newInput.name = 'additional_tracking_number[]'; 
-    newInput.className = 'form-control mb-2';
+        // Create new input field and a delete button
+        const newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.name = 'additional_tracking_number[]';
+        newInput.className = 'form-control mb-2';
 
-    const deleteButton = document.createElement('button');
-    deleteButton.type = 'button';
-    deleteButton.className = 'btn btn-danger ms-2 delete-button';
-    deleteButton.innerText = '-';
-    deleteButton.onclick = function() {
-        additionalTrackingNumbers.removeChild(container);
+        const deleteButton = document.createElement('button');
+        deleteButton.type = 'button';
+        deleteButton.className = 'btn btn-danger ms-2 delete-button';
+        deleteButton.innerText = '-';
+        deleteButton.onclick = function () {
+            additionalTrackingNumbers.removeChild(container);
 
-        // Display the '+' button when deleting an input field
-        addButton.style.display = 'inline-block';
-    };
+            // Display the '+' button when deleting an input field
+            addButton.style.display = 'inline-block';
+        };
 
-    const container = document.createElement('div');
-    container.className = 'input-group mb-2';
-    container.appendChild(newInput);
-    container.appendChild(deleteButton);
+        const container = document.createElement('div');
+        container.className = 'input-group mb-2';
+        container.appendChild(newInput);
+        container.appendChild(deleteButton);
 
-    // Retrieve the '+' button
-    const addButton = document.querySelector('.btn-primary');
+        // Retrieve the '+' button
+        const addButton = document.querySelector('.btn-primary');
 
-    // Append the new input and delete button to the container
-    additionalTrackingNumbers.appendChild(container);
-}
-
+        // Append the new input and delete button to the container
+        additionalTrackingNumbers.appendChild(container);
+    }
 </script>
 
 
 @endsection
-
