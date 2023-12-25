@@ -96,11 +96,19 @@
 <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <script>
     new DataTable('#kt_table_users', {
-        "search":true
+       
 
     }).on("draw", function () {
+        handleSearchDatatable();
         KTMenu.createInstances();
+        
     });
+    var handleSearchDatatable = function () {
+        const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
+        filterSearch.addEventListener('keyup', function (e) {
+            dt.search(e.target.value).draw();
+        });
+    }
 
 </script>
 
