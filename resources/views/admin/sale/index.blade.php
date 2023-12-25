@@ -10,6 +10,13 @@
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
                             <h3 class="card-title">Sales</h3>
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span
+                                        class="path1"></span><span class="path2"></span></i>
+                                <input type="text" data-kt-docs-table-filter="search"
+                                    class="form-control form-control-solid w-250px ps-15"
+                                    placeholder="Search Customers" />
+                            </div>
                             <!--begin::Primary button-->
                             <a href="{{ route('create-sale') }}"
                                 class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Sale</a>
