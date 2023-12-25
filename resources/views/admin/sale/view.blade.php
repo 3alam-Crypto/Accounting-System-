@@ -10,17 +10,44 @@
                 <div class="mt-n1">
                     <!--begin::Wrapper-->
                     <div class="m-0">
-                        <!--begin::Label-->
-                        <div style="font-size: 20px; font-weight: bold; color: red;">{{ $sale->note }}</div>
-                        <!--end::Label-->
+                        <!-- Include Actions -->
+                        <div class="text-end">
+                            <a href="#"
+                                class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm"
+                                data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+                                <i class="ki-duotone ki-down fs-5 ms-1"></i>
+                            </a>
+                            <!--begin::Menu-->
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
+                                data-kt-menu="true">
+                                <!--begin::Menu items-->
+                                <div class="menu-item px-3">
+                                    <a href="{{ route('create-sale') }}" class="menu-link px-3">Create sale</a>
+                                </div>
+                                <div class="menu-item px-3">
+                                    <a href="{{ route('edit-sale', $sale->id) }}" class="menu-link px-3">Edit</a>
+                                </div>
+                                <div class="menu-item px-3">
+                                    <a href="{{ route('createFile-sale', $sale->id) }}" class="menu-link px-3">Add File</a>
+                                </div>
+                                <div class="menu-item px-3">
+                                    <a href="{{ route('viewFile-sale', $sale->id) }}" class="menu-link px-3">View Files</a>
+                                </div>
+                                <!--end::Menu items-->
+                            </div>
+                            <!--end::Menu-->
+                        </div>
+                        <!-- End Actions -->
+                        
                         <!--begin::Label-->
                         <div class="fw-bold fs-3 text-gray-800 mb-8">Our Order Id: {{ $sale->our_order_id }}</div>
                         <!--end::Label-->
                         <div class="fw-bold fs-3 text-gray-800 mb-8">Platform: {{ $sale->platform->name }}</div>
                         <!--begin::Row-->
+                        
                         <div class="row g-5 mb-11">
                             <!--end::Col-->
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                                 <!--end::Label-->
                                 <div class="fw-semibold fs-7 text-gray-600 mb-1">Order Date:</div>
                                 <!--end::Label-->
@@ -30,7 +57,7 @@
                             </div>
                             <!--end::Col-->
                             <!--end::Col-->
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <!--end::Label-->
                                 <div class="fw-semibold fs-7 text-gray-600 mb-1">Shipping Date:</div>
                                 <!--end::Label-->
@@ -46,7 +73,7 @@
                         <!--begin::Row-->
                         <div class="row g-5 mb-12">
                             <!--end::Col-->
-                            <div class="col-sm-6">
+                            <div class="col-sm-5">
                                 <!--end::Label-->
                                 <div class="fw-semibold fs-7 text-gray-600 mb-1">Shipping Information:</div>
                                 <!--end::Label-->
@@ -62,7 +89,7 @@
                                 <!--end::Col-->
                                 <!--end::Row-->
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <!-- Billing Information -->
                                     <div class="fw-semibold fs-7 text-gray-600 mb-1">Billing Information:</div>
                                     <div class="fw-bold fs-6 text-gray-800">
@@ -71,6 +98,14 @@
                                     <div class="fw-bold fs-6 text-gray-800">
                                         {{ $sale->country->id === $sale->billing_country_id ? $sale->country->country_name : '' }}
                                         <br />{{ $sale->billing_state }} , {{ $sale->billing_city }} , {{ $sale->billing_zip_code }}
+                                    </div>
+                                </div>
+                                
+
+                                <div class="col-sm-3">
+                                    <div style="font-size: 20px; font-weight: bold; color: red;">NOTE:</div>
+                                    <div style="font-size: 24px; font-weight: bold;">
+                                        {{ $sale->note }}
                                     </div>
                                 </div>
                                 

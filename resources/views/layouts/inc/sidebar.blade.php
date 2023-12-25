@@ -77,6 +77,7 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                         <!--end:Menu content-->
                     </div>
                     <!--end:Menu item-->
+                    @role('admin')
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
@@ -110,6 +111,7 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                         </div>
                         <!--end:Menu sub-->
                     </div>
+                    
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
@@ -180,9 +182,11 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                         </div>
                         <!--end:Menu sub-->
                     </div>
+                    @endrole
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
+                    @role('admin|Sales|Accountant')
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
                         <span class="menu-link">
@@ -270,6 +274,7 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
+                    
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
                         <span class="menu-link">
@@ -352,9 +357,11 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                         <!--end:Menu sub-->
 
                     </div>
+                    @endrole
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
+                    @role('admin|Accountant')
                     <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                         <!--begin:Menu link-->
                         <span class="menu-link">
@@ -413,6 +420,7 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                         </div>
                         <!--end:Menu sub-->
                     </div>
+                    
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
@@ -612,9 +620,11 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                         </div>
                         <!--end:Menu sub-->
                     </div>
+                    @endrole
                     <!--end:Menu item-->
 
                     <!--begin:Menu item-->
+                    @role('admin')
                     <div class="menu-item pt-5">
                         <!--begin:Menu content-->
                         <div class="menu-content">
@@ -624,6 +634,7 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                     </div>
                     <!--end:Menu item-->
                     <!--begin:Menu item-->
+                    
                     <div class="menu-item">
                         <!--begin:Menu link-->
                         <a class="menu-link" href="{{ route('paymentPlan') }}" target="_blank">
@@ -637,6 +648,7 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                         </a>
                         <!--end:Menu link-->
                     </div>
+                    @endrole
                     <!--end:Menu item-->
                     
                 </div>

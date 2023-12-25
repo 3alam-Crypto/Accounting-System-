@@ -50,10 +50,21 @@
                              </div>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="form-check mb-3">
                             <div class="col-md-6">
-                                <label>Ship Date</label>
-                                <input type="text" name="ship_date" class="form-control" value="{{ $platform->ship_date }}">
+                                <input class="form-check-input" type="checkbox" name="shipment_status" id="shipmentStatusCheckbox" {{ $platform->shipment_status ? 'checked' : '' }}>
+                                <label class="form-check-label" for="shipmentStatusCheckbox">
+                                    trigger on shipment status 
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-check mb-3">
+                            <div class="col-md-6">
+                                <input class="form-check-input" type="checkbox" name="sales_status" id="salesStatusCheckbox" {{ $platform->sales_status ? 'checked' : '' }}>
+                                <label class="form-check-label" for="salesStatusCheckbox">
+                                    trigger on sales status
+                                </label>
                             </div>
                         </div>
 

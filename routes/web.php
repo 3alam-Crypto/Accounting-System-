@@ -34,12 +34,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
-Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
+Route::prefix('admin')->middleware(['auth', 'role:admin|Sales|Accountant'])->group(function() {
 
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 

@@ -85,19 +85,31 @@ class SaleController extends Controller
             'tracking_number' => 'nullable|string',
         ]);
 
-        // Get the main tracking number
-        $trackingNumber = $validatedData['tracking_number'];
-        
-        // Get additional tracking numbers and store them as an array
+        $mainTrackingNumber = $request->input('tracking_number');
         $additionalTrackingNumbers = $request->input('additional_tracking_number', []);
-        
-        // Combine main and additional tracking numbers into one array
-        $allTrackingNumbers = array_merge([$trackingNumber], $additionalTrackingNumbers);
-        
-        // Convert the combined array to JSON
-        $trackingNumbersJSON = json_encode($allTrackingNumbers);
-        
-        // Replace the 'tracking_number' field with the JSON representation
+
+        $allTrackingNumbers = [];
+
+        // Adding main tracking number
+        if ($mainTrackingNumber) {
+            $allTrackingNumbers[] = [
+                'carrier' => $request->input('shipping_carrier')[0] ?? null,
+                'trackingNumber' => $mainTrackingNumber
+            ];
+        }
+
+        // Adding additional tracking numbers
+        foreach ($additionalTrackingNumbers as $additionalTrackingNumber) {
+            if ($additionalTrackingNumber) {
+                $allTrackingNumbers[] = [
+                    'carrier' => $request->input('shipping_carrier')[count($allTrackingNumbers)] ?? null,
+                    'trackingNumber' => $additionalTrackingNumber
+                ];
+            }
+        }
+
+        $trackingNumbersJSON = empty($allTrackingNumbers) ? null : json_encode($allTrackingNumbers);
+
         $validatedData['tracking_number'] = $trackingNumbersJSON;
 
         

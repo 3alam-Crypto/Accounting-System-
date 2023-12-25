@@ -19,6 +19,7 @@
                     <form action="{{ route('store-platform') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
+                        <!-- Platform Name -->
                         <div class="mb-3">
                             <div class="col-md-6">
                                 <label>Platform Name</label>
@@ -26,6 +27,7 @@
                             </div>
                         </div>
 
+                        <!-- Pay out 1 -->
                         <div class="mb-3">
                             <div class="col-md-6">
                                 <label>Pay out 1</label>
@@ -33,6 +35,7 @@
                             </div>
                         </div>
 
+                        <!-- Pay out 2 -->
                         <div class="mb-3">
                             <div class="col-md-6">
                                 <label>Pay out 2</label>
@@ -40,6 +43,7 @@
                             </div>
                         </div>
 
+                        <!-- Immediately Checkbox -->
                         <div class="form-check mb-3">
                             <div class="col-md-6">
                                 <input class="form-check-input" type="checkbox" name="immediately" id="immediatelyCheckbox">
@@ -49,10 +53,23 @@
                              </div>
                         </div>
 
-                        <div class="mb-3">
+                        <!-- Shipment Status Checkbox -->
+                        <div class="form-check mb-3">
                             <div class="col-md-6">
-                                <label>Ship Date</label>
-                                <input type="text" name="ship_date" class="form-control">
+                                <input class="form-check-input" type="checkbox" name="shipment_status" id="shipmentStatusCheckbox">
+                                <label class="form-check-label" for="shipmentStatusCheckbox">
+                                    trigger on shipment status 
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Sales Status Checkbox -->
+                        <div class="form-check mb-3">
+                            <div class="col-md-6">
+                                <input class="form-check-input" type="checkbox" name="sales_status" id="salesStatusCheckbox">
+                                <label class="form-check-label" for="salesStatusCheckbox">
+                                    trigger on sales status
+                                </label>
                             </div>
                         </div>
 

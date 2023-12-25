@@ -26,10 +26,12 @@ class PlatformController extends Controller
             'name' => 'required',
             'pay_out_1' => 'nullable|numeric',
             'pay_out_2' => 'nullable|numeric',
-            'ship_date' => 'nullable|integer',
+
         ]);
 
         $data['immediately'] = $request->has('immediately');
+        $data['shipment_status'] = $request->has('shipment_status');
+        $data['sales_status'] = $request->has('sales_status');
 
         Platform::create($data);
 
@@ -52,7 +54,8 @@ class PlatformController extends Controller
             'name' => 'required',
             'pay_out_1' => 'nullable|numeric',
             'pay_out_2' => 'nullable|numeric',
-            'ship_date' => 'nullable|integer',
+            'shipment_status' => 'nullable|boolean',
+        'sales_status' => 'nullable|boolean',
             
         ]);
         $data['immediately'] = $request->has('immediately');
