@@ -275,7 +275,5 @@ function calculateTotalPrice() {
     }
 }
 
-
-    
 </script>
 @endsection

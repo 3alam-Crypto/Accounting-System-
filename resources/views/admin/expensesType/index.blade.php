@@ -8,8 +8,8 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Expenses Type</h3>
-                            <a href="{{ route('create-expenses-type') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Expenses Type</a>
+                            <h3 class="card-title">Loans Type</h3>
+                            <a href="{{ route('create-expenses-type') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Loans Type</a>
                         </div>
 
                         @if(session('success'))
@@ -33,14 +33,51 @@
                                     <td>{{ $expenses_type->name }}</td>
                                     <td>{{ $expenses_type->bounce }}</td>
                                     <td>{{ $expenses_type->punishment }}</td>
-                                    <td style="display: flex; align-items: center;">
-                                        <a href="{{ route('edit-expenses-type', $expenses_type->id) }}" class="btn btn-success">Edit</a>
-                                        <form method="POST" action="{{ route('delete-expenses-type', $expenses_type->id) }}" onsubmit="return confirm('Are you sure?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
-                                        </form>
-                                        <a href="{{ route('view-expenses-type', $expenses_type->id) }}" class="btn btn-success" style="margin-left: 10px;">View</a>
+                                    
+                                    <td class="text-center">
+                                        <a
+                                            href="#"
+                                            class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm"
+                                            data-kt-menu-trigger="click"
+                                            data-kt-menu-placement="bottom-end">Actions
+                                            <i class="ki-duotone ki-down fs-5 ms-1"></i>
+                                        </a>
+                                        <!--begin::Menu-->
+                                        <div
+                                            class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
+                                            data-kt-menu="true">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a
+                                                    href="{{ route('edit-expenses-type', $expenses_type->id) }}"
+                                                    class="menu-link px-3">Edit</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a
+                                                    href="{{ route('view-expenses-type', $expenses_type->id) }}"
+                                                    class="menu-link px-3">View</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                            <!-- Update Delete section -->
+                                            <div class="menu-item px-3">
+                                                <a
+                                                    href="{{ route('delete-expenses-type', $expenses_type->id) }}"
+                                                    onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this expenses type?')) { document.getElementById('delete-form-{{ $expenses_type->id }}').submit(); }"
+                                                    class="menu-link px-3">Delete</a>
+                                                <form
+                                                    id="delete-form-{{ $expenses_type->id }}"
+                                                    method="POST"
+                                                    action="{{ route('delete-expenses-type', $expenses_type->id) }}"
+                                                    style="display: none;">
+                                                    @csrf @method('DELETE')
+                                                </form>
+                                            </div>
+                                            <!-- View section -->
+    
+                                        </div>
+                                        <!--end::Menu-->
                                     </td>
                                 </tr>
                                 @endforeach

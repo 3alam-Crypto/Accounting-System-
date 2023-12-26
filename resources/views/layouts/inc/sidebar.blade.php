@@ -460,7 +460,7 @@ if (isset($_COOKIE["sidebar_minimize_state"]) && $_COOKIE["sidebar_minimize_stat
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Create Expenses Type</span>
+                                    <span class="menu-title">Create Loans Type</span>
                                 </a>
                                 <!--end:Menu link-->
                             </div>

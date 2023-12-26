@@ -6,7 +6,7 @@
     
     <div class="card mt-4">
         <div class="card-header">
-            <h1 class="">Add Loan</h1>
+            <h1 class="card-title">Add Loan</h1>
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -109,7 +109,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Save Expenses</button>
+                        <button type="submit" class="btn btn-primary">Save Loan</button>
                     </div>
                 </div>
             </form>

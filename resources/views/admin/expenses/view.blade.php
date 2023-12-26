@@ -8,9 +8,9 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Expenses</h3>
+                            <h3 class="card-title">Loans</h3>
                             <!--begin::Primary button-->
-                            <a href="{{ route('create-expenses') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Expenses</a>
+                            <a href="{{ route('create-expenses') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Loans</a>
                             <!--end::Primary button-->
                         </div>
 
@@ -23,7 +23,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Expense Type</th>
+                                    <th>Loan Type</th>
                                     <th>Installment Amount</th>
                                     <th>Amount</th>
                                     <th>Status</th>
@@ -51,13 +51,43 @@
                                     <td>{{ $expense->due_charges }}</td>
                                     <td>{{ $expense->period }}</td>
                                     <td>{{ $expense->priority }}</td>
-                                    <td style="display: flex; align-items: center;">
-                                        <a href="{{ route('edit-expenses', $expense->id) }}" class="btn btn-success">Edit</a>
-                                        <form method="POST" action="{{ route('delete-expenses', $expense->id) }}" onsubmit="return confirm('Are you sure?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" style="margin-left: 10px;">Delete</button>
-                                        </form>
+                                    
+                                    <td class="text-center">
+                                        <a
+                                            href="#"
+                                            class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm"
+                                            data-kt-menu-trigger="click"
+                                            data-kt-menu-placement="bottom-end">Actions
+                                            <i class="ki-duotone ki-down fs-5 ms-1"></i>
+                                        </a>
+                                        <!--begin::Menu-->
+                                        <div
+                                            class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
+                                            data-kt-menu="true">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a
+                                                    href="{{ route('edit-expenses', $expense->id) }}"
+                                                    class="menu-link px-3">Edit</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                            <!-- Update Delete section -->
+                                            <div class="menu-item px-3">
+                                                <a
+                                                    href="{{ route('delete-expenses', $expense->id) }}"
+                                                    onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this expenses type?')) { document.getElementById('delete-form-{{ $expense->id}}').submit(); }"
+                                                    class="menu-link px-3">Delete</a>
+                                                <form
+                                                    id="delete-form-{{ $expense->id }}"
+                                                    method="POST"
+                                                    action="{{ route('delete-expenses', $expense->id) }}"
+                                                    style="display: none;">
+                                                    @csrf @method('DELETE')
+                                                </form>
+                                            </div>
+                                            <!-- View section -->
+                                        </div>
+                                        <!--end::Menu-->
                                     </td>
                                 </tr>
                                 @endforeach

@@ -33,15 +33,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
 Route::prefix('admin')->middleware(['auth', 'role:admin|Sales|Accountant'])->group(function() {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
-
+    
     Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
 
     Route::get('role', [RoleController::class, 'index'])->name('role');
@@ -125,6 +124,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|Sales|Accountant'])->gro
     Route::get('purchaseOrder', [PurchaseOrderController::class, 'index'])->name('purchaseOrder');
     Route::get('create-purchaseOrder', [PurchaseOrderController::class, 'create'])->name('create-purchaseOrder');
     Route::post('create-purchaseOrder', [PurchaseOrderController::class, 'store'])->name('store-purchaseOrder');
+    Route::get('edit-purchaseOrder/{purchaseOrder}', [PurchaseOrderController::class, 'edit'])->name('edit-purchaseOrder');
+    Route::put('update-purchaseOrder/{purchaseOrder}', [PurchaseOrderController::class, 'update'])->name('update-purchaseOrder');
 
     Route::get('quotation', [QuotationController::class, 'index'])->name('quotation');
     Route::get('create-quotation', [QuotationController::class, 'create'])->name('create-quotation');

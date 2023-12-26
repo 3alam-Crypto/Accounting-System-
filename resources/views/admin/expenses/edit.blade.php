@@ -4,7 +4,7 @@
     <div class="container-fluid px-4">
         <div class="card mt-4">
             <div class="card-header">
-                <h1 class="">Edit Expense</h1>
+                <h1 class="card-title">Edit Loan</h1>
             </div>
             <div class="card-body">
                 @if ($errors->any())
@@ -25,7 +25,7 @@
                         <div class="col-md-8">
                             <div class="mb-3 row">
                                 <div class="col-md-6">
-                                    <label for="expenses_type_id">Expense Type</label>
+                                    <label for="expenses_type_id">Loan Type</label>
                                     <select name="expenses_type_id" id="expenses_type_id" class="form-select">
                                         @foreach ($expensesTypes as $expenseType)
                                             <option value="{{ $expenseType->id }}"
@@ -66,7 +66,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary">Update Expense</button>
+                            <button type="submit" class="btn btn-primary">Update Loan</button>
                         </div>
                     </div>
                 </form>

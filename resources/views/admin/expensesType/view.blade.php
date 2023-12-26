@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h1>Expenses Type: {{ $expensesType->name }}</h1>
+                            <h1>Loans Type: {{ $expensesType->name }}</h1>
                         </div>
 
                         @if(session('success'))
@@ -20,7 +20,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Expense Type</th>
+                                    <th>Loans Type</th>
                                     <th>Installment Amount</th>
                                     <th>Amount</th>
                                     <th>Status</th>
@@ -48,8 +48,27 @@
                                     <td>{{ $expense->due_charges }}</td>
                                     <td>{{ $expense->period }}</td>
                                     <td>{{ $expense->priority }}</td>
-                                    <td>
-                                        <a href="{{ route('edit-expenses', $expense->id) }}" class="btn btn-success">Edit</a>
+                                    <td class="text-center">
+                                        <a
+                                            href="#"
+                                            class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm"
+                                            data-kt-menu-trigger="click"
+                                            data-kt-menu-placement="bottom-end">Actions
+                                            <i class="ki-duotone ki-down fs-5 ms-1"></i>
+                                        </a>
+                                        <!--begin::Menu-->
+                                        <div
+                                            class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
+                                            data-kt-menu="true">
+                                            <!--begin::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a
+                                                    href="{{ route('edit-expenses', $expense->id) }}"
+                                                    class="menu-link px-3">Edit</a>
+                                            </div>
+                                            <!--end::Menu item-->
+                                        </div>
+                                        <!--end::Menu-->
                                     </td>
                                 </tr>
                                 @endforeach
