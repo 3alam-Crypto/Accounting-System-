@@ -85,6 +85,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|Sales|Accountant'])->gro
     Route::get('awaitingShipping-sale', [SaleController::class, 'awaitingShipping'])->name('awaitingShipping-sale');
     Route::get('import-sale', [SaleController::class, 'showImportForm'])->name('import-form');
     Route::post('import-sale', [SaleController::class, 'import'])->name('import');
+    Route::get('export-sale',  [SaleController::class, 'export'])->name('export-sale');
 
 
     Route::get('saleFileType', [SalesFileTypeController::class, 'index'])->name('saleFileType');
@@ -95,11 +96,17 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|Sales|Accountant'])->gro
     Route::delete('delete-saleFileType/{salesFileType}', [SalesFileTypeController::class, 'destroy'])->name('delete-saleFileType');
     
 
+    
+
 
     Route::get('monthly-report', [ReportController::class, 'viewMonthly'])->name('monthly-report');
     Route::get('yearly-report', [ReportController::class, 'viewYearly'])->name('yearly-report');
     Route::get('yearly-Brand-report', [ReportController::class, 'viewBrandYearly'])->name('yearly-Brand-report');
     Route::get('export-report', [ReportController::class, 'exportReport'])->name('export-report');
+    Route::get('export-monthly-report', [ReportController::class, 'exportMonthlyReport'])->name('export-monthly-report');
+    Route::get('export-yearly-report', [ReportController::class, 'exportYearlyReport'])->name('export-yearly-report');
+    Route::get('export-Brand-report', [ReportController::class, 'exportBrandYearly'])->name('export-brand-report');
+
 
 
     Route::get('expensesType', [ExpensesTypeController::class, 'index'])->name('expensesType');
@@ -119,6 +126,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|Sales|Accountant'])->gro
     Route::put('update-expenses/{expenses}', [ExpensesController::class, 'update'])->name('update-expenses');
     Route::post('update-expense-status', [ExpensesController::class, 'updateStatus'])->name('update-expense-status');
     Route::get('view-expenses/{group_id}', [ExpensesController::class, 'view'])->name('view-expenses');
+    Route::get('export-expenses', [ExpensesController::class, 'export'])->name('export-expenses');
 
 
     Route::get('purchaseOrder', [PurchaseOrderController::class, 'index'])->name('purchaseOrder');
@@ -126,10 +134,12 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|Sales|Accountant'])->gro
     Route::post('create-purchaseOrder', [PurchaseOrderController::class, 'store'])->name('store-purchaseOrder');
     Route::get('edit-purchaseOrder/{purchaseOrder}', [PurchaseOrderController::class, 'edit'])->name('edit-purchaseOrder');
     Route::put('update-purchaseOrder/{purchaseOrder}', [PurchaseOrderController::class, 'update'])->name('update-purchaseOrder');
+    Route::get('export-purchaseOrder', [PurchaseOrderController::class, 'export'])->name('export-purchaseOrder');
 
     Route::get('quotation', [QuotationController::class, 'index'])->name('quotation');
     Route::get('create-quotation', [QuotationController::class, 'create'])->name('create-quotation');
     Route::post('create-quotation', [QuotationController::class, 'store'])->name('store-quotation');
+    Route::get('export-quotation', [QuotationController::class, 'export'])->name('export-quotation');
     
 
     Route::get('platform', [PlatformController::class, 'index'])->name('platform');

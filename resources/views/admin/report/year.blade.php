@@ -36,6 +36,8 @@
                                 </div>
                                 <!--end::Menu item-->
                             </div>
+                            <a href="{{ route('export-yearly-report') }}"
+                                    class="btn btn-sm fw-bold btn-primary px-4 py-2">Export</a>
                             <!--end::Menu-->
                             <!--end::Export dropdown-->
                         </div>

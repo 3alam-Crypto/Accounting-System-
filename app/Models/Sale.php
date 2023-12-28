@@ -59,6 +59,7 @@ class Sale extends Model
         'billing_country_id',
         'note',
         'tracking_number',
+        'discount_type',
     ];
 
     protected $attributes = [
@@ -87,6 +88,7 @@ class Sale extends Model
         'gross_profit_percentage' => 0,
         'discount_value' =>0,
         'due_date_shipping' => null,
+        'discount_type' => null,
 
     ];
 
@@ -142,12 +144,17 @@ class Sale extends Model
 
     public function country()
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class, 'country_id', 'id');
+    }
+
+    public function billingCountry()
+    {
+        return $this->belongsTo(Country::class, 'billing_country_id', 'id');
     }
 
     public function platform()
     {
-        return $this->belongsTo(Platform::class);
+        return $this->belongsTo(Platform::class, 'platform_id');
     }
 
     public function salesFiles()

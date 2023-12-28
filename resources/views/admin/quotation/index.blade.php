@@ -11,8 +11,12 @@
                         <div class="d-flex justify-content-between mb-3">
                             <h3 class="card-title">Quotations</h3>
                             <!--begin::Primary button-->
-                            <a href="{{ route('create-quotation') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Quotation</a>
                             <!--end::Primary button-->
+                            <div class="d-flex flex-nowrap">
+                                <a href="{{ route('create-quotation') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Quotation</a>
+                                <a href="{{ route('export-quotation') }}"
+                                    class="btn btn-sm fw-bold btn-primary px-4 py-2">Export</a>
+                            </div>
                         </div>
 
                         @if(session('success'))

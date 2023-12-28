@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Expenses;
 use App\Models\ExpensesType;
 use Illuminate\Http\Request;
+use App\Exports\ExpensesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExpensesController extends Controller
 {
@@ -149,6 +151,11 @@ class ExpensesController extends Controller
         $groupExpenses = Expenses::where('group_id', $groupId)->get();
         
         return view('admin.expenses.view', compact('groupExpenses'));
+    }
+
+    public function export()
+    {
+        return Excel::download(new ExpensesExport(), 'expenses.xlsx');
     }
 
 }

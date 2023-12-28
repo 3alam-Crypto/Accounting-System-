@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderProduct;
+use App\Exports\PurchaseOrderExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PurchaseOrderController extends Controller
 {
@@ -162,5 +164,10 @@ class PurchaseOrderController extends Controller
             }
         }
         return redirect()->route('purchaseOrder')->with('success', 'Purchase Order updated successfully');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PurchaseOrderExport(), 'purchase_orders.xlsx');
     }
 }

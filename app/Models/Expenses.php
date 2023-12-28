@@ -26,6 +26,10 @@ class Expenses extends Model
         'group_id',
     ];
 
+    protected $casts = [
+        'group_id' => 'string', // Cast group_id to string
+    ];
+
     public function expensesType()
     {
         return $this->belongsTo(ExpensesType::class, 'expenses_type_id');

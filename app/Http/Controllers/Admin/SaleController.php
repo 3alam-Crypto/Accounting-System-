@@ -11,6 +11,8 @@ use App\Models\Country;
 use App\Models\SalesFile;
 use App\Models\SalesFileType;
 use App\Models\Status;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SalesExport;
 use DateTime;
 
 class SaleController extends Controller
@@ -83,10 +85,15 @@ class SaleController extends Controller
             'billing_country_id' => 'nullable|exists:countries,id',
             'note' => 'nullable|string',
             'tracking_number' => 'nullable|string',
+            'discount_type' => 'nullable|in:Percent,Fixed',
         ]);
 
         $mainTrackingNumber = $request->input('tracking_number');
         $additionalTrackingNumbers = $request->input('additional_tracking_number', []);
+        $discountType = $request->input('discount_type');
+
+        // Update the validated data with the discount type
+        $validatedData['discount_type'] = $discountType;
 
         $allTrackingNumbers = [];
 
@@ -148,10 +155,13 @@ class SaleController extends Controller
         $countries = Country::all();
         $statuses = Status::all();
         // Decode tracking numbers for the view
-        $decodedTrackingNumbers = json_decode($sale->tracking_number);
-        $primaryTrackingNumber = !empty($decodedTrackingNumbers) ? $decodedTrackingNumbers[0] : '';
+    $decodedTrackingNumbers = json_decode($sale->tracking_number);
+    $primaryTrackingNumber = !empty($decodedTrackingNumbers) ? $decodedTrackingNumbers[0] : '';
 
-        return view('admin.sale.edit', compact('sale', 'platforms', 'brands', 'countries', 'statuses', 'primaryTrackingNumber', 'decodedTrackingNumbers'));
+    // Retrieve existing tracking numbers directly from the sale object
+    $existingTrackingNumbers = !empty($decodedTrackingNumbers) ? $decodedTrackingNumbers : [];
+
+        return view('admin.sale.edit', compact('sale', 'platforms', 'brands', 'countries', 'statuses', 'primaryTrackingNumber', 'decodedTrackingNumbers', 'existingTrackingNumbers'));
     }
     
     public function update(Request $request, Sale $sale) {
@@ -205,12 +215,19 @@ class SaleController extends Controller
             'billing_country_id' => 'nullable|exists:countries,id',
             'note' => 'nullable|string',
             'tracking_number' => 'nullable|string',
+            'additional_tracking_number.*' => 'nullable|string',
+            'shipping_carrier.*' => 'nullable|string',
+            'discount_type' => 'nullable|in:Percent,Fixed',
         ]);
 
         // Check the presence of tax_exempt
         $taxExempt = $request->has('tax_exempt') ? 1 : 0;
         $validatedData['tax_exempt'] = $taxExempt;
         
+        // Update other fields
+        $sale->update($validatedData);
+        
+        // Sync billing fields if 'Same_aaddress' is present in the request
         if ($request->has('Same_aaddress')) {
             $billingFields = [
                 'billing_first_name' => 'first_name',
@@ -222,29 +239,44 @@ class SaleController extends Controller
                 'billing_country_id' => 'country_id',
                 'billing_company_name' => 'company_name',
             ];
-    
+            
             foreach ($billingFields as $billingField => $shippingField) {
-                $validatedData[$billingField] = $validatedData[$shippingField];
+                $sale->$billingField = $sale->$shippingField;
+            }
+            
+            $sale->save();
+        }
+        
+        // Process tracking numbers
+        $mainTrackingNumber = $request->input('tracking_number');
+        $additionalTrackingNumbers = $request->input('additional_tracking_number', []);
+        $shippingCarriers = $request->input('shipping_carrier', []);
+        
+        $allTrackingNumbers = [];
+        
+        // Adding main tracking number
+        if ($mainTrackingNumber) {
+            $allTrackingNumbers[] = [
+                'carrier' => $shippingCarriers[0] ?? null,
+                'trackingNumber' => $mainTrackingNumber
+            ];
+        }
+        
+        // Adding additional tracking numbers
+        foreach ($additionalTrackingNumbers as $index => $additionalTrackingNumber) {
+            if ($additionalTrackingNumber) {
+                $allTrackingNumbers[] = [
+                    'carrier' => $shippingCarriers[$index + 1] ?? null,
+                    'trackingNumber' => $additionalTrackingNumber
+                ];
             }
         }
-
-        // Extract and merge tracking numbers
-        $trackingNumber = $validatedData['tracking_number'];
-        $additionalTrackingNumbers = $request->input('additional_tracking_number', []);
-        $allTrackingNumbers = array_merge([$trackingNumber], $additionalTrackingNumbers);
-        $trackingNumbersJSON = json_encode($allTrackingNumbers);
         
-        // Update the sale's tracking numbers
-        $sale->update([
-            'tracking_number' => $trackingNumbersJSON,
-        ]);
+        $trackingNumbersJSON = empty($allTrackingNumbers) ? null : json_encode($allTrackingNumbers);
         
-        // Update other sale attributes except tracking_number
-        unset($validatedData['tracking_number']);
-    
-        $sale->update($validatedData);
-    
-        return redirect()->route('sale')->with('success', 'Sale Update successfully');
+        $sale->update(['tracking_number' => $trackingNumbersJSON]);
+        
+        return redirect()->route('sale')->with('success', 'Sale updated successfully');
     }
     
 
@@ -476,26 +508,9 @@ class SaleController extends Controller
         return ($unitPrice * $quantity * $discountPercent) / 100;
     }
 
-    private function getCountryId($countryName)
+    public function export()
     {
-        switch ($countryName) {
-            case 'USA':
-                return 230;
-            case 'Saudi Arabia':
-                return 189;
-            case 'Mexico':
-                 return 141;
-            case 'Canada':
-                return 38;
-            case 'Botswana':
-                return 28;
-            case 'Turkey':
-                return 222;
-            case 'Nicaragua':
-                return 158;
-            default:
-                return null;
-        }
+        return Excel::download(new SalesExport, 'sales.xlsx');
     }
 
 }

@@ -120,9 +120,16 @@
                                 <input type="text" name="platform_tax" class="form-control" value="{{ $sale->platform_tax }}" id="special_shipping_cost">
                             </div>
 
-                            <div class="col-md-6">
-                                <label for="shipping_date">Discount Percent</label>
-                                <input type="text" name="discount_percent" class="form-control" id="discount_percent" value="{{ $sale->discount_percent }}" oninput="calculateDiscount()">
+                            <div class="col-md-3">
+                                <label for="shipping_date">Discount</label>
+                                <input type="text" name="discount_percent" class="form-control" id="discount_percent" value="{{ $sale->discount_percent }}" oninput="calculateDiscount(); calculateTotalNetReceived(); calculateGrossProfit();">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="currency">Discount Type</label>
+                                <select name="discount_type" id="discount_type" class="form-select" onchange="calculateDiscount()">
+                                    <option value="Percent" {{ $sale->discount_type === 'Percent' ? 'selected' : '' }}>Percent</option>
+                                    <option value="Fixed" {{ $sale->discount_type === 'Fixed' ? 'selected' : '' }}>Fixed</option>
+                                </select>
                             </div>
                         </div>
 
@@ -209,27 +216,35 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="tracking_number">Tracking Number</label>
-                                <input type="text" name="tracking_number" class="form-control" id="tracking_number" value="{{ $primaryTrackingNumber ?? '' }}">
+                                <label for="shipping_carrier">Shipping Carrier</label>
+                                <input type="text" name="shipping_carrier[]" class="form-control" id="shipping_carrier">
                             </div>
+                            <div class="col-md-6">
+                                <label>Tracking Number</label>
+                                <input type="text" name="tracking_number" class="form-control" id="tracking_number">
+                            </div>
+                        </div>
+                        
+                        <!-- Additional Tracking Numbers section -->
+                        <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label>Additional Tracking Numbers</label>
                                 <div id="additionalTrackingNumbers">
-                                    @if(isset($decodedTrackingNumbers))
-                                        @foreach($decodedTrackingNumbers as $key => $tracking)
-                                            @if($key > 0)
-                                                <div class="input-group mb-2">
-                                                    <input type="text" name="additional_tracking_number[]" class="form-control mb-2" value="{{ $tracking }}">
-                                                    <button type="button" class="btn btn-danger ms-2 delete-button" onclick="deleteTrackingNumber(this)">-</button>
-                                                </div>
-                                            @endif
+                                    <!-- Existing additional tracking numbers will be populated here -->
+                                    <!-- Loop through existing data to populate this section -->
+                                    @if(isset($existingTrackingNumbers) && count($existingTrackingNumbers) > 0)
+                                        @foreach($existingTrackingNumbers as $index => $trackingData)
+                                            <div class="input-group mb-2">
+                                                <input type="text" name="shipping_carrier[]" class="form-control mb-2" placeholder="Shipping Carrier" value="{{ isset($trackingData->carrier) ? $trackingData->carrier : '' }}">
+                                                <input type="text" name="additional_tracking_number[]" class="form-control mb-2" placeholder="Additional Tracking Number" value="{{ isset($trackingData->trackingNumber) ? $trackingData->trackingNumber : '' }}">
+                                                <button type="button" class="btn btn-danger ms-2 delete-button">-</button>
+                                            </div>
                                         @endforeach
                                     @endif
                                 </div>
                                 <button type="button" class="btn btn-primary" onclick="addTrackingNumberField()">+</button>
                             </div>
                         </div>
-
                     </div>
 
                     
@@ -387,13 +402,22 @@
         const quantity = parseFloat(document.getElementById('quantity').value) || 1;
         const unitPrice = parseFloat(document.getElementById('unit_price').value) || 0;
         const specialShippingCost = parseFloat(document.getElementById('special_shipping_cost').value) || 0;
+        const discountValue = parseFloat(document.getElementById('discount_value').value) || 0;
 
-        const totalNetReceived = quantity * unitPrice + specialShippingCost;
+        const totalNetReceived = (quantity * unitPrice + specialShippingCost) - discountValue;
         document.getElementById('total_net_received').value = isNaN(totalNetReceived) ? '' : totalNetReceived.toFixed(2);
 
         
         document.getElementById('hidden_total_net_received').value = isNaN(totalNetReceived) ? '' : totalNetReceived.toFixed(2);
     }
+    document.addEventListener('DOMContentLoaded', function () {
+        const discountTypeSelect = document.getElementById('discount_type');
+        discountTypeSelect.addEventListener('change', function () {
+            calculateDiscount();
+            calculateTotalNetReceived();
+            calculateGrossProfit();
+        });
+    });
 
     function calculateGrossProfit() {
         const totalNetReceived = parseFloat(document.getElementById('total_net_received').value) || 0;
@@ -419,23 +443,24 @@
         const quantity = parseFloat(document.getElementById('quantity').value) || 1;
         const unitPrice = parseFloat(document.getElementById('unit_price').value) || 0;
         const discountPercent = parseFloat(document.getElementById('discount_percent').value) || 0;
+        const discountType = document.getElementById('discount_type').value;
 
-        const discountAmount = (unitPrice * quantity * discountPercent) / 100;
+        let discountAmount = 0;
+
+        if (discountType === 'Percent') {
+            discountAmount = (unitPrice * quantity * discountPercent) / 100;
+        } else if (discountType === 'Fixed') {
+            discountAmount = discountPercent;
+        }
+
         document.getElementById('discount_value').value = isNaN(discountAmount) ? '' : discountAmount.toFixed(2);
-
         document.getElementById('hidden_discount_value').value = isNaN(discountAmount) ? '' : discountAmount.toFixed(2);
     }
 
-    function toggleTaxExempt() {
-    const checkbox = document.getElementById('tax_exempt');
-    const hiddenInput = document.querySelector('input[name="hidden_tax_exempt"]');
-    
-    if (checkbox.checked) {
-        hiddenInput.value = "1";
-    } else {
-        hiddenInput.value = "0";
-    }
-}
+    // Call calculateDiscount on page load to calculate discount if required
+    window.onload = function() {
+        calculateDiscount();
+    };
 
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -484,30 +509,47 @@
     });
 
     function addTrackingNumberField() {
-    const additionalTrackingNumbers = document.getElementById('additionalTrackingNumbers');
+        const additionalTrackingNumbers = document.getElementById('additionalTrackingNumbers');
 
-    // Create new input field and a delete button
-    const newInput = document.createElement('input');
-    newInput.type = 'text';
-    newInput.name = 'additional_tracking_number[]';
-    newInput.className = 'form-control mb-2';
+        const container = document.createElement('div');
+        container.className = 'input-group mb-2';
 
-    const deleteButton = document.createElement('button');
-    deleteButton.type = 'button';
-    deleteButton.className = 'btn btn-danger ms-2 delete-button';
-    deleteButton.innerText = '-';
-    deleteButton.onclick = function() {
-        additionalTrackingNumbers.removeChild(container);
-    };
+        const newShippingCarrierInput = document.createElement('input');
+        newShippingCarrierInput.type = 'text';
+        newShippingCarrierInput.name = 'shipping_carrier[]';
+        newShippingCarrierInput.className = 'form-control mb-2';
+        newShippingCarrierInput.placeholder = 'Shipping Carrier';
 
-    const container = document.createElement('div');
-    container.className = 'input-group mb-2';
-    container.appendChild(newInput);
-    container.appendChild(deleteButton);
+        const newInput = document.createElement('input');
+        newInput.type = 'text';
+        newInput.name = 'additional_tracking_number[]';
+        newInput.className = 'form-control mb-2';
+        newInput.placeholder = 'Additional Tracking Number';
 
-    // Append the new input and delete button to the container
-    additionalTrackingNumbers.appendChild(container);
-}
+        const deleteButton = document.createElement('button');
+        deleteButton.type = 'button';
+        deleteButton.className = 'btn btn-danger ms-2 delete-button';
+        deleteButton.innerText = '-';
+        deleteButton.onclick = function () {
+            container.remove(); // Remove the corresponding tracking number fields
+        };
+
+        container.appendChild(newShippingCarrierInput);
+        container.appendChild(newInput);
+        container.appendChild(deleteButton);
+
+        additionalTrackingNumbers.appendChild(container);
+    }
+
+    // Assuming you have a delete-button class for deletion functionality
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            this.parentElement.remove(); // Remove the entire input group when delete button is clicked
+        });
+    });
+
+
 
 </script>
 

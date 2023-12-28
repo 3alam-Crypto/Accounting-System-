@@ -40,12 +40,46 @@
                         <!-- End Actions -->
                         
                         <!--begin::Label-->
-                        <div class="fw-bold fs-3 text-gray-800 mb-8">Our Order Id: {{ $sale->our_order_id }}</div>
+                        <div class="row g-5 mb-12">
+                            <div class="col-sm-5">
+                                <div class="fw-bold fs-3 text-gray-800 mb-8">Our Order Id: {{ $sale->our_order_id }}</div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="fw-bold fs-3 text-gray-800 mb-8">Ramo Trading Order Id: {{ $sale->ramo_trading_order_id }}</div>
+                            </div>
+                        </div>
+                       
                         <!--end::Label-->
-                        <div class="fw-bold fs-3 text-gray-800 mb-8">Platform: {{ $sale->platform->name }}</div>
+                        <div class="row g-5 mb-12">
+                            <div class="col-sm-5">
+                                <div class="fw-bold fs-3 text-gray-800 mb-8">Platform: {{ $sale->platform->name }}</div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="fw-bold fs-3 text-gray-800 mb-8">Brand: {{ $sale->brand->name }}</div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="fw-bold fs-3 text-gray-800 mb-8">Status: {{ $sale->status->name }}</div>
+                            </div>
+                        </div>
                         <!--begin::Row-->
+
+                        <div class="row g-5 mb-12">
+                            <div class="col-sm-5">
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Vendor Invoice Number</div>
+                                <div class="fw-bold fs-6 text-gray-800">{{ $sale->vendor_invoice_number }}</div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Vendor Confirmation</div>
+                                <div class="fw-bold fs-6 text-gray-800">{{ $sale->vendor_confirmation }}</div>
+                            </div>
+                            <!-- Add other fields similarly -->
+                            <div class="col-sm-3">
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Marketplace PO</div>
+                                <div class="fw-bold fs-6 text-gray-800">{{ $sale->market_place_po }}</div>
+                            </div>
+                        </div>
                         
-                        <div class="row g-5 mb-11">
+                        <div class="row g-5 mb-12">
                             <!--end::Col-->
                             <div class="col-sm-5">
                                 <!--end::Label-->
@@ -64,6 +98,18 @@
                                 <!--end::Info-->
                                 <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
                                     <span class="pe-2">{{ $sale->shipping_date }}</span>
+                                </div>
+                                <!--end::Info-->
+                            </div>
+                            <!--end::Col-->
+
+                            <div class="col-sm-3">
+                                <!--end::Label-->
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Due Date Shipping</div>
+                                <!--end::Label-->
+                                <!--end::Info-->
+                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                    <span class="pe-2">{{ $sale->due_date_shipping }}</span>
                                 </div>
                                 <!--end::Info-->
                             </div>
@@ -212,6 +258,39 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountnumber-->
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Additional Shipping</div>
+                                                <!--end::Accountnumber-->
+                                                <!--begin::Number-->
+                                                <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->additional_shipping }}</div>
+                                                <!--end::Number-->
+                                            </div>
+                                            <!--end::Item-->
+
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-3">
+                                                <!--begin::Accountnumber-->
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Special Shipping Cost</div>
+                                                <!--end::Accountnumber-->
+                                                <!--begin::Number-->
+                                                <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->special_shipping_cost }}</div>
+                                                <!--end::Number-->
+                                            </div>
+                                            <!--end::Item-->
+
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-3">
+                                                <!--begin::Accountnumber-->
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Manufacturer Tax</div>
+                                                <!--end::Accountnumber-->
+                                                <!--begin::Number-->
+                                                <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->manufacturer_tax }}</div>
+                                                <!--end::Number-->
+                                            </div>
+                                            <!--end::Item-->
+
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-3">
+                                                <!--begin::Accountnumber-->
                                                 <div class="fw-semibold pe-10 text-gray-600 fs-7">Gross Profit</div>
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
@@ -227,6 +306,21 @@
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">% {{ $sale->gross_profit_percentage }}</div>
+                                                <!--end::Number-->
+                                            </div>
+                                            <!--end::Item-->
+
+                                            <!--begin::Item-->
+                                            <div class="d-flex flex-stack mb-3">
+                                                <!--begin::Accountnumber-->
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Tax Exempt</div>
+                                                <!--end::Accountnumber-->
+                                                <!--begin::Number-->
+                                                <div class="text-end fw-bold fs-6 text-gray-800">@if($sale->tax_exempt == 0)
+                                                    No
+                                                @else
+                                                    Yes
+                                                @endif</div>
                                                 <!--end::Number-->
                                             </div>
                                             <!--end::Item-->

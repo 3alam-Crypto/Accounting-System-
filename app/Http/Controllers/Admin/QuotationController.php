@@ -8,6 +8,8 @@ use App\Models\QuotationProduct;
 use App\Models\Brand;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Exports\QuotationExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class QuotationController extends Controller
 {
@@ -100,5 +102,10 @@ class QuotationController extends Controller
         }
 
         return redirect()->route('quotation')->with('success', 'Quotation created successfully');
+    }
+    
+    public function export()
+    {
+        return Excel::download(new QuotationExport(), 'quotations.xlsx');
     }
 }

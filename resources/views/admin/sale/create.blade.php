@@ -73,7 +73,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label>Vendor Order ID</label>
+                                <label>Vendor PO</label>
                                 <input type="text" name="our_order_id" class="form-control" id="our_order_id">
                             </div>
                         </div>
@@ -137,10 +137,17 @@
                                 <input type="text" name="platform_tax" class="form-control" id="special_shipping_cost">
                             </div>
 
-                            <div class="col-md-6">
-                                <label for="shipping_date">Discount Percent</label>
+                            <div class="col-md-3">
+                                <label for="shipping_date">Discount</label>
                                 <input type="text" name="discount_percent" class="form-control" id="discount_percent"
-                                    oninput="calculateDiscount()">
+                                    oninput="calculateDiscount(); calculateTotalNetReceived(); calculateGrossProfit();">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="currency">Discount Type</label>
+                                <select name="discount_type" id="discount_type" class="form-select" oninput="calculateDiscount()">
+                                    <option value="Percent">Percent</option>
+                                    <option value="Fixed">Fixed</option>
+                                </select>
                             </div>
                         </div>
 
@@ -420,15 +427,21 @@
         const quantity = parseFloat(document.getElementById('quantity').value) || 1;
         const unitPrice = parseFloat(document.getElementById('unit_price').value) || 0;
         const specialShippingCost = parseFloat(document.getElementById('special_shipping_cost').value) || 0;
+        const discountValue = parseFloat(document.getElementById('discount_value').value) || 0;
 
-        const totalNetReceived = quantity * unitPrice + specialShippingCost;
-        document.getElementById('total_net_received').value = isNaN(totalNetReceived) ? '' : totalNetReceived.toFixed(
-            2);
-
-
-        document.getElementById('hidden_total_net_received').value = isNaN(totalNetReceived) ? '' : totalNetReceived
-            .toFixed(2);
+        const totalNetReceived = (quantity * unitPrice + specialShippingCost) - discountValue;
+        document.getElementById('total_net_received').value = isNaN(totalNetReceived) ? '' : totalNetReceived.toFixed(2);
+        
+        document.getElementById('hidden_total_net_received').value = isNaN(totalNetReceived) ? '' : totalNetReceived.toFixed(2);
     }
+    document.addEventListener('DOMContentLoaded', function () {
+        const discountTypeSelect = document.getElementById('discount_type');
+        discountTypeSelect.addEventListener('change', function () {
+            calculateDiscount();
+            calculateTotalNetReceived();
+            calculateGrossProfit();
+        });
+    });
 
     function calculateGrossProfit() {
         const totalNetReceived = parseFloat(document.getElementById('total_net_received').value) || 0;
@@ -439,8 +452,7 @@
         const shippingCost = parseFloat(document.getElementById('shipping_cost').value) || 0;
         const platformFee = parseFloat(document.getElementById('platform_fee').value) || 0;
 
-        const grossProfit = totalNetReceived - (productCost + otherCost + manufacturerTax + additionalShipping +
-            shippingCost + platformFee);
+        const grossProfit = totalNetReceived - (productCost +  manufacturerTax + shippingCost + platformFee);
         document.getElementById('gross_profit').value = isNaN(grossProfit) ? '' : grossProfit.toFixed(2);
 
         const grossProfitPercentage = (grossProfit / totalNetReceived) * 100;
@@ -457,8 +469,14 @@
         const quantity = parseFloat(document.getElementById('quantity').value) || 1;
         const unitPrice = parseFloat(document.getElementById('unit_price').value) || 0;
         const discountPercent = parseFloat(document.getElementById('discount_percent').value) || 0;
+        const discountType = document.getElementById('discount_type').value;
 
-        const discountAmount = (unitPrice * quantity * discountPercent) / 100;
+        if (discountType === 'Percent') {
+            const discountPercent = parseFloat(document.getElementById('discount_percent').value) || 0;
+            discountAmount = (unitPrice * quantity * discountPercent) / 100;
+        } else if (discountType === 'Fixed') {
+            discountAmount = parseFloat(document.getElementById('discount_percent').value) || 0;
+        }
         document.getElementById('discount_value').value = isNaN(discountAmount) ? '' : discountAmount.toFixed(2);
 
         document.getElementById('hidden_discount_value').value = isNaN(discountAmount) ? '' : discountAmount.toFixed(2);

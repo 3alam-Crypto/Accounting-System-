@@ -40,7 +40,7 @@ return new class extends Migration
             $table->decimal('other_cost', 10, 2)->default(0);
             $table->decimal('product_cost', 10, 2)->default(0);
             $table->decimal('gross_profit', 10, 2)->default(0);
-            $table->decimal('gross_profit_percentage', 5, 2)->default(0);
+            $table->decimal('gross_profit_percentage', 10, 6)->default(0);
             $table->date('due_date_shipping')->nullable();
             $table->unsignedBigInteger('status_id')->nullable();
             $table->foreign('status_id')->references('id')->on('statuses');
@@ -60,6 +60,7 @@ return new class extends Migration
             $table->unsignedBigInteger('billing_country_id')->nullable();
             $table->string('note')->nullable();
             $table->string('tracking_number')->nullable();
+            $table->string('discount_type')->nullable();
             $table->timestamps();
         });
     }

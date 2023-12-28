@@ -18,10 +18,17 @@
                                     placeholder="Search Customers" />
                             </div>
                             <!--begin::Primary button-->
-                            <a href="{{ route('create-sale') }}"
-                                class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Sale</a>
+                            
+                            <div class="d-flex flex-nowrap">
+                                <a href="{{ route('create-sale') }}"
+                                    class="btn btn-sm fw-bold btn-primary px-4 py-2 me-2">Add Sale</a>
+                                <a href="{{ route('export-sale') }}"
+                                    class="btn btn-sm fw-bold btn-primary px-4 py-2">Export</a>
+                            </div>
+                                
                             <!--end::Primary button-->
                         </div>
+                        
 
                         @if(session('success'))
                             <div class="alert alert-success" role="alert">

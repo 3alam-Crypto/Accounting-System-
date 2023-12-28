@@ -32,13 +32,15 @@
                             <div id="kt_ecommerce_report_sales_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="" class="menu-link px-3" data-kt-ecommerce-export="pdf">Export as PDF</a>
+                                    <a href="{{ route('export-brand-report') }}" class="menu-link px-3" data-kt-ecommerce-export="pdf">Export as PDF</a>
                                 </div>
                                 <!--end::Menu item-->
                             </div>
                             <!--end::Menu-->
                             <!--end::Export dropdown-->
                         </div>
+                        <a href="{{ route('export-brand-report') }}"
+                                    class="btn btn-sm fw-bold btn-primary px-4 py-2">Export</a>
                         <!--end::Card toolbar-->
                     </div>
                     <!--end::Card header-->
