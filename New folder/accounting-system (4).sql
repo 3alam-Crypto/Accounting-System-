@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2023 at 02:37 PM
+-- Generation Time: Dec 29, 2023 at 02:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -357,15 +357,22 @@ CREATE TABLE `employees` (
   `payout_date` int(11) NOT NULL,
   `birthdate` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `department` varchar(255) DEFAULT NULL,
+  `id_number` varchar(255) DEFAULT NULL,
+  `id_file` varchar(255) DEFAULT NULL,
+  `country_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `citizen` varchar(255) DEFAULT NULL,
+  `contract_end_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `first_name`, `last_name`, `address`, `phone`, `email`, `salary`, `start_date`, `payout_date`, `birthdate`, `created_at`, `updated_at`) VALUES
-(1, 'Abeer', 'Alhamwia', 'syria', '991493515', 'abeerhamwia@gmail.com', 300.00, '2023-09-01', 1, '1997-07-21', '2023-12-13 06:26:22', '2023-12-13 06:38:59');
+INSERT INTO `employees` (`id`, `first_name`, `last_name`, `address`, `phone`, `email`, `salary`, `start_date`, `payout_date`, `birthdate`, `created_at`, `updated_at`, `department`, `id_number`, `id_file`, `country_id`, `citizen`, `contract_end_date`) VALUES
+(1, 'Abeer', 'Alhamwia', 'syria', '991493515', 'abeerhamwia@gmail.com', 300.00, '2023-09-01', 1, '1997-07-21', '2023-12-13 06:26:22', '2023-12-13 06:38:59', NULL, NULL, NULL, 0, NULL, NULL),
+(6, 'Bilal', 'Hamwia', 'syria', '0389459283', 'nuaanuaa23@gmail.com', 800.00, '2023-12-01', 1, '2023-11-26', '2023-12-29 10:30:38', '2023-12-29 11:41:18', 'IT', '34324324332', 'http://127.0.0.1:8000/employee_files/1703853038_292204371_8418985951460309_7037056661177514494_n.jpg', 16, 'damascus', '2024-01-06');
 
 -- --------------------------------------------------------
 
@@ -396,13 +403,11 @@ CREATE TABLE `expenses` (
 --
 
 INSERT INTO `expenses` (`id`, `group_id`, `expenses_type_id`, `installment_amount`, `installment_count`, `amount`, `status`, `due_date`, `paid_date`, `charges`, `due_charges`, `period`, `priority`, `created_at`, `updated_at`) VALUES
-(27, 0, 2, 20.00, 2, 40.00, 0, '2023-12-12', NULL, 10.00, 20.00, 'weekly', 'Medium', '2023-12-11 09:31:15', '2023-12-11 09:31:15'),
+(27, 0, 2, 20.00, 2, 40.00, 0, '2023-12-12', NULL, 30.00, 20.00, 'weekly', 'Medium', '2023-12-11 09:31:15', '2023-12-29 07:31:52'),
 (28, 0, 2, 20.00, 2, 40.00, 0, '2023-12-19', NULL, 10.00, 20.00, 'weekly', 'Medium', '2023-12-11 09:31:15', '2023-12-11 09:31:15'),
-(29, 1, 2, 20.00, 2, 40.00, 0, '2023-12-15', NULL, 10.00, 15.00, 'monthly', 'Medium', '2023-12-11 09:34:19', '2023-12-15 08:46:17'),
-(30, 1, 2, 20.00, 2, 40.00, 0, '2024-01-15', NULL, 10.00, 15.00, 'monthly', 'Medium', '2023-12-11 09:34:19', '2023-12-11 09:34:19'),
 (31, 2, 3, 100.00, 2, 200.00, 1, '2023-12-10', '2023-12-12', 50.00, 60.00, 'monthly', 'High', '2023-12-11 09:35:22', '2023-12-12 06:41:24'),
 (32, 2, 3, 100.00, 2, 200.00, 0, '2024-01-10', NULL, 50.00, 60.00, 'monthly', 'High', '2023-12-11 09:35:22', '2023-12-11 09:35:22'),
-(33, 3, 3, 100.00, 3, 300.00, 0, '2023-12-15', NULL, 10.00, 60.00, 'monthly', 'Medium', '2023-12-11 10:05:11', '2023-12-11 10:05:11'),
+(33, 3, 3, 100.00, 3, 300.00, 0, '2023-12-15', NULL, 20.00, 60.00, 'monthly', 'Medium', '2023-12-11 10:05:11', '2023-12-29 07:31:16'),
 (34, 3, 3, 100.00, 3, 300.00, 0, '2024-01-15', NULL, 10.00, 60.00, 'monthly', 'Medium', '2023-12-11 10:05:11', '2023-12-11 10:05:11'),
 (35, 3, 3, 100.00, 3, 300.00, 0, '2024-02-15', NULL, 10.00, 60.00, 'monthly', 'Medium', '2023-12-11 10:05:11', '2023-12-11 10:05:11');
 
@@ -444,6 +449,62 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `loans`
+--
+
+CREATE TABLE `loans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `group_id` int(11) NOT NULL DEFAULT 0,
+  `loan_type_id` bigint(20) UNSIGNED NOT NULL,
+  `installment_amount` decimal(8,2) NOT NULL,
+  `installment_count` int(11) NOT NULL,
+  `amount` decimal(8,2) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `due_date` date NOT NULL,
+  `paid_date` date DEFAULT NULL,
+  `charges` decimal(8,2) NOT NULL,
+  `due_charges` decimal(8,2) NOT NULL,
+  `period` varchar(255) NOT NULL,
+  `priority` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `loans`
+--
+
+INSERT INTO `loans` (`id`, `group_id`, `loan_type_id`, `installment_amount`, `installment_count`, `amount`, `status`, `due_date`, `paid_date`, `charges`, `due_charges`, `period`, `priority`, `created_at`, `updated_at`) VALUES
+(3, 1, 1, 200.00, 2, 400.00, 0, '2023-12-15', NULL, 20.00, 50.00, 'monthly', 'Medium', '2023-12-29 07:37:24', '2023-12-29 07:37:24'),
+(4, 1, 1, 200.00, 2, 400.00, 0, '2024-01-15', NULL, 20.00, 50.00, 'monthly', 'Medium', '2023-12-29 07:37:24', '2023-12-29 07:37:24'),
+(5, 2, 1, 200.00, 3, 600.00, 0, '2023-12-01', NULL, 10.00, 30.00, 'monthly', 'High', '2023-12-29 07:54:38', '2023-12-29 07:54:38'),
+(6, 2, 1, 200.00, 3, 600.00, 0, '2024-01-01', NULL, 10.00, 30.00, 'monthly', 'High', '2023-12-29 07:54:38', '2023-12-29 07:54:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `loan_types`
+--
+
+CREATE TABLE `loan_types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `bounce` text DEFAULT NULL,
+  `punishment` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `loan_types`
+--
+
+INSERT INTO `loan_types` (`id`, `name`, `bounce`, `punishment`, `created_at`, `updated_at`) VALUES
+(1, 'Bank Loans', 'test', 'no thing', '2023-12-29 06:28:46', '2023-12-29 06:34:14');
 
 -- --------------------------------------------------------
 
@@ -503,7 +564,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (41, '2023_12_21_090942_add_additional_brands', 26),
 (42, '2023_12_25_141221_modify_platforms_table', 27),
 (43, '2023_12_28_081555_add_currency_to_sales_table', 28),
-(44, '2023_12_28_085011_rename_currency_column_in_sales_table', 29);
+(44, '2023_12_28_085011_rename_currency_column_in_sales_table', 29),
+(45, '2023_12_29_074453_create_loans_table', 30),
+(46, '2023_12_29_074724_create_loan_types_table', 30),
+(47, '2023_12_29_080135_modify_loan_types_table', 31),
+(48, '2023_12_29_092516_create_loans_table', 32),
+(49, '2023_12_29_103946_add_additional_columns_to_employees_table', 33),
+(50, '2023_12_29_112514_add_country_id_to_employees_table', 34);
 
 -- --------------------------------------------------------
 
@@ -1004,6 +1071,13 @@ CREATE TABLE `sales_files` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `sales_files`
+--
+
+INSERT INTO `sales_files` (`id`, `salesFileType_id`, `sale_id`, `uploadFiles`, `file_location`, `created_at`, `updated_at`) VALUES
+(8, 2, 10, '1703852813_292204371_8418985951460309_7037056661177514494_n.jpg', 'http://127.0.0.1:8000/sales_files/1703852813_292204371_8418985951460309_7037056661177514494_n.jpg', '2023-12-29 10:26:53', '2023-12-29 10:26:53');
+
 -- --------------------------------------------------------
 
 --
@@ -1121,6 +1195,19 @@ ALTER TABLE `expenses_types`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `loans`
+--
+ALTER TABLE `loans`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `loans_loan_type_id_foreign` (`loan_type_id`);
+
+--
+-- Indexes for table `loan_types`
+--
+ALTER TABLE `loan_types`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -1263,7 +1350,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `expenses`
@@ -1284,10 +1371,22 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `loans`
+--
+ALTER TABLE `loans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `loan_types`
+--
+ALTER TABLE `loan_types`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -1347,7 +1446,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `sales_files`
 --
 ALTER TABLE `sales_files`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sales_file_types`
@@ -1376,6 +1475,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `expenses`
   ADD CONSTRAINT `expenses_expenses_type_id_foreign` FOREIGN KEY (`expenses_type_id`) REFERENCES `expenses_types` (`id`);
+
+--
+-- Constraints for table `loans`
+--
+ALTER TABLE `loans`
+  ADD CONSTRAINT `loans_loan_type_id_foreign` FOREIGN KEY (`loan_type_id`) REFERENCES `loan_types` (`id`);
 
 --
 -- Constraints for table `model_has_permissions`

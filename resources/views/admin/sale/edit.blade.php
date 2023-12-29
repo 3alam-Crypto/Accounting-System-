@@ -6,7 +6,7 @@
     
     <div class="card mt-4">
         <div class="card-header">
-            <h1 class="">Add Sale</h1>
+            <h1 class="card-title">Edit Sale</h1>
         </div>
         <div class="card-body">
             @if ($errors->any())

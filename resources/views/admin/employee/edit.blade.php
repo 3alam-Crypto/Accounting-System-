@@ -5,7 +5,7 @@
     
     <div class="card mt-4">
         <div class="card-header">
-            <h1 class="">Add Employee</h1>
+            <h1 class="card-title">Edit Employee</h1>
         </div>
         <div class="card-body">
             <form action="{{ route('update-employee', ['employee' => $employee->id]) }}" method="POST" enctype="multipart/form-data">
