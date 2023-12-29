@@ -19,5 +19,16 @@ class Employee extends Model
         'start_date',
         'payout_date',
         'birthdate',
+        'country_id',
+        'department',
+        'id_number',
+        'id_file',
+        'citizen',
+        'contract_end_date',
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class, 'country_id', 'id');
+    }
 }

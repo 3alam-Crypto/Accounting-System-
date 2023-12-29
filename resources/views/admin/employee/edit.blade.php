@@ -75,6 +75,59 @@
                     </div>
                 </div>
 
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="id_file">ID File:</label>
+                        <input type="file" name="id_file" id="id_file" class="form-control">
+                        <!-- Add a link to download the current file -->
+                        @if($employee->id_file)
+                            <a href="{{ $employee->id_file }}" download>Download Current File</a>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="id_number">ID Number:</label>
+                        <input type="text" name="id_number" id="id_number" class="form-control" value="{{ $employee->id_number }}">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="country" class="form-label">Country</label>
+                        <select name="country_id" id="country" autocomplete="country-name" class="form-select">
+                            @foreach ($countries as $country)
+                                <option value="{{ $country->id }}" {{ $employee->country_id === $country->id ? 'selected' : '' }}>
+                                    {{ $country->country_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="department">Department:</label>
+                        <input type="text" name="department" id="department" class="form-control" value="{{ $employee->department }}">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="citizen">Citizen:</label>
+                        <input type="text" name="citizen" id="citizen" class="form-control" value="{{ $employee->citizen }}">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="contract_end_date">Contract End Date:</label>
+                        <input type="date" name="contract_end_date" id="contract_end_date" class="form-control" value="{{ $employee->contract_end_date }}">
+                    </div>
+                </div>
+
                 @error('name')
                 <span class="text-sm" style="color: red;">{{ $message }}</span>
                 @enderror

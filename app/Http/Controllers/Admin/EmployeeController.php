@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -16,7 +17,8 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        return view('admin.employee.create');
+        $countries = Country::all();
+        return view('admin.employee.create', compact('countries'));
     }
 
     public function store(Request $request)
@@ -31,16 +33,38 @@ class EmployeeController extends Controller
             'start_date' => 'required|date',
             'payout_date' => 'required|integer',
             'birthdate' => 'required|date',
+            'id_file' => 'nullable|max:2048',
+            'country_id' => 'nullable|exists:countries,id',
+            'department' => 'nullable|string',
+            'id_number' => 'nullable|string',
+            'citizen' => 'nullable|string',
+            'contract_end_date' => 'nullable|date',
         ]);
-
-        Employee::create($validatedData);
-
+    
+    
+        $countryId = $request->input('country_id');
+        // Create the employee record
+        $employee = Employee::create($validatedData);
+        
+        if ($request->hasFile('id_file') && $request->file('id_file')->isValid()) {
+            $file = $request->file('id_file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('employee_files'), $fileName);
+    
+            // Save the file details to the employees table
+            $fileUrl = asset('employee_files/' . $fileName);
+            $employee->id_file = $fileUrl;
+            $employee->save();
+        }
+    
         return redirect()->route('employee')->with('success', 'Employee created successfully');
     }
 
     public function edit(Employee $employee)
     {
-        return view('admin.employee.edit', compact('employee'));
+        $countries = Country::all();
+
+        return view('admin.employee.edit', compact('employee', 'countries'));
     }
 
     public function update(Request $request, Employee $employee)
@@ -55,10 +79,26 @@ class EmployeeController extends Controller
             'start_date' => 'required|date',
             'payout_date' => 'required|integer',
             'birthdate' => 'required|date',
+            'id_file' => 'nullable|max:2048',
+            'country_id' => 'nullable|exists:countries,id',
+            'department' => 'nullable|string',
+            'id_number' => 'nullable|string',
+            'citizen' => 'nullable|string',
+            'contract_end_date' => 'nullable|date',
         ]);
-
+    
         $employee->update($validatedData);
-
+    
+        if ($request->hasFile('id_file') && $request->file('id_file')->isValid()) {
+            $file = $request->file('id_file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('employee_files'), $fileName);
+    
+            $fileUrl = asset('employee_files/' . $fileName);
+            $employee->id_file = $fileUrl;
+            $employee->save();
+        }
+    
         return redirect()->route('employee')->with('success', 'Employee updated successfully');
     }
 

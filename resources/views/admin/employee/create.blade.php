@@ -7,6 +7,16 @@
         <div class="card-header">
             <h1 class="card-title">Add Employee</h1>
         </div>
+        
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <div class="card-body">
             <form action="{{ route('store-employee') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -73,6 +83,55 @@
                         <input type="date" id="birthdate" name="birthdate" class="form-control">
                     </div>
                 </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="id_file">ID File:</label>
+                        <input type="file" id="id_file" name="id_file" class="form-control">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="id_number">ID Number:</label>
+                        <input type="text" id="id_number" name="id_number" class="form-control">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="country_id">Country:</label>
+                        <select id="country_id" name="country_id" class="form-control">
+                            <option value="">Select Country</option>
+                            @foreach($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="department">Department:</label>
+                        <input type="text" id="department" name="department" class="form-control">
+                    </div>
+                </div>
+
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="citizen">Citizen:</label>
+                        <input type="text" id="citizen" name="citizen" class="form-control">
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label for="contract_end_date">Contract End Date:</label>
+                        <input type="date" id="contract_end_date" name="contract_end_date" class="form-control">
+                    </div>
+                </div>
+
 
                 @error('name')
                 <span class="text-sm" style="color: red;">{{ $message }}</span>

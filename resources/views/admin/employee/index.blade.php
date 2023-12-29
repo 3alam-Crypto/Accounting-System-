@@ -28,6 +28,12 @@
                                     <th>Phone</th>
                                     <th>Email</th>
                                     <th>Payout Date</th>
+                                    <th>Country</th>
+                                    <th>Department</th>
+                                    <th>ID Number</th>
+                                    <th>ID File</th>
+                                    <th>Citizen</th>
+                                    <th>Contract End Date</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -39,6 +45,20 @@
                                     <td>{{ $employee->phone }}</td>
                                     <td>{{ $employee->email }}</td>
                                     <td>{{ $employee->payout_date }}</td>
+                                    <td>
+                                        @if ($employee->country)
+                                            {{ $employee->country->country_name }}
+                                        @else
+                                            No Country Assigned
+                                        @endif
+                                    </td>
+                                    <td>{{ $employee->department }}</td>
+                                    <td>{{ $employee->id_number }}</td>
+                                    <td>
+                                        <a href="{{ $employee->id_file }}" download>{{ $employee->id_file }}</a>
+                                    </td>
+                                    <td>{{ $employee->citizen }}</td>
+                                    <td>{{ $employee->contract_end_date }}</td>
                                     <td class="text-center">
                                         <a
                                             href="#"
