@@ -468,11 +468,13 @@ class SaleController extends Controller
     
     private function calculateTotalNetReceived($sale)
     {
+        //$discountValue = $this->calculateDiscountValue($sale);
+        $discountPercent = $sale->discount_percent ?? 0;
         $quantity = $sale->quantity ?? 1;
         $unitPrice = $sale->unit_price ?? 0;
         $specialShippingCost = $sale->special_shipping_cost ?? 0;
         
-        return $quantity * $unitPrice + $specialShippingCost;
+        return ($quantity * $unitPrice + $specialShippingCost) - $discountPercent;
     }
     
     private function calculateGrossProfit($sale)
@@ -485,7 +487,7 @@ class SaleController extends Controller
         $shippingCost = $sale->shipping_cost ?? 0;
         $platformFee = $sale->platform_fee ?? 0;
         
-        return $totalNetReceived - ($productCost + $otherCost + $manufacturerTax + $additionalShipping + $shippingCost + $platformFee);
+        return $totalNetReceived - ($productCost + $manufacturerTax + $shippingCost + $platformFee);
     }
     
     private function calculateGrossProfitPercentage($sale)
@@ -505,7 +507,12 @@ class SaleController extends Controller
         $unitPrice = $sale->unit_price ?? 0;
         $discountPercent = $sale->discount_percent ?? 0;
         
-        return ($unitPrice * $quantity * $discountPercent) / 100;
+        // Check if $unitPrice or $quantity is zero to prevent division by zero
+        if ($unitPrice !== 0 && $quantity !== 0) {
+            return ($unitPrice * $quantity * $discountPercent) / 100;
+        } else {
+            return 0; // or handle this case based on your logic
+        }
     }
 
     public function export()
