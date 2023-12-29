@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\PlatformController;
 use App\Http\Controllers\Admin\PaymentPlanController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ShippingReminderController;
+use App\Http\Controllers\Admin\LoanTypeController;
+use App\Http\Controllers\Admin\LoanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -118,6 +120,8 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|Sales|Accountant'])->gro
     Route::get('expensesType/{expensesType}', [ExpensesTypeController::class, 'view'])->name('view-expenses-type');
 
 
+
+
     Route::get('expenses', [ExpensesController::class, 'index'])->name('expenses');
     Route::get('create-expenses', [ExpensesController::class, 'create'])->name('create-expenses');
     Route::post('create-expenses', [ExpensesController::class, 'store'])->name('store-expenses');
@@ -159,6 +163,24 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|Sales|Accountant'])->gro
     Route::put('update-employee/{employee}', [EmployeeController::class, 'update'])->name('update-employee');
     Route::delete('delete-employee/{employee}', [EmployeeController::class, 'destroy'])->name('delete-employee');
 
+    Route::get('loanTypes', [LoanTypeController::class, 'index'])->name('loanTypes');
+    Route::get('create-loan-type', [LoanTypeController::class, 'create'])->name('create-loan-type');
+    Route::post('create-loan-type', [LoanTypeController::class, 'store'])->name('store-loan-type');
+    Route::get('edit-loan-type/{loanType}', [LoanTypeController::class, 'edit'])->name('edit-loan-type');
+    Route::put('update-loan-type/{loanType}', [LoanTypeController::class, 'update'])->name('update-loan-type');
+    Route::delete('delete-loan-type/{loanType}', [LoanTypeController::class, 'destroy'])->name('delete-loan-type');
+    Route::get('loanType/{loanType}', [LoanTypeController::class, 'view'])->name('view-loan-type');
+
+
+    Route::get('loans', [LoanController::class, 'index'])->name('loans');
+    Route::get('create-loan', [LoanController::class, 'create'])->name('create-loan');
+    Route::post('create-loan', [LoanController::class, 'store'])->name('store-loan');
+    Route::get('edit-loan/{loan}', [LoanController::class, 'edit'])->name('edit-loan');
+    Route::delete('delete-loan/{loan}', [LoanController::class, 'destroy'])->name('delete-loan');
+    Route::put('update-loan/{loan}', [LoanController::class, 'update'])->name('update-loan');
+    Route::post('update-loan-status', [LoanController::class, 'updateStatus'])->name('update-loan-status');
+    Route::get('view-loans/{group_id}', [LoanController::class, 'view'])->name('view-loans');
+    Route::get('export-loans', [LoanController::class, 'export'])->name('export-loans');
 
     //Route::get('/send-reminder-email', [ShippingReminderController::class, 'sendReminderEmail']);
     Route::get('/send-reminder-email', [ShippingReminderController::class, 'sendReminderEmail']);

@@ -59,8 +59,8 @@ class ExpensesTypeController extends Controller
     }
 
     public function view(ExpensesType $expensesType)
-{
-    $expenses = $expensesType->expenses()->get();
-    return view('admin.expensesType.view', compact('expensesType', 'expenses'));
-}
+    {
+        $expenses = $expensesType->expenses()->get();
+        return view('admin.expensesType.view', compact('expensesType', 'expenses'));
+    }
 }

@@ -8,12 +8,12 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Loans</h3>
+                            <h3 class="card-title">Expenses</h3>
                             <!--begin::Primary button-->
                            
                             <!--end::Primary button-->
                             <div class="d-flex flex-nowrap">
-                                <a href="{{ route('create-expenses') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Loans</a>
+                                <a href="{{ route('create-expenses') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Expenses</a>
                                 <a href="{{ route('export-expenses') }}"
                                     class="btn btn-sm fw-bold btn-primary px-4 py-2">Export</a>
                             </div>

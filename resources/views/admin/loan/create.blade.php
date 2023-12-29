@@ -6,7 +6,7 @@
     
     <div class="card mt-4">
         <div class="card-header">
-            <h1 class="card-title">Add Expenses</h1>
+            <h1 class="card-title">Add Loan</h1>
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -18,19 +18,18 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('store-expenses') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('store-loan') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row">
                     <div class="col-md-8">
 
-
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="expenses_type_id">Expense Type</label>
-                                <select name="expenses_type_id" id="expenses_type_id" class="form-select">
-                                    @foreach ($expensesTypes as $expenseType)
-                                        <option value="{{ $expenseType->id }}">{{ $expenseType->name }}</option>
+                                <label for="loan_type_id">Loan Type</label>
+                                <select name="loan_type_id" id="loan_type_id" class="form-select">
+                                    @foreach ($loanTypes as $loanType)
+                                        <option value="{{ $loanType->id }}">{{ $loanType->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -43,14 +42,12 @@
                             </div>
                         </div>
 
-
                         <div class="mb-3 row">
                             <div class="col-md-6">
                                 <label for="installment_count">Installment Count</label>
                                 <input type="number" name="installment_count" id="installment_count" class="form-control" oninput="calculateAmount()">
                             </div>
                         </div>
-
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
@@ -109,7 +106,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Save Expenses</button>
+                        <button type="submit" class="btn btn-primary">Save Loan</button>
                     </div>
                 </div>
             </form>
@@ -128,4 +125,3 @@
 </script>
 
 @endsection
-

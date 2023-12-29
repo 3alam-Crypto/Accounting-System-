@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h1>Loans Type: {{ $expensesType->name }}</h1>
+                            <h1>Expenses Type: {{ $expensesType->name }}</h1>
                         </div>
 
                         @if(session('success'))
@@ -20,7 +20,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Loans Type</th>
+                                    <th>Expenses Type</th>
                                     <th>Installment Amount</th>
                                     <th>Amount</th>
                                     <th>Status</th>
@@ -67,6 +67,19 @@
                                                     class="menu-link px-3">Edit</a>
                                             </div>
                                             <!--end::Menu item-->
+                                            <div class="menu-item px-3">
+                                                <a
+                                                    href="{{ route('delete-expenses', $expense->id) }}"
+                                                    onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this expenses type?')) { document.getElementById('delete-form-{{ $expense->id}}').submit(); }"
+                                                    class="menu-link px-3">Delete</a>
+                                                <form
+                                                    id="delete-form-{{ $expense->id }}"
+                                                    method="POST"
+                                                    action="{{ route('delete-expenses', $expense->id) }}"
+                                                    style="display: none;">
+                                                    @csrf @method('DELETE')
+                                                </form>
+                                            </div>                                            
                                         </div>
                                         <!--end::Menu-->
                                     </td>

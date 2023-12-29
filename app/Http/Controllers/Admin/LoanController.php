@@ -3,36 +3,34 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Expenses;
-use App\Models\ExpensesType;
+use App\Models\Loan;
+use App\Models\LoanType;
 use Illuminate\Http\Request;
-use App\Exports\ExpensesExport;
-use Maatwebsite\Excel\Facades\Excel;
 
-class ExpensesController extends Controller
+class LoanController extends Controller
 {
     public function index()
     {
-        $firstExpenses = Expenses::whereIn('id', function ($query) {
+        $firstLoans = Loan::whereIn('id', function ($query) {
             $query->selectRaw('MIN(id)')
-                ->from('expenses')
+                ->from('loans')
                 ->groupBy('group_id');
         })->get();
     
-        return view('admin.expenses.index', compact('firstExpenses'));
+        return view('admin.loan.index', compact('firstLoans'));
     }
 
     public function create()
     {
-        $expensesTypes = ExpensesType::all();
-        return view('admin.expenses.create', compact('expensesTypes'));
+        $loanTypes = LoanType::all();
+        return view('admin.loan.create', compact('loanTypes'));
     }
 
 
     public function store(Request $request)
     {
         $request->validate([
-            'expenses_type_id' => 'required',
+            'loan_type_id' => 'required',
             'installment_amount' => 'required|numeric',
             'installment_count' => 'required|integer|min:1',
             'due_date' => 'required|date',
@@ -42,12 +40,12 @@ class ExpensesController extends Controller
             'priority' => 'required|string|in:High,Medium,Low',
         ]);
         
-        $maxGroupId = Expenses::max('group_id');
+        $maxGroupId = Loan::max('group_id');
         $newGroupId = $maxGroupId + 1;
         
         if ($request->input('period') === 'on time') {
-            $newExpense = [
-                'expenses_type_id' => $request->input('expenses_type_id'),
+            $newLoan = [
+                'loan_type_id' => $request->input('loan_type_id'),
                 'installment_amount' => $request->input('installment_amount'),
                 'installment_count' => 1, // Set to 1 for 'One Time'
                 'amount' => $request->input('amount'),
@@ -59,14 +57,14 @@ class ExpensesController extends Controller
                 'group_id' => $newGroupId,
             ];
             
-            Expenses::create($newExpense);
+            Loan::create($newLoan);
         } else {
             $installmentCount = $request->input('installment_count');
             $dueDate = new \DateTime($request->input('due_date'));
             
             for ($i = 0; $i < $installmentCount; $i++) {
-                $newExpense = [
-                    'expenses_type_id' => $request->input('expenses_type_id'),
+                $newLoan = [
+                    'loan_type_id' => $request->input('loan_type_id'),
                     'installment_amount' => $request->input('installment_amount'),
                     'installment_count' => $installmentCount,
                     'amount' => $request->input('amount'),
@@ -78,9 +76,8 @@ class ExpensesController extends Controller
                 ];
                 
                 if ($i === 0) {
-                    $newExpense['due_date'] = $dueDate->format('Y-m-d');
+                    $newLoan['due_date'] = $dueDate->format('Y-m-d');
                 } else {
-                    
                     if ($request->input('period') === 'yearly') {
                         $dueDate->add(new \DateInterval('P1Y'));
                     } elseif ($request->input('period') === 'monthly') {
@@ -88,49 +85,48 @@ class ExpensesController extends Controller
                     } elseif ($request->input('period') === 'weekly') {
                         $dueDate->add(new \DateInterval('P7D'));
                     }
-                    $newExpense['due_date'] = $dueDate->format('Y-m-d');
+                    $newLoan['due_date'] = $dueDate->format('Y-m-d');
                 }
-                Expenses::create($newExpense);
+                Loan::create($newLoan);
             }
         }
-        return redirect()->route('expenses')->with('success', 'Expenses added successfully.');
+        return redirect()->route('loans')->with('success', 'Loans added successfully.');
     }
 
 
-    public function edit(Expenses $expenses)
+    public function edit(Loan $loan)
     {
-        $expensesTypes = ExpensesType::all();
-        return view('admin.expenses.edit', compact('expenses', 'expensesTypes'));
+        $loanTypes = LoanType::all();
+        return view('admin.loan.edit', compact('loan', 'loanTypes'));
     }
 
-    public function update(Request $request, Expenses $expenses)
+    public function update(Request $request, Loan $loan)
     {
         $request->validate([
-            'expenses_type_id' => 'required',
+            'loan_type_id' => 'required',
             'charges' => 'required|numeric',
             'due_charges' => 'required|numeric',
             'priority' => 'required|string',
         ]);
         
-        $expenses->update($request->all());
+        $loan->update($request->all());
         
-        return redirect()->route('expenses')->with('success', 'Expense updated successfully.');
+        return redirect()->route('loans')->with('success', 'Loan updated successfully.');
     }
 
     public function updateStatus(Request $request)
     {
-        $expense = Expenses::findOrFail($request->input('expense_id'));
+        $loan = Loan::findOrFail($request->input('loan_id'));
         $isChecked = $request->input('status');
         
         if ($isChecked) {
-            
-            $expense->update([
+            $loan->update([
                 'status' => 1,
                 'paid_date' => now()->toDateString()
             ]);
         
         } else {
-            $expense->update([
+            $loan->update([
                 'status' => 0,
                 'paid_date' => null
             ]);
@@ -138,23 +134,22 @@ class ExpensesController extends Controller
         return response()->json(['message' => 'Status updated successfully'], 200);
     }
 
-    public function destroy(Expenses $expenses)
+    public function destroy(Loan $loan)
     {
-        $expenses->delete();
+        $loan->delete();
 
-        return redirect()->route('expenses')->with('success', 'Expenses deleted successfully.');
+        return redirect()->route('loans')->with('success', 'Loan deleted successfully.');
     }
 
     public function view($groupId)
     {
-        $groupExpenses = Expenses::where('group_id', $groupId)->get();
+        $groupLoans = Loan::where('group_id', $groupId)->get();
         
-        return view('admin.expenses.view', compact('groupExpenses'));
+        return view('admin.loan.view', compact('groupLoans'));
     }
 
     public function export()
     {
-        return Excel::download(new ExpensesExport(), 'expenses.xlsx');
+        return Excel::download(new LoansExport(), 'loans.xlsx');
     }
-
 }

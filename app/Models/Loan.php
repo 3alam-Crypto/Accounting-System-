@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Expenses extends Model
+class Loan extends Model
 {
     use HasFactory;
 
-    protected $table = 'expenses';
+    protected $table = 'loans';
 
     protected $fillable = [
-        'expenses_type_id',
+        'loan_type_id',
         'installment_amount',
         'installment_count',
         'amount',
@@ -30,8 +30,8 @@ class Expenses extends Model
         'group_id' => 'string',
     ];
 
-    public function expensesType()
+    public function loanType()
     {
-        return $this->belongsTo(ExpensesType::class, 'expenses_type_id');
+        return $this->belongsTo(LoanType::class, 'loan_type_id');
     }
 }
