@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Loan;
 use App\Models\LoanType;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LoansExport;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
