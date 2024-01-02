@@ -31,4 +31,9 @@ class Employee extends Model
     {
         return $this->belongsTo(Country::class, 'country_id', 'id');
     }
+
+    public function salaries()
+    {
+        return $this->hasMany(Salary::class);
+    }
 }

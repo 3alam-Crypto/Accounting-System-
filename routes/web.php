@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ShippingReminderController;
 use App\Http\Controllers\Admin\LoanTypeController;
 use App\Http\Controllers\Admin\LoanController;
+use App\Http\Controllers\Admin\SalaryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -181,6 +182,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|Sales|Accountant'])->gro
     Route::post('update-loan-status', [LoanController::class, 'updateStatus'])->name('update-loan-status');
     Route::get('view-loans/{group_id}', [LoanController::class, 'view'])->name('view-loans');
     Route::get('export-loans', [LoanController::class, 'export'])->name('export-loans');
+
+
+    Route::get('salaries', [SalaryController::class, 'index'])->name('salaries');
+    Route::post('update-status', [SalaryController::class, 'updateStatus'])->name('update-salary-status');
+    Route::get('/salaries/view/{employee_id}', [SalaryController::class, 'view'])->name('view-salaries');
 
     //Route::get('/send-reminder-email', [ShippingReminderController::class, 'sendReminderEmail']);
     Route::get('/send-reminder-email', [ShippingReminderController::class, 'sendReminderEmail']);

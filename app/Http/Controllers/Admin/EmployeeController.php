@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Country;
+use App\Models\Salary;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -56,6 +57,9 @@ class EmployeeController extends Controller
             $employee->id_file = $fileUrl;
             $employee->save();
         }
+
+        app(SalaryController::class)->createSalariesForEmployee($employee);
+
     
         return redirect()->route('employee')->with('success', 'Employee created successfully');
     }
@@ -104,8 +108,10 @@ class EmployeeController extends Controller
 
     public function destroy(Employee $employee)
     {
+        $employee->salaries()->delete();
+
         $employee->delete();
 
-        return redirect()->route('employee')->with('success', 'Employee deleted successfully');
+        return redirect()->route('employee')->with('success', 'Employee and related salaries deleted successfully');
     }
 }
