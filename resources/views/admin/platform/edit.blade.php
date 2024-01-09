@@ -45,7 +45,7 @@
                             <div class="col-md-6">
                                 <input class="form-check-input" type="checkbox" name="immediately" id="immediatelyCheckbox" {{ $platform->immediately ? 'checked' : '' }}>
                                 <label class="form-check-label" for="immediatelyCheckbox">
-                                    {{ __('keyword.immediately') }}
+                                    {{ __('keyword.Immediately') }}
                                 </label>
                              </div>
                         </div>

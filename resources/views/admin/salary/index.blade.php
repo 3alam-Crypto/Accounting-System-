@@ -25,7 +25,7 @@
                                 <tr>
                                     <th>{{ __('keyword.ID Salaries') }}</th>
                                     <th>{{ __('keyword.Employee') }}</th>
-                                    <th>{{ __('keyword.Status') }}</th>
+                                    <th>Status</th>
                                     <th>{{ __('keyword.Payout Date') }}</th>
                                     <th>{{ __('keyword.Amount') }}</th>
                                     <th>{{ __('keyword.Actions') }}</th>

@@ -36,7 +36,8 @@ class SalaryController extends Controller
     {
         $startDate = $employee->start_date;
         $contractEndDate = $employee->contract_end_date;
-        $amount = $employee->salary; // Fetch 'amount' from the 'salary' field in the Employee model
+        $amount = $employee->salary; 
+        
 
         $startDateTime = new \DateTime($startDate);
         $contractEndDateTime = new \DateTime($contractEndDate);

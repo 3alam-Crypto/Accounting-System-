@@ -26,7 +26,7 @@
                 @enderror
 
                 <div class="mb-3">
-                    <label>Bounce{{ __('keyword.Edit Loan Type') }}{{ __('keyword.Bounce') }}</label>
+                    <label>{{ __('keyword.Bounce') }}</label>
                     <textarea name="bounce" class="form-control">{{ $loanType->bounce }}</textarea>
                 </div>
 

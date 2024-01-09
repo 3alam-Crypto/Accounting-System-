@@ -23,6 +23,7 @@ return [
     'Email:' => 'Email:',
     'Salary:' => 'Salary:',
     'Start Date:' => 'Start Date:',
+    'Payout Date:' => 'Payout Date:',
     'Birthdate:' => 'Birthdate:',
     'ID File:' => 'ID File:',
     'Download Current File' => 'Download Current File',
@@ -88,6 +89,7 @@ return [
 
     'Platform' => 'Platform',
     'Add Platform' => 'Add Platform',
+    'Edit Platform' => 'Edit Platform',
     'id' => 'id',
     'Name Platform' => 'Name Platform',
     'Immediately' => 'Immediately',
@@ -163,18 +165,9 @@ return [
     'Salaries' => 'Salaries',
     'ID Salaries' => 'ID Salaries',
     'Employee' => 'Employee',
-    'Shipping' => 'Shipping',
-    'Shipping' => 'Shipping',
-    'Shipping' => 'Shipping',
-    'Shipping' => 'Shipping',
-    'Shipping' => 'Shipping',
-    'Shipping' => 'Shipping',
-    'Shipping' => 'Shipping',
-    'Shipping' => 'Shipping',
-    'Shipping' => 'Shipping',
-    'Shipping' => 'Shipping',
-    'Shipping' => 'Shipping',
-    'Shipping' => 'Shipping',
+    'Status' => 'Status',
+    'Employee Salaries' => 'Employee Salaries',
+    
 
 
     
