@@ -42,39 +42,39 @@
                         <!--begin::Label-->
                         <div class="row g-5 mb-12">
                             <div class="col-sm-5">
-                                <div class="fw-bold fs-3 text-gray-800 mb-8">Our Order Id: {{ $sale->our_order_id }}</div>
+                                <div class="fw-bold fs-3 text-gray-800 mb-8">{{ __('Saleword.Our Order Id') }}: {{ $sale->our_order_id }}</div>
                             </div>
                             <div class="col-sm-4">
-                                <div class="fw-bold fs-3 text-gray-800 mb-8">Ramo Trading Order Id: {{ $sale->ramo_trading_order_id }}</div>
+                                <div class="fw-bold fs-3 text-gray-800 mb-8">{{ __('Saleword.Ramo Trading Order Id') }}: {{ $sale->ramo_trading_order_id }}</div>
                             </div>
                         </div>
                        
                         <!--end::Label-->
                         <div class="row g-5 mb-12">
                             <div class="col-sm-5">
-                                <div class="fw-bold fs-3 text-gray-800 mb-8">Platform: {{ $sale->platform->name }}</div>
+                                <div class="fw-bold fs-3 text-gray-800 mb-8">{{ __('Saleword.Platform') }}: {{ $sale->platform->name }}</div>
                             </div>
                             <div class="col-sm-4">
-                                <div class="fw-bold fs-3 text-gray-800 mb-8">Brand: {{ $sale->brand->name }}</div>
+                                <div class="fw-bold fs-3 text-gray-800 mb-8">{{ __('Saleword.Brand') }}: {{ $sale->brand->name }}</div>
                             </div>
                             <div class="col-sm-3">
-                                <div class="fw-bold fs-3 text-gray-800 mb-8">Status: {{ $sale->status->name }}</div>
+                                <div class="fw-bold fs-3 text-gray-800 mb-8">{{ __('Saleword.Status') }}: {{ $sale->status ? $sale->status->name : 'N/A' }}</div>
                             </div>
                         </div>
                         <!--begin::Row-->
 
                         <div class="row g-5 mb-12">
                             <div class="col-sm-5">
-                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Vendor Invoice Number</div>
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">{{ __('Saleword.Vendor Invoice Number') }}</div>
                                 <div class="fw-bold fs-6 text-gray-800">{{ $sale->vendor_invoice_number }}</div>
                             </div>
                             <div class="col-sm-4">
-                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Vendor Confirmation</div>
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">{{ __('Saleword.Vendor Confirmation') }}</div>
                                 <div class="fw-bold fs-6 text-gray-800">{{ $sale->vendor_confirmation }}</div>
                             </div>
                             <!-- Add other fields similarly -->
                             <div class="col-sm-3">
-                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Marketplace PO</div>
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">{{ __('Saleword.Marketplace PO') }}</div>
                                 <div class="fw-bold fs-6 text-gray-800">{{ $sale->market_place_po }}</div>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                             <!--end::Col-->
                             <div class="col-sm-5">
                                 <!--end::Label-->
-                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Order Date:</div>
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">{{ __('Saleword.Order Date') }}:</div>
                                 <!--end::Label-->
                                 <!--end::Col-->
                                 <div class="fw-bold fs-6 text-gray-800">{{ $sale->order_date }}</div>
@@ -93,7 +93,7 @@
                             <!--end::Col-->
                             <div class="col-sm-4">
                                 <!--end::Label-->
-                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Shipping Date:</div>
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">{{ __('Saleword.Shipping Date') }}:</div>
                                 <!--end::Label-->
                                 <!--end::Info-->
                                 <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
@@ -105,7 +105,7 @@
 
                             <div class="col-sm-3">
                                 <!--end::Label-->
-                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Due Date Shipping</div>
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">{{ __('Saleword.Due Date Shipping') }}</div>
                                 <!--end::Label-->
                                 <!--end::Info-->
                                 <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
@@ -121,7 +121,7 @@
                             <!--end::Col-->
                             <div class="col-sm-5">
                                 <!--end::Label-->
-                                <div class="fw-semibold fs-7 text-gray-600 mb-1">Shipping Information:</div>
+                                <div class="fw-semibold fs-7 text-gray-600 mb-1">{{ __('Saleword.Shipping Information') }}:</div>
                                 <!--end::Label-->
                                 <!--end::Text-->
                                 <div class="fw-bold fs-6 text-gray-800">{{ $sale->first_name }} {{ $sale->last_name }}</div>
@@ -137,7 +137,7 @@
 
                                 <div class="col-sm-4">
                                     <!-- Billing Information -->
-                                    <div class="fw-semibold fs-7 text-gray-600 mb-1">Billing Information:</div>
+                                    <div class="fw-semibold fs-7 text-gray-600 mb-1">{{ __('Saleword.Billing Information') }}:</div>
                                     <div class="fw-bold fs-6 text-gray-800">
                                         {{ $sale->billing_first_name }} {{ $sale->billing_last_name }}
                                     </div>
@@ -149,7 +149,7 @@
                                 
 
                                 <div class="col-sm-3">
-                                    <div style="font-size: 20px; font-weight: bold; color: red;">NOTE:</div>
+                                    <div style="font-size: 20px; font-weight: bold; color: red;">{{ __('Saleword.NOTE') }}:</div>
                                     <div style="font-size: 24px; font-weight: bold;">
                                         {{ $sale->note }}
                                     </div>
@@ -164,12 +164,12 @@
                                         <table class="table mb-3">
                                             <thead>
                                                 <tr class="border-bottom fs-6 fw-bold text-muted">
-                                                    <th class="min-w-175px pb-2">Product Name</th>
-                                                    <th class="min-w-70px text-end pb-2">Brand</th>
-                                                    <th class="min-w-80px text-end pb-2">Model</th>
-                                                    <th class="min-w-100px text-end pb-2">Qty</th>
-                                                    <th class="min-w-100px text-end pb-2">Unit Price</th>
-                                                    <th class="min-w-100px text-end pb-2">Product Cost</th>
+                                                    <th class="min-w-175px pb-2">{{ __('Saleword.Product Name') }}</th>
+                                                    <th class="min-w-70px text-end pb-2">{{ __('Saleword.Brand') }}</th>
+                                                    <th class="min-w-80px text-end pb-2">{{ __('Saleword.Model') }}</th>
+                                                    <th class="min-w-100px text-end pb-2">{{ __('Saleword.Qty') }}</th>
+                                                    <th class="min-w-100px text-end pb-2">{{ __('Saleword.Unit Price') }}</th>
+                                                    <th class="min-w-100px text-end pb-2">{{ __('Saleword.Product Cost') }}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -194,7 +194,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountname-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Total Net Recived:</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Total Net Recived') }}:</div>
                                                 <!--end::Accountname-->
                                                 <!--begin::Label-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->total_net_received }}</div>
@@ -204,7 +204,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountname-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Platform Fee</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Platform Fee') }}</div>
                                                 <!--end::Accountname-->
                                                 <!--begin::Label-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->platform_fee }}</div>
@@ -214,7 +214,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountnumber-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Platform Tax</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Platform Tax') }}</div>
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->platform_tax }}</div>
@@ -225,7 +225,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountnumber-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Shipping Cost</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Shipping Cost') }}</div>
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->special_shipping_cost }}</div>
@@ -236,7 +236,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountnumber-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Other Cost</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Other Cost') }}</div>
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->other_cost }}</div>
@@ -247,7 +247,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountnumber-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Discount</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Discount') }}</div>
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->discount_value }}</div>
@@ -258,7 +258,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountnumber-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Additional Shipping</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Additional Shipping') }}</div>
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->additional_shipping }}</div>
@@ -269,7 +269,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountnumber-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Special Shipping Cost</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Special Shipping Cost') }}</div>
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->special_shipping_cost }}</div>
@@ -280,7 +280,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountnumber-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Manufacturer Tax</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Manufacturer Tax') }}</div>
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->manufacturer_tax }}</div>
@@ -291,7 +291,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountnumber-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Gross Profit</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Gross Profit') }}</div>
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">$ {{ $sale->gross_profit }}</div>
@@ -302,7 +302,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountnumber-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Gross Profit Percentage</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Gross Profit Percentage') }}</div>
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">% {{ $sale->gross_profit_percentage }}</div>
@@ -313,7 +313,7 @@
                                             <!--begin::Item-->
                                             <div class="d-flex flex-stack mb-3">
                                                 <!--begin::Accountnumber-->
-                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">Tax Exempt</div>
+                                                <div class="fw-semibold pe-10 text-gray-600 fs-7">{{ __('Saleword.Tax Exempt') }}</div>
                                                 <!--end::Accountnumber-->
                                                 <!--begin::Number-->
                                                 <div class="text-end fw-bold fs-6 text-gray-800">@if($sale->tax_exempt == 0)

@@ -5,7 +5,7 @@
     
     <div class="card mt-4">
         <div class="card-header">
-            <h1 class="">Add Permission</h1>
+            <h1 class="">Add Permission{{ __('keyword.Add Permission') }}</h1>
         </div>
         <div class="card-body">
 
@@ -15,7 +15,7 @@
                 @csrf
 
                 <div class="mb-3">
-                    <label>Permission Name</label>
+                    <label>{{ __('keyword.Permission Name') }}</label>
                     <input type="text" name="name" class="form-control">
                 </div>
                 @error('name')
@@ -25,7 +25,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Save Permission</button>
+                        <button type="submit" class="btn btn-primary">{{ __('keyword.Save') }}</button>
                     </div>
                 </div>
             </form>

@@ -13,6 +13,7 @@ use App\Models\SalesFileType;
 use App\Models\Status;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SalesExport;
+use App\Models\Expenses;
 use DateTime;
 
 class SaleController extends Controller
@@ -142,6 +143,51 @@ class SaleController extends Controller
         }
         
         $sale = Sale::create($validatedData);
+    
+    
+        Expenses::create([
+            'expenses_type_id' => 16,
+            'expenses_title' => 'sales',
+            'expense_date' => $sale->order_date,
+            'period' => 'On Time',
+            'approval_status' => 0,
+            'expense_status' => 0,
+            'amount' => $sale->platform_tax + $sale->manufacturer_tax,
+            'vendor_name' => 'sales tax',
+            'receipt_number' => $sale->ramo_trading_order_id,
+            'employee_name' => auth()->user()->name,
+            'payment_method' => 'credit_card',
+        ]);
+        
+        
+        Expenses::create([
+            'expenses_type_id' => 19,
+            'expenses_title' => 'sales',
+            'expense_date' => $sale->order_date,
+            'period' => 'On Time',
+            'approval_status' => 0,
+            'expense_status' => 0,
+            'amount' => $sale->shipping_cost + $sale->special_shipping_cost + $sale->additional_shipping,
+            'vendor_name' => 'sales Shipping and Delivery',
+            'receipt_number' => $sale->ramo_trading_order_id,
+            'employee_name' => auth()->user()->name,
+            'payment_method' => 'credit_card',
+        ]);
+        
+        
+        Expenses::create([
+            'expenses_type_id' => 22,
+            'expenses_title' => 'sales',
+            'expense_date' => $sale->order_date,
+            'period' => 'On Time',
+            'approval_status' => 0,
+            'expense_status' => 0,
+            'amount' => $sale->product_cost,
+            'vendor_name' => 'sales Merchandise',
+            'receipt_number' => $sale->ramo_trading_order_id,
+            'employee_name' => auth()->user()->name,
+            'payment_method' => 'credit_card',
+        ]);
 
         
         return redirect()->route('sale')->with('success', 'Sale created successfully');

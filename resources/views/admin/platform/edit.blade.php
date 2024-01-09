@@ -6,7 +6,7 @@
         <div class="card mt-4">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-3">
-                    <h3 class="card-title">Edit Platform</h3>
+                    <h3 class="card-title">{{ __('keyword.Edit Platform') }}</h3>
                 </div>
 
                 @if(session('success'))
@@ -22,21 +22,21 @@
 
                         <div class="mb-3">
                             <div class="col-md-6">
-                                <label>Platform Name</label>
+                                <label>{{ __('keyword.Platform Name') }}</label>
                                 <input type="text" name="name" class="form-control" value="{{ $platform->name }}">
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="col-md-6">
-                                <label>Pay out 1</label>
+                                <label>{{ __('keyword.Pay out 1') }}</label>
                                 <input type="text" name="pay_out_1" class="form-control" value="{{ $platform->pay_out_1 }}" {{ $disablePayOut ? 'disabled' : '' }}>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="col-md-6">
-                                <label>Pay out 2</label>
+                                <label>{{ __('keyword.Pay out 2') }}</label>
                                 <input type="text" name="pay_out_2" class="form-control" value="{{ $platform->pay_out_2 }}" {{ $disablePayOut ? 'disabled' : '' }}>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                             <div class="col-md-6">
                                 <input class="form-check-input" type="checkbox" name="immediately" id="immediatelyCheckbox" {{ $platform->immediately ? 'checked' : '' }}>
                                 <label class="form-check-label" for="immediatelyCheckbox">
-                                    immediately
+                                    {{ __('keyword.immediately') }}
                                 </label>
                              </div>
                         </div>
@@ -54,7 +54,7 @@
                             <div class="col-md-6">
                                 <input class="form-check-input" type="checkbox" name="shipment_status" id="shipmentStatusCheckbox" {{ $platform->shipment_status ? 'checked' : '' }}>
                                 <label class="form-check-label" for="shipmentStatusCheckbox">
-                                    trigger on shipment status 
+                                    {{ __('keyword.trigger on shipment status') }} 
                                 </label>
                             </div>
                         </div>
@@ -63,14 +63,14 @@
                             <div class="col-md-6">
                                 <input class="form-check-input" type="checkbox" name="sales_status" id="salesStatusCheckbox" {{ $platform->sales_status ? 'checked' : '' }}>
                                 <label class="form-check-label" for="salesStatusCheckbox">
-                                    trigger on sales status
+                                    {{ __('keyword.trigger on sales status') }}
                                 </label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary">Update Platform</button>
+                                <button type="submit" class="btn btn-primary">{{ __('keyword.Save') }}</button>
                             </div>
                         </div>
                     </form>

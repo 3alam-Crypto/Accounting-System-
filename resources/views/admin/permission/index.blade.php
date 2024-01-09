@@ -8,9 +8,9 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Permissions</h3>
+                            <h3 class="card-title">{{ __('keyword.Permissions') }}</h3>
                             <!--begin::Primary button-->
-                            <a href="{{ route('create-permission') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Permission</a>
+                            <a href="{{ route('create-permission') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">{{ __('keyword.Add Permission') }}</a>
                             <!--end::Primary button-->
                         </div>
 
@@ -23,8 +23,8 @@
                         <table id="myDataTable" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Actions</th>
+                                    <th>{{ __('keyword.Name') }}</th>
+                                    <th>{{ __('keyword.Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

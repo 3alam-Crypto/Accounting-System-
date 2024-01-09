@@ -8,9 +8,9 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Platform</h3>
+                            <h3 class="card-title">{{ __('keyword.Platform') }}</h3>
                             
-                            <a href="{{ route('create-platform') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Platform</a>
+                            <a href="{{ route('create-platform') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">{{ __('keyword.Add Platform') }}</a>
                         </div>
 
                         @if(session('success'))
@@ -22,13 +22,13 @@
                         <table id="kt_table_users" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>id</th>
-                                    <th>Name</th>
-                                    <th>Immediately</th>
-                                    <th>Pay Out 1</th>
-                                    <th>Pay Out 2</th>
-                                    <th>Ship Date</th>
-                                    <th>Actions</th>
+                                    <th>{{ __('keyword.id') }}</th>
+                                    <th>{{ __('keyword.Name Platform') }}</th>
+                                    <th>{{ __('keyword.Immediately') }}</th>
+                                    <th>{{ __('keyword.Pay Out 1') }}</th>
+                                    <th>{{ __('keyword.Pay Out 2') }}</th>
+                                    <th>{{ __('keyword.Ship Date') }}</th>
+                                    <th>{{ __('keyword.Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

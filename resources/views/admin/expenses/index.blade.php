@@ -8,14 +8,14 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Expenses</h3>
+                            <h3 class="card-title">{{ __('keyword.Expenses') }}</h3>
                             <!--begin::Primary button-->
                            
                             <!--end::Primary button-->
                             <div class="d-flex flex-nowrap">
-                                <a href="{{ route('create-expenses') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Expenses</a>
+                                <a href="{{ route('create-expenses') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">{{ __('keyword.Add Expenses') }}</a>
                                 <a href="{{ route('export-expenses') }}"
-                                    class="btn btn-sm fw-bold btn-primary px-4 py-2">Export</a>
+                                    class="btn btn-sm fw-bold btn-primary px-4 py-2">{{ __('keyword.Export') }}</a>
                             </div>
                         </div>
 
@@ -28,32 +28,24 @@
                         <table id="kt_table_users" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Expense Type</th>
-                                    <th>Installment Amount</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Due Date</th>
-                                    <th>Paid Date</th>
-                                    <th>Charges</th>
-                                    <th>Due Charges</th>
-                                    <th>Period</th>
-                                    <th>Priority</th>
-                                    <th>Actions</th>
+                                    <th>{{ __('keyword.Expense Type') }}</th>
+                                    <th>{{ __('keyword.Installment Amount') }}</th>
+                                    <th>{{ __('keyword.Amount') }}</th>
+                                    <th>{{ __('keyword.Installment Due Date') }}</th>
+                                    <th>{{ __('keyword.Additional Cost') }}</th>
+                                    <th>{{ __('keyword.Period') }}</th>
+                                    <th>{{ __('keyword.Priority') }}</th>
+                                    <th>{{ __('keyword.Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($firstExpenses as $expense)
+                                @foreach($expenses as $expense)
                                 <tr>
                                     <td>{{ $expense->expensesType->name }}</td>
                                     <td>{{ $expense->installment_amount }}</td>
                                     <td>{{ $expense->amount }}</td>
-                                    <td>
-                                        <input type="checkbox" class="status-checkbox" data-expense-id="{{ $expense->id }}" {{ $expense->status ? 'checked' : '' }}>
-                                    </td>
                                     <td>{{ $expense->due_date }}</td>
-                                    <td>{{ $expense->paid_date }}</td>
                                     <td>{{ $expense->charges }}</td>
-                                    <td>{{ $expense->due_charges }}</td>
                                     <td>{{ $expense->period }}</td>
                                     <td>{{ $expense->priority }}</td>
                                     <td class="text-center">

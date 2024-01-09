@@ -8,8 +8,8 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Loan Types</h3>
-                            <a href="{{ route('create-loan-type') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Loan Type</a>
+                            <h3 class="card-title">{{ __('keyword.Loan Types') }}</h3>
+                            <a href="{{ route('create-loan-type') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">{{ __('keyword.Add Loan Type') }}</a>
                         </div>
 
                         @if(session('success'))
@@ -21,10 +21,10 @@
                         <table id="kt_table_loan_types" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Bounce</th>
-                                    <th>Punishment</th>
-                                    <th>Actions</th>
+                                    <th>{{ __('keyword.Name') }}</th>
+                                    <th>{{ __('keyword.Bounce') }}</th>
+                                    <th>{{ __('keyword.Punishment') }}</th>
+                                    <th>{{ __('keyword.Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

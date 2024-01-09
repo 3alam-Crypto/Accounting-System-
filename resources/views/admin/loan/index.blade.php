@@ -8,10 +8,10 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Loans</h3>
+                            <h3 class="card-title">{{ __('keyword.Loans') }}</h3>
                             <div class="d-flex flex-nowrap">
-                                <a href="{{ route('create-loan') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Loan</a>
-                                <a href="{{ route('export-loans') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Export</a>
+                                <a href="{{ route('create-loan') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">{{ __('keyword.Add Loan') }}</a>
+                                <a href="{{ route('export-loans') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">{{ __('keyword.Export') }}</a>
                             </div>
                         </div>
 
@@ -24,17 +24,17 @@
                         <table id="kt_table_loans" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Loan Type</th>
-                                    <th>Installment Amount</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                    <th>Due Date</th>
-                                    <th>Paid Date</th>
-                                    <th>Charges</th>
-                                    <th>Due Charges</th>
-                                    <th>Period</th>
-                                    <th>Priority</th>
-                                    <th>Actions</th>
+                                    <th>{{ __('keyword.Loan Type') }}</th>
+                                    <th>{{ __('keyword.Installment Amount') }}</th>
+                                    <th>{{ __('keyword.Installment Amount') }}</th>
+                                    <th>{{ __('keyword.Status') }}</th>
+                                    <th>{{ __('keyword.Due Date') }}</th>
+                                    <th>{{ __('keyword.Paid Date') }}</th>
+                                    <th>{{ __('keyword.Charges') }}</th>
+                                    <th>{{ __('keyword.Due Charges') }}</th>
+                                    <th>{{ __('keyword.Period') }}</th>
+                                    <th>{{ __('keyword.Priority') }}</th>
+                                    <th>{{ __('keyword.Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

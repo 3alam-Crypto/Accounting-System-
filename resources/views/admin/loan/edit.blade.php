@@ -4,7 +4,7 @@
     <div class="container-fluid px-4">
         <div class="card mt-4">
             <div class="card-header">
-                <h1 class="card-title">Edit Loan</h1>
+                <h1 class="card-title">{{ __('keyword.Edit Loan') }}</h1>
             </div>
             <div class="card-body">
                 @if ($errors->any())
@@ -25,7 +25,7 @@
                         <div class="col-md-8">
                             <div class="mb-3 row">
                                 <div class="col-md-6">
-                                    <label for="loan_type_id">Loan Type</label>
+                                    <label for="loan_type_id">{{ __('keyword.Loan Type') }}</label>
                                     <select name="loan_type_id" id="loan_type_id" class="form-select">
                                         @foreach ($loanTypes as $loanType)
                                             <option value="{{ $loanType->id }}"
@@ -38,21 +38,21 @@
 
                             <div class="mb-3 row">
                                 <div class="col-md-6">
-                                    <label for="charges">Charges</label>
+                                    <label for="charges">{{ __('keyword.Charges') }}</label>
                                     <input type="number" name="charges" id="charges" class="form-control" value="{{ $loan->charges}}">
                                 </div>
                             </div>
 
                             <div class="mb-3 row">
                                 <div class="col-md-6">
-                                    <label for="due_charges">Due Charges</label>
+                                    <label for="due_charges">{{ __('keyword.Due Charges') }}</label>
                                     <input type="number" name="due_charges" id="due_charges" class="form-control" value="{{ $loan->due_charges}}">
                                 </div>
                             </div>
 
                             <div class="mb-3 row">
                                 <div class="col-md-6">
-                                    <label for="priority">Priority</label>
+                                    <label for="priority">{{ __('keyword.Priority') }}</label>
                                     <select name="priority" id="priority" class="form-select">
                                         <option value="High" {{ $loan->priority === 'High' ? 'selected' : '' }}>High</option>
                                         <option value="Medium" {{ $loan->priority === 'Medium' ? 'selected' : '' }}>Medium</option>
@@ -66,7 +66,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary">Update Loan</button>
+                            <button type="submit" class="btn btn-primary">{{ __('keyword.Update') }}</button>
                         </div>
                     </div>
                 </form>

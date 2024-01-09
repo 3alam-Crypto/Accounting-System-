@@ -5,14 +5,14 @@
     
     <div class="card mt-4">
         <div class="card-header">
-            <h1 class="">Add Role</h1>
+            <h1 class="">{{ __('keyword.Add Role') }}</h1>
         </div>
         <div class="card-body">
             <form action="{{ route('store-role') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
-                    <label>Role Name</label>
+                    <label>{{ __('keyword.Name Role') }}</label>
                     <input type="text" name="name" class="form-control">
                 </div>
                 @error('name')
@@ -21,7 +21,7 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Save Role</button>
+                        <button type="submit" class="btn btn-primary">{{ __('keyword.Save') }}</button>
                     </div>
                 </div>
             </form>

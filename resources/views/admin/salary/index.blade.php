@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Salaries</h3>
+                            <h3 class="card-title">{{ __('keyword.Salaries') }}</h3>
                             <!--begin::Primary button-->
                            
                             
@@ -23,12 +23,12 @@
                         <table id="kt_table_users" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Employee</th>
-                                    <th>Status</th>
-                                    <th>Payout Date</th>
-                                    <th>Amount</th>
-                                    <th>Actions</th>
+                                    <th>{{ __('keyword.ID Salaries') }}</th>
+                                    <th>{{ __('keyword.Employee') }}</th>
+                                    <th>{{ __('keyword.Status') }}</th>
+                                    <th>{{ __('keyword.Payout Date') }}</th>
+                                    <th>{{ __('keyword.Amount') }}</th>
+                                    <th>{{ __('keyword.Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Employes</h3>
+                            <h3 class="card-title">{{ __('keyword.Employes') }}</h3>
                             <!--begin::Primary button-->
                             <a href="{{ route('create-employee') }}" class="btn btn-sm fw-bold btn-primary px-4 py-2">Add Employee</a>
                             <!--end::Primary button-->
@@ -23,18 +23,18 @@
                         <table id="myDataTable" class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Payout Date</th>
-                                    <th>Country</th>
-                                    <th>Department</th>
-                                    <th>ID Number</th>
-                                    <th>ID File</th>
-                                    <th>Citizen</th>
-                                    <th>Contract End Date</th>
-                                    <th>Actions</th>
+                                    <th>{{ __('keyword.Name') }}</th>
+                                    <th>{{ __('keyword.Address') }}</th>
+                                    <th>{{ __('keyword.Phone') }}</th>
+                                    <th>{{ __('keyword.Email') }}</th>
+                                    <th>{{ __('keyword.Payout Date') }}</th>
+                                    <th>{{ __('keyword.Country') }}</th>
+                                    <th>{{ __('keyword.Department') }}</th>
+                                    <th>{{ __('keyword.ID Number') }}</th>
+                                    <th>{{ __('keyword.ID File') }}</th>
+                                    <th>{{ __('keyword.Citizen') }}</th>
+                                    <th>{{ __('keyword.Contract End Date')}}</th>
+                                    <th>{{ __('keyword.Actions') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

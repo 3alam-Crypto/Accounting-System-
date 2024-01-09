@@ -4,7 +4,7 @@
 <div class="container-fluid px-4">
     <div class="card mt-4">
         <div class="card-header">
-            <h2>Create Purchase Order</h2>
+            <h2>{{ __('keyword.Create Purchase Order') }}</h2>
         </div>
         <div class="card-body">
             <form action="{{ route('store-quotation') }}" method="POST" enctype="multipart/form-data">
@@ -14,7 +14,7 @@
                 <div id="products">
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label class="form-label">Brand Name</label>
+                            <label class="form-label">{{ __('keyword.Brand Name') }}</label>
                             <select class="form-select" name="brand_id[]"">
                                 <option selected disabled>Select Brand</option>
                                 @foreach($brands as $brand)
@@ -23,7 +23,7 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Product Name</label>
+                            <label class="form-label">{{ __('keyword.Product Name') }}</label>
                             <input type="text" class="form-control" name="product_name[]">
                         </div>
                     </div>
@@ -31,82 +31,82 @@
                     
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label class="form-label">Quantity</label>
+                            <label class="form-label">{{ __('keyword.Quantity') }}</label>
                             <input type="number" class="form-control" name="quantity[]"">
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Product Price</label>
+                            <label class="form-label">{{ __('keyword.Product Price') }}</label>
                             <input type="number" step="0.01" class="form-control" name="product_price[]" oninput="calculateTotalPrice()">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label class="form-label">Discount</label>
+                            <label class="form-label">{{ __('keyword.Discount') }}</label>
                             <input type="number" class="form-control" name="discount[]" oninput="calculateTotalDiscount()">
                         </div>
                         
                         <div class="col-md-6">
-                            <label class="form-label">Shipping Cost</label>
+                            <label class="form-label">{{ __('keyword.Shipping Cost') }}</label>
                             <input type="number" class="form-control" name="shipping_cost[]"">
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Shipping Type</label>
+                            <label class="form-label">{{ __('keyword.Shipping Type') }}</label>
                             <input type="text" class="form-control" name="shipping_type[]">
                             <input type="hidden" name="shipping_type[]" id="hidden_shipping_type">
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary" onclick="addProduct()">Add Product</button><br><br>
+            <button type="button" class="btn btn-primary" onclick="addProduct()">{{ __('keyword.Add Product') }}</button><br><br>
             
             
             <!-- Customer Information -->
             <div class="card mt-4">
                 <div class="card-header">
-                    <h2>Customer Information</h2>
+                    <h2>{{ __('keyword.Customer Information') }}</h2>
                 </div>
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-md-6">
-                                <label class="form-label">Customer Name</label>
+                                <label class="form-label">{{ __('keyword.Customer Name') }}</label>
                                 <input type="text" class="form-control" name="customer_name">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Customer Email</label>
+                                <label class="form-label">{{ __('keyword.Customer Email') }}</label>
                                 <input type="email" class="form-control" name="customer_email">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">Customer Phone</label>
+                                <label class="form-label">{{ __('keyword.Customer Phone') }}</label>
                                 <input type="text" class="form-control" name="customer_phone">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Customer City</label>
+                                <label class="form-label">{{ __('keyword.Customer City') }}</label>
                                 <input type="text" class="form-control" name="customer_city">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">Customer State</label>
+                                <label class="form-label">{{ __('keyword.Customer State') }}</label>
                                 <input type="text" class="form-control" name="customer_state">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Customer Zip Code</label>
+                                <label class="form-label">{{ __('keyword.Customer Zip Code') }}</label>
                                 <input type="text" class="form-control" name="customer_zip_code">
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label class="form-label">Customer Company Name</label>
+                            <label class="form-label">{{ __('keyword.Customer Company Name') }}</label>
                             <input type="text" class="form-control" name="customer_company_name">
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">Customer Address 1</label>
+                            <label class="form-label">{{ __('keyword.Customer Address 1') }}</label>
                             <input type="text" class="form-control" name="customer_address_1">
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">Customer Address 2</label>
+                            <label class="form-label">{{ __('keyword.Customer Address 2') }}</label>
                             <input type="text" class="form-control" name="customer_address_2">
                         </div>
                     </div>
@@ -115,50 +115,50 @@
                 <!-- Billing Address -->
                 <div class="card mt-4">
                     <div class="card-header">
-                        <h2>Billing Address</h2>
+                        <h2>{{ __('keyword.Billing Address') }}</h2>
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">Billing Name</label>
+                                <label class="form-label">{{ __('keyword.Billing Name') }}</label>
                                 <input type="text" class="form-control" name="billing_name">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Billing Email</label>
+                                <label class="form-label">{{ __('keyword.Billing Email') }}</label>
                                 <input type="email" class="form-control" name="billing_email">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">Billing Phone</label>
+                                <label class="form-label">{{ __('keyword.Billing Phone') }}</label>
                                 <input type="text" class="form-control" name="billing_phone">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Billing City</label>
+                                <label class="form-label">{{ __('keyword.Billing City') }}</label>
                                 <input type="text" class="form-control" name="billing_city">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">Billing State</label>
+                                <label class="form-label">{{ __('keyword.Billing State') }}</label>
                                 <input type="text" class="form-control" name="billing_state">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Billing Zip Code</label>
+                                <label class="form-label">{{ __('keyword.Billing Zip Code') }}</label>
                                 <input type="text" class="form-control" name="billing_zip_code">
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label class="form-label">Billing Company Name</label>
+                            <label class="form-label">{{ __('keyword.Billing Company Name') }}</label>
                             <input type="text" class="form-control" name="billing_company_name">
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">Billing Address 1</label>
+                            <label class="form-label">{{ __('keyword.Billing Address 1') }}</label>
                             <input type="text" class="form-control" name="billing_address_1">
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">Billing Address 2</label>
+                            <label class="form-label">{{ __('keyword.Billing Address 2') }}</label>
                             <input type="text" class="form-control" name="billing_address_2">
                         </div>
                     </div>
@@ -167,42 +167,42 @@
                 <!-- Additional Information -->
                 <div class="card mt-4">
                     <div class="card-header">
-                        <h2>Additional Information</h2>
+                        <h2>{{ __('keyword.Additional Information') }}</h2>
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">
-                            <label class="form-label">Quotation Type</label>
+                            <label class="form-label">{{ __('keyword.Quotation Type') }}</label>
                             <input type="text" class="form-control" name="quotation_type">
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">Note</label>
+                            <label class="form-label">{{ __('keyword.Note') }}</label>
                             <textarea class="form-control" name="note"></textarea>
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">valid</label>
+                            <label class="form-label">{{ __('keyword.valid') }}</label>
                             <input type="text" class="form-control" name="valid">
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">Payment</label>
+                            <label class="form-label">{{ __('keyword.Payment') }}</label>
                             <input type="text" class="form-control" name="payment">
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">Total Price</label>
+                            <label class="form-label">{{ __('keyword.Total Price') }}</label>
                             <input type="number" step="0.01" class="form-control" name="total_price" disabled>
                             <input type="hidden" name="total_price" id="hidden_total_price">
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">Total Tax</label>
+                            <label class="form-label">{{ __('keyword.Total Tax') }}</label>
                             <input type="number" step="0.01" class="form-control" name="total_tax" disabled>
                             <input type="hidden" name="total_tax" id="hidden_total_tax">
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">Shipping Cost</label>
+                            <label class="form-label">{{ __('keyword.Shipping Cost') }}</label>
                             <input type="number" step="0.01" class="form-control" name="shipping_cost" disabled>
                             <input type="hidden" name="shipping_cost" id="hidden_shipping_cost">
                         </div>
                         <div class="row mb-3">
-                            <label class="form-label">Total discount</label>
+                            <label class="form-label">{{ __('keyword.Total discount') }}</label>
                             <input type="number" step="0.01" class="form-control" name="total_discount" disabled>
                             <input type="hidden" name="total_discount" id="hidden_total_discount">
                         </div>
@@ -210,7 +210,7 @@
                 </div>
 
                 <div class="card mt-4">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">{{ __('keyword.Save') }}</button>
                 </div>
                 
             </form>

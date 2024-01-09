@@ -33,12 +33,12 @@
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="vendor_invoice_number">Vendor INVOICE NUMBER</label>
+                                <label for="vendor_invoice_number">{{ __('Saleword.Vendor INVOICE NUMBER') }}</label>
                                 <input type="text" name="vendor_invoice_number" class="form-control"
                                     id="vendor_invoice_number">
                             </div>
                             <div class="col-md-6">
-                                <label for="vendor_confirmation">Vendor Confirmation</label>
+                                <label for="vendor_confirmation">{{ __('Saleword.Vendor Confirmation') }}</label>
                                 <input type="text" name="vendor_confirmation" class="form-control"
                                     id="vendor_confirmation">
                             </div>
@@ -46,11 +46,11 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="name">Market Place PO</label>
+                                <label for="name">{{ __('Saleword.Market Place PO') }}</label>
                                 <input type="text" name="market_place_po" class="form-control" id="market_place_po">
                             </div>
                             <div class="col-md-6">
-                                <label for="platform" class="block text-sm font-medium text-gray-700">Platform</label>
+                                <label for="platform" class="block text-sm font-medium text-gray-700">{{ __('Saleword.Platform') }}</label>
                                 <div class="mb-3">
                                     <select name="platform_id" id="platform" autocomplete="platform-name"
                                         class="form-select">
@@ -65,7 +65,7 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label>Shipping Date</label>
+                                <label>{{ __('Saleword.Shipping Date') }}</label>
                                 <div class="mb-3">
                                     <input class="form-control" type="date" name="shipping_date" class="form-control"
                                         id="shipping_date">
@@ -73,14 +73,14 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label>Vendor PO</label>
+                                <label>{{ __('Saleword.Vendor PO') }}</label>
                                 <input type="text" name="our_order_id" class="form-control" id="our_order_id">
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label>Order Date</label>
+                                <label>{{ __('Saleword.Order Date') }}</label>
                                 <div class="mb-3">
                                     <input class="form-control" type="date" name="order_date" class="form-control"
                                         id="order_date">
@@ -88,7 +88,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="shipping_date">Product Model</label>
+                                <label for="shipping_date">{{ __('Saleword.Product Model') }}</label>
                                 <input type="text" name="product_model" class="form-control" id="product_model">
                             </div>
                         </div>
@@ -100,12 +100,12 @@
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_date">Product Name</label>
+                                <label for="shipping_date">{{ __('Saleword.Product Name') }}</label>
                                 <input type="text" name="product_name" class="form-control" id="product_name">
                             </div>
 
                             <div class="col-md-6">
-                                <label for="brand" class="block text-sm font-medium text-gray-700">Brand</label>
+                                <label for="brand" class="block text-sm font-medium text-gray-700">{{ __('Saleword.Brand') }}</label>
                                 <div class="mb-3">
                                     <select name="brand_id" id="brand" autocomplete="brand-name" class="form-select">
                                         @foreach($brands as $brand)
@@ -119,13 +119,13 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_date">Unit Price</label>
+                                <label for="shipping_date">{{ __('Saleword.Unit Price') }}</label>
                                 <input type="text" name="unit_price" class="form-control" id="unit_price"
                                     oninput="calculateTotalNetReceived(); calculateDiscount();">
                             </div>
 
                             <div class="col-md-6">
-                                <label for="shipping_date">Special Shipping cost</label>
+                                <label for="shipping_date">{{ __('Saleword.Special Shipping cost') }}</label>
                                 <input type="text" name="special_shipping_cost" class="form-control"
                                     id="special_shipping_cost" oninput="calculateTotalNetReceived()">
                             </div>
@@ -133,17 +133,17 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_date">Platform Tax</label>
+                                <label for="shipping_date">{{ __('Saleword.Platform Tax') }}</label>
                                 <input type="text" name="platform_tax" class="form-control" id="special_shipping_cost">
                             </div>
 
                             <div class="col-md-3">
-                                <label for="shipping_date">Discount</label>
+                                <label for="shipping_date">{{ __('Saleword.Discount') }}</label>
                                 <input type="text" name="discount_percent" class="form-control" id="discount_percent"
                                     oninput="calculateDiscount(); calculateTotalNetReceived(); calculateGrossProfit();">
                             </div>
                             <div class="col-md-3">
-                                <label for="currency">Discount Type</label>
+                                <label for="currency">{{ __('Saleword.Discount Type') }}</label>
                                 <select name="discount_type" id="discount_type" class="form-select" oninput="calculateDiscount()">
                                     <option value="Percent">Percent</option>
                                     <option value="Fixed">Fixed</option>
@@ -154,13 +154,13 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_date">Quantity</label>
+                                <label for="shipping_date">{{ __('Saleword.Quantity') }}</label>
                                 <input type="text" name="quantity" class="form-control" id="quantity"
                                     oninput="calculateTotalNetReceived(); calculateDiscount();">
                             </div>
 
                             <div class="col-md-6">
-                                <label for="shipping_date">Platform Fee</label>
+                                <label for="shipping_date">{{ __('Saleword.Platform Fee') }}</label>
                                 <input type="text" name="platform_fee" class="form-control" id="platform_fee"
                                     oninput="calculateGrossProfit()">
                             </div>
@@ -170,13 +170,13 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_date">Shipping Cost</label>
+                                <label for="shipping_date">{{ __('Saleword.Shipping Cost') }}</label>
                                 <input type="text" name="shipping_cost" class="form-control" id="shipping_cost"
                                     oninput="calculateGrossProfit()">
                             </div>
 
                             <div class="col-md-6">
-                                <label for="shipping_date">Additional Shipping</label>
+                                <label for="shipping_date">{{ __('Saleword.Additional Shipping') }}</label>
                                 <input type="text" name="additional_shipping" class="form-control"
                                     id="additional_shipping" oninput="calculateGrossProfit()">
                             </div>
@@ -184,13 +184,13 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_date">Manufacturer Tax</label>
+                                <label for="shipping_date">{{ __('Saleword.Manufacturer Tax') }}</label>
                                 <input type="text" name="manufacturer_tax" class="form-control" id="manufacturer_tax"
                                     oninput="calculateGrossProfit()">
                             </div>
 
                             <div class="col-md-6">
-                                <label for="shipping_date">Other Cost</label>
+                                <label for="shipping_date">{{ __('Saleword.Other Cost') }}</label>
                                 <input type="text" name="other_cost" class="form-control" id="other_cost"
                                     oninput="calculateGrossProfit()">
                             </div>
@@ -198,13 +198,13 @@
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_date">Product Cost</label>
+                                <label for="shipping_date">{{ __('Saleword.Product Cost') }}</label>
                                 <input type="text" name="product_cost" class="form-control" id="product_cost"
                                     oninput="calculateGrossProfit()">
                             </div>
 
                             <div class="col-md-6">
-                                <label for="due_date_shipping">Due Date Shipping</label>
+                                <label for="due_date_shipping">{{ __('Saleword.Due Date Shipping') }}</label>
                                 <input type="date" name="due_date_shipping" class="form-control" id="due_date_shipping">
                             </div>
                         </div>
@@ -215,7 +215,7 @@
                     <div class="card-body">
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label>Status</label>
+                                <label>Status{{ __('Saleword.Action') }}</label>
                                 <select name="status_id" id="status_id" autocomplete="status-name" class="form-select">
                                     @foreach($statuses as $status)
                                         <option value="{{ $status->id }}">{{ $status->name }}</option>
@@ -224,14 +224,14 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="due_date_shipping">Ramo Trading Order Id</label>
+                                <label for="due_date_shipping">{{ __('Saleword.Ramo Trading Order Id') }}</label>
                                 <input type="text" name="ramo_trading_order_id" class="form-control"
                                     id="ramo_trading_order_id">
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label>Note</label>
+                            <label>{{ __('Saleword.Note') }}</label>
                             <textarea name="note" class="form-control"></textarea>
                         </div>
 
@@ -240,22 +240,22 @@
                                 <input type="checkbox" name="tax_exempt" id="tax_exempt" class="status-checkbox"
                                     onclick="toggleTaxExempt()"
                                     {{ $sale->tax_exempt ? 'checked' : '' }}>
-                                <label for="tax_exempt">Is Customer Tax Exempt</label>
+                                <label for="tax_exempt">{{ __('Saleword.Is Customer Tax Exempt') }}</label>
                                 <input type="hidden" name="hidden_tax_exempt" value="{{ $sale->tax_exempt }}">
                             </div>
                         </div>
 
                         <div class="mb-3 row">
                             <div class="col-md-6">
-                                <label for="shipping_carrier">Shipping Carrier</label>
+                                <label for="shipping_carrier">{{ __('Saleword.Shipping Carrier') }}</label>
                                 <input type="text" name="shipping_carrier[]" class="form-control" id="shipping_carrier">
                             </div>
                             <div class="col-md-6">
-                                <label>Tracking Number</label>
+                                <label>{{ __('Saleword.Tracking Number') }}</label>
                                 <input type="text" name="tracking_number" class="form-control" id="tracking_number">
                             </div>
                             <div class="col-md-6">
-                                <label>Additional Tracking Numbers</label>
+                                <label>{{ __('Saleword.Additional Tracking Numbers') }}</label>
                                 <div id="additionalTrackingNumbers">
 
                                 </div>
@@ -268,43 +268,43 @@
                 <!-- Shipping Information -->
                 <div class="card  shadow-sm mt-4">
                     <div class="card-header">
-                        <h2 class="card-title">Shipping Information</h2>
+                        <h2 class="card-title">{{ __('Saleword.Shipping Information') }}</h2>
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">First Name</label>
+                                <label class="form-label">{{ __('Saleword.First Name') }}</label>
                                 <input type="text" class="form-control" name="first_name">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Last Name</label>
+                                <label class="form-label">{{ __('Saleword.Last Name') }}</label>
                                 <input type="text" class="form-control" name="last_name">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">Customer Address</label>
+                                <label class="form-label">{{ __('Saleword.Customer Address') }}</label>
                                 <input type="text" name="customer_address" class="form-control" id="customer_address">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Customer City</label>
+                                <label class="form-label">{{ __('Saleword.Customer City') }}</label>
                                 <input type="text" class="form-control" name="city">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">Zip Code</label>
+                                <label class="form-label">{{ __('Saleword.Zip Code') }}</label>
                                 <input type="text" name="zip_code" class="form-control" id="zip_code">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">State</label>
+                                <label class="form-label">{{ __('Saleword.State') }}</label>
                                 <input type="text" name="state" class="form-control" id="state">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="country" class="form-label">Country</label>
+                                <label for="country" class="form-label">{{ __('Saleword.Country') }}</label>
                                 <select name="country_id" id="country" autocomplete="country-name" class="form-select">
                                     @foreach($countries as $country)
                                         <option value="{{ $country->id }}">{{ $country->country_name }}</option>
@@ -312,7 +312,7 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Company Name</label>
+                                <label class="form-label">{{ __('Saleword.Company Name') }}</label>
                                 <input type="text" class="form-control" name="company_name">
                             </div>
                         </div>
@@ -321,7 +321,7 @@
                             <div class="col-md-6">
                                 <input class="form-check-input" type="checkbox" name="Same_aaddress" id="Same_aaddress">
                                 <label class="form-check-label" for="Same_aaddress">
-                                    Same As Billing Address
+                                    {{ __('Saleword.Same As Billing Address') }}
                                 </label>
                             </div>
                         </div>
@@ -332,43 +332,43 @@
                 <!-- Billing Information -->
                 <div class="card  shadow-sm mt-4">
                     <div class="card-header">
-                        <h2 class="card-title">Billing Information</h2>
+                        <h2 class="card-title">{{ __('Saleword.Billing Information') }}</h2>
                     </div>
                     <div class="card-body">
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">First Name</label>
+                                <label class="form-label">{{ __('Saleword.First Name') }}</label>
                                 <input type="text" class="form-control" name="billing_first_name">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Last Name</label>
+                                <label class="form-label">{{ __('Saleword.Last Name') }}</label>
                                 <input type="text" class="form-control" name="billing_last_name">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">Address</label>
+                                <label class="form-label">{{ __('Saleword.Address') }}</label>
                                 <input type="text" name="billing_address" class="form-control" id="billing_address">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">City</label>
+                                <label class="form-label">{{ __('Saleword.City') }}</label>
                                 <input type="text" class="form-control" name="billing_city">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label class="form-label">Zip Code</label>
+                                <label class="form-label">{{ __('Saleword.Zip Code') }}</label>
                                 <input type="text" name="billing_zip_code" class="form-control" id="billing_zip_code">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">State</label>
+                                <label class="form-label">{{ __('Saleword.State') }}</label>
                                 <input type="text" name="billing_state" class="form-control" id="billing_state">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="country" class="form-label">Country</label>
+                                <label for="country" class="form-label">{{ __('Saleword.Country') }}</label>
                                 <select name="billing_country_id" id="billing_country_id" autocomplete="country-name"
                                     class="form-select">
                                     @foreach($countries as $country)
@@ -377,7 +377,7 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Company Name</label>
+                                <label class="form-label">{{ __('Saleword.Company Name') }}</label>
                                 <input type="text" class="form-control" name="billing_company_name">
                             </div>
                         </div>
@@ -389,21 +389,21 @@
             <div class="col-md-4">
                 <div class="card  shadow-sm mt-4">
                     <div class="card-body">
-                        <label for="name">Total Net Received</label>
+                        <label for="name">{{ __('Saleword.Total Net Received') }}</label>
                         <input type="text" name="total_net_received" class="form-control" id="total_net_received"
                             disabled>
                         <input type="hidden" name="total_net_received" id="hidden_total_net_received">
 
-                        <label for="name">Gross Profit</label>
+                        <label for="name">{{ __('Saleword.Gross Profit') }}</label>
                         <input type="text" name="gross_profit" class="form-control" id="gross_profit" disabled>
                         <input type="hidden" name="gross_profit" id="hidden_gross_profit">
 
-                        <label for="name">Gross Profit Percentage</label>
+                        <label for="name">{{ __('Saleword.Gross Profit Percentage') }}</label>
                         <input type="text" name="gross_profit_percentage" class="form-control"
                             id="gross_profit_percentage" disabled>
                         <input type="hidden" name="gross_profit_percentage" id="hidden_gross_profit_percentage">
 
-                        <label for="name">Discount Value</label>
+                        <label for="name">{{ __('Saleword.Discount Value') }}</label>
                         <input type="text" name="discount_value" class="form-control" id="discount_value" disabled>
                         <input type="hidden" name="discount_value" id="hidden_discount_value">
                     </div>

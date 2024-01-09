@@ -10,7 +10,7 @@
     
     <div class="card mt-4">
         <div class="card-header">
-            <h1 class="">Add Role</h1>
+            <h1 class="">{{ __('keyword.Add Role') }}</h1>
         </div>
         <div class="card-body">
             <form action="{{ route('update-role', ['roles' => $roles->id]) }}" method="POST" enctype="multipart/form-data">
@@ -27,13 +27,13 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Save Role</button>
+                        <button type="submit" class="btn btn-primary">{{ __('keyword.Save') }}</button>
                     </div>
                 </div>
             </form>
         </div>
         <div class="card-body">
-            <h2 class="text-2xl font-semibold">Role Permissions</h2>
+            <h2 class="text-2xl font-semibold">{{ __('keyword.Role Permissions') }}</h2>
             <div class="button mt-4 p-2">
                 @if($roles->permissions)
                 @foreach($roles->permissions as $role_permission)
@@ -50,7 +50,7 @@
                 <form action="{{ route('add-role-permission', ['role' => $roles->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     
-                    <label for="permission" class="block text-sm font-medium text-gray-700">permission</label>
+                    <label for="permission" class="block text-sm font-medium text-gray-700">{{ __('keyword.permission') }}</label>
                     <div class="mb-3">
                         
                         <select name="permission" id="permission" autocomplete="permission-name" class="small-select">
@@ -65,7 +65,7 @@
     
                     <div class="row">
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary">Assign</button>
+                            <button type="submit" class="btn btn-primary">{{ __('keyword.Assign') }}</button>
                         </div>
                     </div>
                 </form>

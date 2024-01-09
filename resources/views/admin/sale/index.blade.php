@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <div class="d-flex justify-content-between mb-3">
-                            <h3 class="card-title">Sales</h3>
+                            <h3 class="card-title">{{ __('Saleword.Sales') }}</h3>
                             <div class="d-flex align-items-center position-relative my-1">
                                 <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span
                                         class="path1"></span><span class="path2"></span></i>
@@ -39,13 +39,13 @@
                         <table id="kt_table_users" class="table align-middle table-row-dashed fs-6 gy-5">
                             <thead>
                                 <tr>
-                                    <th class="min-w-125px">Shipping Date</th>
-                                    <th class="min-w-125px">Our Order </th>
-                                    <th class="min-w-125px">Order Date</th>
-                                    <th class="min-w-125px">Customer Name</th>
-                                    <th class="min-w-125px">Product Name</th>
-                                    <th class="min-w-125px">Product Model</th>
-                                    <th class="min-w-125px">Action</th>
+                                    <th class="min-w-125px">{{ __('Saleword.Shipping Date') }}</th>
+                                    <th class="min-w-125px">{{ __('Saleword.Our Order') }} </th>
+                                    <th class="min-w-125px">{{ __('Saleword.Order Date') }}</th>
+                                    <th class="min-w-125px">{{ __('Saleword.Customer Name') }}</th>
+                                    <th class="min-w-125px">{{ __('Saleword.Product Name') }}</th>
+                                    <th class="min-w-125px">{{ __('Saleword.Product Model') }}</th>
+                                    <th class="min-w-125px">{{ __('Saleword.Action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -13,13 +13,9 @@ class ExpensesController extends Controller
 {
     public function index()
     {
-        $firstExpenses = Expenses::whereIn('id', function ($query) {
-            $query->selectRaw('MIN(id)')
-                ->from('expenses')
-                ->groupBy('group_id');
-        })->get();
-    
-        return view('admin.expenses.index', compact('firstExpenses'));
+        $expenses = Expenses::all();
+        
+        return view('admin.expenses.index', ['expenses' => $expenses]);
     }
 
     public function create()
@@ -31,69 +27,37 @@ class ExpensesController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'expenses_type_id' => 'required',
-            'installment_amount' => 'required|numeric',
-            'installment_count' => 'required|integer|min:1',
-            'due_date' => 'required|date',
-            'charges' => 'required|numeric',
-            'due_charges' => 'required|numeric',
-            'period' => 'required|string|in:yearly,monthly,weekly,on time',
-            'priority' => 'required|string|in:High,Medium,Low',
+        $validatedData = $request->validate([
+            // Add validation rules for each field here
+            'expenses_type_id' => 'required|integer',
+            'expenses_title' => 'required|string',
+            'expense_date' => 'required|date',
+            'charges' => 'nullable|numeric',
+            'period' => 'required|string',
+            'priority' => 'required|string',
+            'approval_status' => 'required|integer',
+            'expense_status' => 'required|integer',
+            'payment_method' => 'required|string',
+            'is_installment' => 'required|boolean',
+            'installment_count' => 'nullable|required_if:is_installment,1|integer',
+            'due_date' => 'nullable|required_if:is_installment,1|date',
+            'installment_amount' => 'nullable|required_if:is_installment,1|numeric',
+            'amount' => 'required|numeric',
+            'description' => 'nullable|string',
+            'vendor_name' => 'nullable|string',
+            'receipt_number' => 'nullable|string',
+            'employee_name' => 'nullable|string',
+            'project_department' => 'nullable|string',
+            'notes' => 'nullable|string',
         ]);
+    
         
-        $maxGroupId = Expenses::max('group_id');
-        $newGroupId = $maxGroupId + 1;
+        $expense = new Expenses($validatedData);
         
-        if ($request->input('period') === 'on time') {
-            $newExpense = [
-                'expenses_type_id' => $request->input('expenses_type_id'),
-                'installment_amount' => $request->input('installment_amount'),
-                'installment_count' => 1, // Set to 1 for 'One Time'
-                'amount' => $request->input('amount'),
-                'charges' => $request->input('charges'),
-                'due_charges' => $request->input('due_charges'),
-                'period' => $request->input('period'),
-                'priority' => $request->input('priority'),
-                'due_date' => $request->input('due_date'),
-                'group_id' => $newGroupId,
-            ];
-            
-            Expenses::create($newExpense);
-        } else {
-            $installmentCount = $request->input('installment_count');
-            $dueDate = new \DateTime($request->input('due_date'));
-            
-            for ($i = 0; $i < $installmentCount; $i++) {
-                $newExpense = [
-                    'expenses_type_id' => $request->input('expenses_type_id'),
-                    'installment_amount' => $request->input('installment_amount'),
-                    'installment_count' => $installmentCount,
-                    'amount' => $request->input('amount'),
-                    'charges' => $request->input('charges'),
-                    'due_charges' => $request->input('due_charges'),
-                    'period' => $request->input('period'),
-                    'priority' => $request->input('priority'),
-                    'group_id' => $newGroupId,
-                ];
-                
-                if ($i === 0) {
-                    $newExpense['due_date'] = $dueDate->format('Y-m-d');
-                } else {
-                    
-                    if ($request->input('period') === 'yearly') {
-                        $dueDate->add(new \DateInterval('P1Y'));
-                    } elseif ($request->input('period') === 'monthly') {
-                        $dueDate->add(new \DateInterval('P1M'));
-                    } elseif ($request->input('period') === 'weekly') {
-                        $dueDate->add(new \DateInterval('P7D'));
-                    }
-                    $newExpense['due_date'] = $dueDate->format('Y-m-d');
-                }
-                Expenses::create($newExpense);
-            }
-        }
-        return redirect()->route('expenses')->with('success', 'Expenses added successfully.');
+        $expense->save();
+    
+        
+        return redirect()->route('expenses')->with('success', 'Expense added successfully');
     }
 
 
@@ -105,16 +69,35 @@ class ExpensesController extends Controller
 
     public function update(Request $request, Expenses $expenses)
     {
-        $request->validate([
+        $validatedData = $request->validate([
+            
             'expenses_type_id' => 'required',
-            'charges' => 'required|numeric',
-            'due_charges' => 'required|numeric',
-            'priority' => 'required|string',
+            'expenses_title' => 'nullable|string',
+            'installment_amount' => 'nullable|numeric',
+            'installment_count' => 'nullable|integer',
+            'amount' => 'nullable|numeric',
+            'due_date' => 'nullable|date',
+            'paid_date' => 'nullable|date',
+            'charges' => 'nullable|numeric',
+            'period' => 'nullable|string',
+            'priority' => 'nullable|string',
+            'expense_date' => 'nullable|date',
+            'is_installment' => 'required|boolean',
+            'description' => 'nullable|string',
+            'payment_method' => 'nullable|string',
+            'vendor_name' => 'nullable|string',
+            'receipt_number' => 'nullable|string',
+            'employee_name' => 'nullable|string',
+            'project_department' => 'nullable|string',
+            'approval_status' => 'required|integer',
+            'expense_status' => 'required|integer',
+            'notes' => 'nullable|string',
         ]);
-        
-        $expenses->update($request->all());
-        
-        return redirect()->route('expenses')->with('success', 'Expense updated successfully.');
+
+        $expenses->update($validatedData);
+
+        return redirect()->route('expenses')
+            ->with('success', 'Expenses updated successfully');
     }
 
     public function updateStatus(Request $request)

@@ -13,6 +13,7 @@ class Expenses extends Model
 
     protected $fillable = [
         'expenses_type_id',
+        'expenses_title',
         'installment_amount',
         'installment_count',
         'amount',
@@ -23,6 +24,17 @@ class Expenses extends Model
         'due_charges',
         'period',
         'priority',
+        'description',
+        'is_installment',
+        'expense_date',
+        'payment_method',
+        'vendor_name',
+        'receipt_number',
+        'employee_name',
+        'project_department',
+        'approval_status',
+        'expense_status',
+        'notes',
         'group_id',
     ];
 
