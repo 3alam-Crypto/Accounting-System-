@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2024 at 01:41 PM
+-- Generation Time: Jan 11, 2024 at 01:28 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,7 +35,7 @@ CREATE TABLE `expenses` (
   `installment_count` int(11) DEFAULT NULL,
   `amount` decimal(8,2) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0,
-  `due_date` date DEFAULT NULL,
+  `due_date` int(11) DEFAULT NULL,
   `paid_date` date DEFAULT NULL,
   `charges` decimal(8,2) DEFAULT NULL,
   `period` varchar(255) DEFAULT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE `expenses` (
 --
 
 INSERT INTO `expenses` (`id`, `group_id`, `expenses_type_id`, `installment_amount`, `installment_count`, `amount`, `status`, `due_date`, `paid_date`, `charges`, `period`, `priority`, `created_at`, `updated_at`, `expense_date`, `is_installment`, `description`, `payment_method`, `vendor_name`, `receipt_number`, `employee_name`, `project_department`, `approval_status`, `expense_status`, `notes`, `expenses_title`) VALUES
-(39, 0, 2, 50.00, 2, 100.00, 0, '2024-01-07', NULL, 10.00, 'yearly', 'High', '2024-01-08 12:08:36', '2024-01-08 12:45:27', '2024-01-01', 1, 'test', 'cash', 'test', '123', 'abeer', 'sales', 0, 0, NULL, 'product');
+(51, 0, 3, 50.00, 1, 50.00, 0, 12, NULL, 10.00, 'monthly', 'Medium', '2024-01-11 10:16:26', '2024-01-11 10:20:47', '2024-01-10', 1, NULL, 'credit_card', 'test', '123', 'abeer', 'sales', 1, 0, NULL, 'product');
 
 --
 -- Indexes for dumped tables
@@ -82,7 +82,7 @@ ALTER TABLE `expenses`
 -- AUTO_INCREMENT for table `expenses`
 --
 ALTER TABLE `expenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- Constraints for dumped tables
