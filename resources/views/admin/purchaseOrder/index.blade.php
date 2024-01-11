@@ -32,7 +32,7 @@
                                     <th>{{ __('keyword.ID') }}</th>
                                     <th>{{ __('keyword.ORDER ID') }}</th>
                                     <th>{{ __('keyword.CUSTOMER NAME') }}</th>
-                                    <th>{{ __('keyword.TOTAL QUANTITYm') }}</th>
+                                    <th>{{ __('keyword.TOTAL QUANTITY') }}</th>
                                     <th>{{ __('keyword.TOTAL PRICE') }}</th>
                                     <th>{{ __('keyword.CREATED AT') }}</th>
                                     <th>{{ __('keyword.Actions') }}</th>

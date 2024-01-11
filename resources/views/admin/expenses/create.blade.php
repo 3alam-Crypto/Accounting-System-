@@ -142,9 +142,16 @@
                         <label for="installment_count">{{ __('keyword.Number of Installments') }}</label>
                         <input type="number" name="installment_count" id="installment_count" class="form-control">
                     </div>
-                    <div class="col-md-6">
-                        <label for="due_date">{{ __('keyword.Installment Due Date') }}</label>
-                        <input type="date" name="due_date" id="due_date" class="form-control">
+                    <!-- Due Date -->
+                    <div class="mb-3 row">
+                        <div class="col-md-6">
+                            <label for="due_date">{{ __('keyword.Installment Due Date') }}</label>
+                            <select name="due_date" id="due_date" class="form-select">
+                                @for ($i = 1; $i <= 31; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <label for="installment_amount">{{ __('keyword.Installment Amount') }}</label>

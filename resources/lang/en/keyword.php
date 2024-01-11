@@ -113,6 +113,8 @@ return [
     'Product Name' => 'Product Name',
     'Quantity' => 'Quantity',
     'Product Price' => 'Product Price',
+    'Discount' => 'Discount',
+    'Shipping Type' => 'Shipping Type',
     'Add Product' => 'Add Product',
     'Customer Information' => 'Customer Information',
     'Customer Name' => 'Customer Name',

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('installment_count')->nullable();
             $table->decimal('amount')->nullable();
             $table->boolean('status')->default(0);
-            $table->date('due_date')->nullable();
+            $table->integer('due_date')->nullable();
             $table->date('paid_date')->nullable();
             $table->decimal('charges')->nullable();
             $table->string('period')->nullable();
