@@ -141,7 +141,8 @@ return [
     'Payment' => 'Payment',
     'Shipping' => 'Shipping',
     'Total Quantity' => 'Total Quantity',
-    'Total Price' => 'Total Price',
+    
+    'Action' => 'Action',
 
 
 
@@ -151,6 +152,7 @@ return [
     'Create Purchase Order' => 'Create Purchase Order',
     'Quotation Type' => 'Quotation Type',
     'valid' => 'valid',
+    'Total Price' => 'Total Price',
     'Total Tax' => 'Total Tax',
     'Shipping Cost' => 'Shipping Cost',
     'Total discount' => 'Total discount',

@@ -4,7 +4,7 @@
 <div class="container-fluid px-4">
     <div class="card mt-4">
         <div class="card-header">
-            <h2>{{ __('keyword.Create Purchase Order') }}</h2>
+            <h2>{{ __('keyword.Quotations') }}</h2>
         </div>
         <div class="card-body">
             <form action="{{ route('store-quotation') }}" method="POST" enctype="multipart/form-data">

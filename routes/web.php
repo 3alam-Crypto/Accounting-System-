@@ -145,6 +145,9 @@ Route::prefix('admin')->middleware(['auth', 'role:admin|Sales|Accountant'])->gro
     Route::get('create-quotation', [QuotationController::class, 'create'])->name('create-quotation');
     Route::post('create-quotation', [QuotationController::class, 'store'])->name('store-quotation');
     Route::get('export-quotation', [QuotationController::class, 'export'])->name('export-quotation');
+    Route::get('download-quotation-pdf/{id}', [QuotationController::class, 'downloadPdf'])->name('download-quotation-pdf');
+    Route::get('view-quotation/{id}', [QuotationController::class, 'view'])->name('view-quotation');
+
     
 
     Route::get('platform', [PlatformController::class, 'index'])->name('platform');

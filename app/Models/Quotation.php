@@ -42,4 +42,15 @@ class Quotation extends Model
     {
         return $this->hasMany(QuotationProduct::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(QuotationProduct::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+    
 }

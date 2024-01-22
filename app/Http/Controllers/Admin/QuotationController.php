@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Exports\QuotationExport;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class QuotationController extends Controller
 {
@@ -107,5 +108,28 @@ class QuotationController extends Controller
     public function export()
     {
         return Excel::download(new QuotationExport(), 'quotations.xlsx');
+    }
+
+    public function downloadPdf($id)
+    {
+        
+        $quotation = Quotation::findOrFail($id);
+        
+        // Add any additional logic or checks here if needed
+        $pdf = PDF::loadView('admin.quotation.pdf', compact('quotation'));
+        
+        // You can customize the PDF file name if needed
+        $fileName = 'quotation_' . $quotation->id . '.pdf';
+        
+        return $pdf->download($fileName);
+    }
+
+    public function view(Quotation $quotation,$id)
+    {
+        $quotation = Quotation::findOrFail($id);
+
+        $brands = Brand::all();
+
+        return view('admin.quotation.view', compact('quotation', 'brands'));
     }
 }
